@@ -1,31 +1,37 @@
 package models;
 
 import java.util.UUID;
-
-public class Usuario extends Pessoa {
+public class Usuario {
     
     private String idUsuario;
-    private String usuario;
+    private String nomeCompleto;
+    private String nomeUsuario;
     private String senha;
 
-    public Usuario(String usuario, String senha, String nome, int idade) {
-        super(nome, idade);
+    public Usuario(String nomeCompleto, String nomeUsuario, String senha) {
         this.idUsuario = UUID.randomUUID().toString();
-        this.usuario = usuario;
-        this.senha = senha;
-        
+        this.nomeCompleto = nomeCompleto;
+        this.nomeUsuario = nomeUsuario;
     }
 
     public String getIdUsuario() {
         return idUsuario;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 
     public String getSenha() {
@@ -39,12 +45,12 @@ public class Usuario extends Pessoa {
     @Override
     public String toString() {
         // retorna nome e idade da superclasse
-        return idUsuario + "," + usuario + "," + senha + "," + super.toString();
+        return idUsuario + "," + nomeCompleto + "," + nomeUsuario + "," + senha;
     }
 
     public static Usuario fromString(String usuarioString) {
         String[] partes = usuarioString.split(",");
-        Usuario usuario = new Usuario(partes[1], partes[2], partes[3], Integer.parseInt(partes[4]));
+        Usuario usuario = new Usuario(partes[1], partes[2], partes[3]);
         usuario.idUsuario = partes[0];
         return usuario;
     }
