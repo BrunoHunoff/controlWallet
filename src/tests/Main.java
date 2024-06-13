@@ -1,6 +1,7 @@
 import controllers.GerenciarUsuario;
 import helpers.Console;
 import models.Usuario;
+
 public class Main {
     public static void main(String[] args) {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
