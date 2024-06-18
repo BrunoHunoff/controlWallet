@@ -1,10 +1,10 @@
 package models;
 
-public class Fundosimoveis extends Investimentos {
+public class FundoImobiliario extends Ativo {
 
     private String tipoFundo;
 
-    public Fundosimoveis(String tipoFundo, int Quantidade, String nome, float precoMedio) {
+    public FundoImobiliario(String tipoFundo, int Quantidade, String nome, float precoMedio) {
         super(Quantidade, nome, precoMedio);
         this.tipoFundo = tipoFundo;
     }

@@ -1,10 +1,10 @@
 package models;
 
-public class Criptomoedas extends Investimentos {
+public class Criptomoeda extends Ativo {
 
     private String tipoMoeda;
 
-    public Criptomoedas(String tipoMoeda, int Quantidade, String nome, float precoMedio) {
+    public Criptomoeda(String tipoMoeda, int Quantidade, String nome, float precoMedio) {
         super(Quantidade, nome, precoMedio);
         this.tipoMoeda = tipoMoeda;
     }

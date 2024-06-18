@@ -1,6 +1,6 @@
 package models;
 
-public class Acao extends Investimentos {
+public class Acao extends Ativo {
 
     private String tipoAcao;
 

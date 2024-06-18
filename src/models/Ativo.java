@@ -1,13 +1,17 @@
 package models;
 
-public abstract class Investimentos {
+import java.util.UUID;
 
+public abstract class Ativo {
+
+    protected UUID uuid;
     protected String nome;
     protected float precoMedio;
-    protected int Quantidade;
+    protected int quantidade;
 
-    public Investimentos(int Quantidade, String nome, float precoMedio) {
-        this.Quantidade = Quantidade;
+    public Ativo(int Quantidade, String nome, float precoMedio) {
+        this.uuid = UUID.randomUUID();
+        this.quantidade = Quantidade;
         this.nome = nome;
         this.precoMedio = precoMedio;
     }
@@ -29,20 +33,20 @@ public abstract class Investimentos {
     }
 
     public int getQuantidade() {
-        return Quantidade;
+        return quantidade;
     }
 
     public void setQuantidade(int Quantidade) {
-        this.Quantidade = Quantidade;
+        this.quantidade = Quantidade;
     }
 
     public float calcularValorTotal() {
-        return precoMedio * Quantidade;
+        return precoMedio * quantidade;
     }
 
     @Override
     public String toString() {
-        return "Nome: " + nome + ", Preço Médio:" + precoMedio + ", Quantidade: " + Quantidade;
+        return "Nome: " + nome + ", Preço Médio:" + precoMedio + ", Quantidade: " + quantidade;
     }
 
 }

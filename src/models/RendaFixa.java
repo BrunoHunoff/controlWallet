@@ -2,25 +2,25 @@ package models;
 
 import java.time.LocalDate;
 
-public class RendaFixa extends Investimentos {
+public class RendaFixa extends Ativo {
 
-    private String TipoRenda;
+    private String categoria;
     private LocalDate dataVencimento;
     private float txJuros;
 
-    public RendaFixa(String TipoRenda, LocalDate dataVencimento, float txJuros, int Quantidade, String nome, float precoMedio) {
+    public RendaFixa(String categoria, LocalDate dataVencimento, float txJuros, int Quantidade, String nome, float precoMedio) {
         super(Quantidade, nome, precoMedio);
-        this.TipoRenda = TipoRenda;
+        this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.txJuros = txJuros;
     }
 
-    public String getTipoRenda() {
-        return TipoRenda;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setTipoRenda(String TipoRenda) {
-        this.TipoRenda = TipoRenda;
+    public void setCategoria(String TipoRenda) {
+        this.categoria = TipoRenda;
     }
 
     public LocalDate getDataVencimento() {
@@ -41,7 +41,7 @@ public class RendaFixa extends Investimentos {
 
     @Override
     public String toString() {
-        return super.toString() + ", Tipo de Renda: " + TipoRenda + ", Data de Vencimento: " + dataVencimento + ", Taxa de Juros: " + txJuros;
+        return super.toString() + ", Tipo de Renda: " + categoria + ", Data de Vencimento: " + dataVencimento + ", Taxa de Juros: " + txJuros;
     }
 
 }
