@@ -2,7 +2,7 @@ import controllers.GerenciarUsuario;
 import helpers.Console;
 import models.Usuario;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
         

@@ -65,7 +65,7 @@ public class GerenciarUsuario {
 
     public void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) {
         String hashSenha = criptografarSenha(senha);
-        Usuario usuario = new Usuario(nomeCompleto, nomeUsuario, hashSenha);
+        Usuario usuario = new Usuario(nomeCompleto, nomeUsuario.toLowerCase(), hashSenha);
         usuarios.add(usuario);
         salvarUsuarios();
     }
@@ -87,7 +87,7 @@ public class GerenciarUsuario {
         Usuario usuario = listarUsuario(idUsuario);
         if (usuario != null) {
             usuario.setNomeCompleto(novoNomeCompleto);
-            usuario.setNomeUsuario(novoNomeUsuario);
+            usuario.setNomeUsuario(novoNomeUsuario.toLowerCase());
             usuario.setSenha(criptografarSenha(novaSenha));
             salvarUsuarios();
         }
@@ -99,6 +99,27 @@ public class GerenciarUsuario {
             usuarios.remove(usuario);
             salvarUsuarios();
         }
+    }
+
+    public Boolean nomeUsuarioExiste(String nomeUsuario) {
+        String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean loginValido(String nomeUsuario, String senha) {
+        String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo) &&
+                usuario.getSenha().equals(criptografarSenha(senha))) {
+                return true;
+            }
+        }        
+        return false;
     }
 
 }

@@ -12,6 +12,7 @@ public class Usuario {
         this.idUsuario = UUID.randomUUID().toString();
         this.nomeCompleto = nomeCompleto;
         this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
     }
 
     public String getIdUsuario() {
