@@ -3,10 +3,21 @@ package models;
 public class Nft extends Ativo {
 
     private String descricao;
+    private String autor;
 
-    public Nft(String descricao, int Quantidade, String nome, float precoMedio) {
+    public Nft(int Quantidade, String nome, float precoMedio, String descricao, String autor) {
         super(Quantidade, nome, precoMedio);
         this.descricao = descricao;
+        this.autor = autor;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public Nft setAutor(String autor) {
+        this.autor = autor;
+        return this;
     }
 
     public String getDescricao() {

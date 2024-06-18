@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.UUID;
 public class Usuario {
     
@@ -7,11 +8,13 @@ public class Usuario {
     private String nomeCompleto;
     private String nomeUsuario;
     private String senha;
+    private ArrayList<Ativo> carteira;
 
     public Usuario(String nomeCompleto, String nomeUsuario, String senha) {
         this.idUsuario = UUID.randomUUID().toString();
         this.nomeCompleto = nomeCompleto;
         this.nomeUsuario = nomeUsuario;
+        this.carteira = new ArrayList<Ativo>();
     }
 
     public String getIdUsuario() {
