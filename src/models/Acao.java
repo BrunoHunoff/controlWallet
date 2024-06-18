@@ -33,6 +33,15 @@ public class Acao extends Ativo {
     }
 
     @Override
+    public Ativo fromString(String linha) {
+        String[] atributos = linha.split(", ");
+
+        return new Acao(UUID.fromString(atributos[0]), atributos[1],
+                atributos[2], Float.parseFloat(atributos[3]),
+                Integer.parseInt(atributos[4]), atributos[5], Boolean.parseBoolean(atributos[6]));
+    }
+
+    @Override
     public String toString() {
         return super.toString() + "Tipo da Ação: " + tipoAcao;
     }
