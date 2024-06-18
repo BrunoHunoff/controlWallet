@@ -1,3 +1,4 @@
+package models;
 
 public class NFT extends Investimentos {
 
@@ -18,7 +19,7 @@ public class NFT extends Investimentos {
 
     @Override
     public String toString() {
-        return super.toString() + "Tipo da NFT:" + TipoNFT;
+        return super.toString() + "Tipo da models.NFT:" + TipoNFT;
     }
 
 }
