@@ -2,7 +2,7 @@ import controllers.GerenciarUsuario;
 import helpers.Console;
 import models.Usuario;
 
-public class UsuarioMenu {
+public class App {
     public static void main(String[] args) {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
         
@@ -27,7 +27,7 @@ public class UsuarioMenu {
                     break;
 
                 case 2:
-                    for (UsuarioMenu usuario : gerenciarUsuario.listarTodos()) {
+                    for (Usuario usuario : gerenciarUsuario.listarTodos()) {
                         System.out.println(usuario);
                     }
                     break;
