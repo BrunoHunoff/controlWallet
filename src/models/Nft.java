@@ -1,12 +1,16 @@
 package models;
 
+import java.util.UUID;
+
 public class Nft extends Ativo {
 
     private String descricao;
     private String autor;
 
-    public Nft(int Quantidade, String nome, float precoMedio, String descricao, String autor) {
-        super(Quantidade, nome, precoMedio);
+    public Nft(){}
+
+    public Nft(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String descricao, String autor) {
+        super(uuid, nome, tipoAtivo, precoMedio, quantidade);
         this.descricao = descricao;
         this.autor = autor;
     }

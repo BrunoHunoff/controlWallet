@@ -1,12 +1,16 @@
 package models;
 
+import java.util.UUID;
+
 public class Acao extends Ativo {
 
     private String tipoAcao;
     private boolean pagaDividendos;
 
-    public Acao(int Quantidade, String nome, float precoMedio, String tipoAcao, boolean pagaDividendos) {
-        super(Quantidade, nome, precoMedio);
+    public Acao(){}
+
+    public Acao(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoAcao, boolean pagaDividendos) {
+        super(uuid, nome, tipoAtivo, precoMedio, quantidade);
         this.tipoAcao = tipoAcao;
         this.pagaDividendos = pagaDividendos;
     }

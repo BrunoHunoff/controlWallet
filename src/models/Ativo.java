@@ -6,14 +6,27 @@ public abstract class Ativo {
 
     protected UUID uuid;
     protected String nome;
+    protected String tipoAtivo;
     protected float precoMedio;
     protected int quantidade;
 
-    public Ativo(int Quantidade, String nome, float precoMedio) {
-        this.uuid = UUID.randomUUID();
-        this.quantidade = Quantidade;
+    public Ativo(){}
+
+    public Ativo(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade) {
+        this.uuid = uuid;
         this.nome = nome;
+        this.tipoAtivo = tipoAtivo;
         this.precoMedio = precoMedio;
+        this.quantidade = quantidade;
+    }
+
+    public String getTipoAtivo() {
+        return tipoAtivo;
+    }
+
+    public Ativo setTipoAtivo(String tipoAtivo) {
+        this.tipoAtivo = tipoAtivo;
+        return this;
     }
 
     public String getNome() {
@@ -43,6 +56,8 @@ public abstract class Ativo {
     public float calcularValorTotal() {
         return precoMedio * quantidade;
     }
+
+    public abstract Ativo fromString();
 
     @Override
     public String toString() {

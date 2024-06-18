@@ -1,11 +1,15 @@
 package models;
 
+import java.util.UUID;
+
 public class FundoImobiliario extends Ativo {
 
     private String tipoFundo;
 
-    public FundoImobiliario(String tipoFundo, int Quantidade, String nome, float precoMedio) {
-        super(Quantidade, nome, precoMedio);
+    public FundoImobiliario(){}
+
+    public FundoImobiliario(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoFundo) {
+        super(uuid, nome, tipoAtivo, precoMedio, quantidade);
         this.tipoFundo = tipoFundo;
     }
 

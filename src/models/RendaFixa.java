@@ -1,6 +1,7 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class RendaFixa extends Ativo {
 
@@ -8,8 +9,10 @@ public class RendaFixa extends Ativo {
     private LocalDate dataVencimento;
     private float txJuros;
 
-    public RendaFixa(String categoria, LocalDate dataVencimento, float txJuros, int Quantidade, String nome, float precoMedio) {
-        super(Quantidade, nome, precoMedio);
+    public RendaFixa(){}
+
+    public RendaFixa(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
+        super(uuid, nome, tipoAtivo, precoMedio, quantidade);
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.txJuros = txJuros;
