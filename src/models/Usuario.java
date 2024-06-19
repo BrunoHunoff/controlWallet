@@ -15,6 +15,8 @@ public class Usuario {
         this.nomeCompleto = nomeCompleto;
         this.nomeUsuario = nomeUsuario;
         this.carteira = new ArrayList<Ativo>();
+        this.senha = senha;
+
     }
 
     public String getIdUsuario() {

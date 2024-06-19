@@ -8,7 +8,7 @@ import models.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
         teste3();
     }
