@@ -13,6 +13,11 @@ public class FundoImobiliario extends Ativo {
         this.tipoFundo = tipoFundo;
     }
 
+    public FundoImobiliario(String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoFundo) {
+        super(nome, tipoAtivo, precoMedio, quantidade);
+        this.tipoFundo = tipoFundo;
+    }
+
     public String getTipoFundo() {
         return tipoFundo;
     }
@@ -21,9 +26,17 @@ public class FundoImobiliario extends Ativo {
         this.tipoFundo = tipoFundo;
     }
 
+    public static FundoImobiliario fromString(String linha) {
+        String[] atributos = linha.split(", ");
+
+        return new FundoImobiliario(UUID.fromString(atributos[0]), atributos[1],
+                atributos[2], Float.parseFloat(atributos[3]),
+                Integer.parseInt(atributos[4]), atributos[5]);
+    }
+
     @Override
     public String toString() {
-        return super.toString() + "Tipo do Fundo Imobiliário: " + tipoFundo;
+        return super.toString() + ", " + tipoFundo;
     }
 
 }

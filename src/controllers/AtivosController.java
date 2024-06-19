@@ -1,11 +1,8 @@
 package controllers;
 
-import models.Acao;
-import models.Ativo;
+import models.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class AtivosController{
@@ -14,25 +11,56 @@ public class AtivosController{
 
     public static ArrayList<Ativo> ativosConta = new ArrayList<Ativo>();
 
-    public static void lerAtivos() throws IOException{
+    public static void lerAtivos() throws IOException, Exception{
         try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
             BufferedReader bufferedReader = new BufferedReader(fileReader))
         {
             String linhaAtual;
 
             while ((linhaAtual = bufferedReader.readLine()) != null) {
-                String[] splitTipo = linhaAtual.split(",");
-                String tipoAtivo = splitTipo[0];
+                String[] splitTipo = linhaAtual.split(", ");
+                String tipoAtivo = splitTipo[2];
 
+                Ativo temp = null;
                 switch (tipoAtivo) {
                     case "Acao":
-                        Acao temp = new Acao();
                         temp = Acao.fromString(linhaAtual);
 
-                        ativosConta.add(temp);
+                        break;
+
+                    case "Fundo Imobiliario":
+                        temp = FundoImobiliario.fromString(linhaAtual);
+
+                        break;
+
+                    case "NFT":
+                        temp = Nft.fromString(linhaAtual);
+                        break;
+
+                    case "Cripto":
+                        temp = Criptomoeda.fromString(linhaAtual);
+                        break;
+
+                    case "Renda Fixa":
+                        temp = RendaFixa.fromString(linhaAtual);
+                        break;
+
+                    default:
+                        throw new Exception("Tipo de ativo não reconhecido: " + tipoAtivo);
                 }
+
+                ativosConta.add(temp);
+
             }
         }
     }
 
+    public static void salvarAtivos() throws IOException {
+        try (FileWriter fileWriter = new FileWriter(ATIVOS_USUARIOS);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            for (Ativo temp: ativosConta) {
+                bufferedWriter.write(temp.toString() + "\n");
+            }
+        }
+    }
 }

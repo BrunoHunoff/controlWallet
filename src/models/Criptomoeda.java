@@ -15,6 +15,12 @@ public class Criptomoeda extends Ativo {
         this.rede = rede;
     }
 
+    public Criptomoeda(String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoMoeda, String rede) {
+        super(nome, tipoAtivo, precoMedio, quantidade);
+        this.tipoMoeda = tipoMoeda;
+        this.rede = rede;
+    }
+
     public String getRede() {
         return rede;
     }
@@ -32,9 +38,17 @@ public class Criptomoeda extends Ativo {
         this.tipoMoeda = tipoMoeda;
     }
 
+    public static Criptomoeda fromString(String linha) {
+        String[] atributos = linha.split(", ");
+
+        return new Criptomoeda(UUID.fromString(atributos[0]), atributos[1],
+                atributos[2], Float.parseFloat(atributos[3]),
+                Integer.parseInt(atributos[4]), atributos[5], atributos[6]);
+    }
+
     @Override
     public String toString() {
-        return super.toString() + ", Tipo da moeda:" + tipoMoeda;
+        return super.toString() + ", " + tipoMoeda + ", " + rede;
     }
 
 }

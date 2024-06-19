@@ -4,13 +4,21 @@ import java.util.UUID;
 
 public abstract class Ativo {
 
-    protected UUID uuid;
+    private UUID uuid;
     protected String nome;
     protected String tipoAtivo;
     protected float precoMedio;
     protected int quantidade;
 
     public Ativo(){}
+
+    public Ativo(String nome, String tipoAtivo, float precoMedio, int quantidade) {
+        this.uuid = UUID.randomUUID();
+        this.nome = nome;
+        this.tipoAtivo = tipoAtivo;
+        this.precoMedio = precoMedio;
+        this.quantidade = quantidade;
+    }
 
     public Ativo(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade) {
         this.uuid = uuid;
@@ -57,11 +65,9 @@ public abstract class Ativo {
         return precoMedio * quantidade;
     }
 
-    public abstract Ativo fromString();
-
     @Override
     public String toString() {
-        return "Nome: " + nome + ", Preço Médio:" + precoMedio + ", Quantidade: " + quantidade;
+        return uuid + ", " + nome + ", " + tipoAtivo + ", " +precoMedio + ", " + quantidade;
     }
 
 }

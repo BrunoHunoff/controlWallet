@@ -9,6 +9,12 @@ public class Acao extends Ativo {
 
     public Acao(){}
 
+    public Acao( String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoAcao, boolean pagaDividendos) {
+        super( nome, tipoAtivo, precoMedio, quantidade);
+        this.tipoAcao = tipoAcao;
+        this.pagaDividendos = pagaDividendos;
+    }
+
     public Acao(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoAcao, boolean pagaDividendos) {
         super(uuid, nome, tipoAtivo, precoMedio, quantidade);
         this.tipoAcao = tipoAcao;
@@ -32,8 +38,7 @@ public class Acao extends Ativo {
         this.tipoAcao = tipoAcao;
     }
 
-    @Override
-    public Ativo fromString(String linha) {
+    public static Acao fromString(String linha) {
         String[] atributos = linha.split(", ");
 
         return new Acao(UUID.fromString(atributos[0]), atributos[1],
@@ -43,7 +48,7 @@ public class Acao extends Ativo {
 
     @Override
     public String toString() {
-        return super.toString() + "Tipo da Ação: " + tipoAcao;
+        return super.toString() + ", " + tipoAcao + ", " + pagaDividendos;
     }
 
 }

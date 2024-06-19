@@ -15,6 +15,12 @@ public class Nft extends Ativo {
         this.autor = autor;
     }
 
+    public Nft(String nome, String tipoAtivo, float precoMedio, int quantidade, String descricao, String autor) {
+        super(nome, tipoAtivo, precoMedio, quantidade);
+        this.descricao = descricao;
+        this.autor = autor;
+    }
+
     public String getAutor() {
         return autor;
     }
@@ -32,9 +38,17 @@ public class Nft extends Ativo {
         this.descricao = TipoNFT;
     }
 
+    public static Nft fromString(String linha) {
+        String[] atributos = linha.split(", ");
+
+        return new Nft(UUID.fromString(atributos[0]), atributos[1],
+                atributos[2], Float.parseFloat(atributos[3]),
+                Integer.parseInt(atributos[4]), atributos[5], atributos[6]);
+    }
+
     @Override
     public String toString() {
-        return super.toString() + "Tipo da models.NFT:" + descricao;
+        return super.toString() + ", " + descricao + ", " + autor;
     }
 
 }
