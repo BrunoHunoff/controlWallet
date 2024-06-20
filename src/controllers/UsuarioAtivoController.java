@@ -5,7 +5,7 @@ import models.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
-
+/*
 public class UsuarioAtivoController {
 
     private static final String ATIVOS_USUARIOS = "ativos_usuarios.txt";
@@ -72,3 +72,5 @@ public class UsuarioAtivoController {
         return null;
     }
 }
+
+ */
