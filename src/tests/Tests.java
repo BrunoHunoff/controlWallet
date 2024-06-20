@@ -27,6 +27,9 @@ public class Tests {
                 case 1:
                     String nomeCompleto = Console.lerString("Digite o nome completo do usuário: ");
                     String nomeUsuario = Console.lerString("Digite o nome de usuario: ");
+                    while (gerenciarUsuario.nomeUsuarioExiste(nomeUsuario)) {
+                        nomeUsuario = Console.lerString("Usuário inválido. Digite novamente o nome de usuario: ");
+                    };
                     String senha = Console.lerString("Digite a senha: ");
 
                     gerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);

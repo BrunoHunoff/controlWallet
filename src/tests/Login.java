@@ -10,8 +10,11 @@ public class Login {
         String nomeUsuario = Console.lerString("Digite o nome de usuário: ");
         String senha = Console.lerString("Digite a senha: ");
 
-        if (gerenciarUsuario.loginValido(nomeUsuario, senha)) {
+        String idUsuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
+
+        if (idUsuario != null) {
             // chamar menu
+            System.out.println(idUsuario);
             System.out.println("Login efetuado com sucesso!");
         } else {
             System.out.println("Nome de usuário ou senha incorretos.");
