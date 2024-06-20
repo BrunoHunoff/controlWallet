@@ -111,15 +111,15 @@ public class GerenciarUsuario {
         return false;
     }
 
-    public Boolean loginValido(String nomeUsuario, String senha) {
+    public String loginValido(String nomeUsuario, String senha) {
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
         for (Usuario usuario : usuarios) {
             if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo) &&
                 usuario.getSenha().equals(criptografarSenha(senha))) {
-                return true;
+                return usuario.getIdUsuario();
             }
         }        
-        return false;
+        return null;
     }
 
 }
