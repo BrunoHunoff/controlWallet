@@ -3,7 +3,10 @@ package controllers;
 import models.*;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class AtivosController{
 
@@ -109,4 +112,47 @@ public class AtivosController{
             }
         }
     }
+
+    //cadastro Acao
+    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoAcao, boolean pagaDividendos) {
+        ativosConta.add(new Acao(nome, tipoAtivo, preco, quantidade, tipoAcao, pagaDividendos));
+    }
+
+    //cadastro Cripto e NFT
+    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String parametro1, String parametro2) {
+        switch (tipoAtivo) {
+            case "Cripto":
+                ativosConta.add(new Criptomoeda(nome, tipoAtivo, preco, quantidade, parametro1, parametro2));
+                break;
+
+            case "NFT":
+                ativosConta.add(new Nft(nome, tipoAtivo, preco, quantidade, parametro1, parametro2));
+                break;
+        }
+    }
+
+    //cadastro FII
+    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoFundo) {
+        ativosConta.add(new FundoImobiliario(nome, tipoAtivo, preco, quantidade, tipoFundo));
+    }
+
+    //cadastro Renda Fixa
+    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
+        ativosConta.add(new RendaFixa(nome, tipoAtivo, preco, quantidade, categoria, dataVencimento, txJuros));
+    }
+
+    public static Ativo buscarAtivo(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo.getNome().contains(nome)) {
+                return ativo;
+            }
+        }
+        throw new Exception("Ativo não encontrado");
+    }
+
+     public static void deletarAtivo(String nome) throws Exception {
+        Ativo temp = buscarAtivo(nome);
+
+        ativosConta.remove(temp);
+     }
 }

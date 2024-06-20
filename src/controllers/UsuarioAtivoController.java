@@ -41,12 +41,7 @@ public class UsuarioAtivoController {
         }
     }
 
-    public void cadastrarNovoAtivo(String idUsuario, UUID idAtivo) {
-        Usuario usuario = getUsuarioId(idUsuario);
-        if (usuario != null) {
-            usuario.adicionarAtivo(idAtivo);
-        }
-    }
+
 
     public ArrayList<UUID> listarAtivosDoUsuario(String idUsuario) {
         Usuario usuario = getUsuarioId(idUsuario);

@@ -7,24 +7,24 @@ public abstract class Ativo {
     private UUID uuid;
     protected String nome;
     protected String tipoAtivo;
-    protected float precoMedio;
+    protected float preco;
     protected int quantidade;
 
     public Ativo(){}
 
-    public Ativo(String nome, String tipoAtivo, float precoMedio, int quantidade) {
+    public Ativo(String nome, String tipoAtivo, float preco, int quantidade) {
         this.uuid = UUID.randomUUID();
         this.nome = nome;
         this.tipoAtivo = tipoAtivo;
-        this.precoMedio = precoMedio;
+        this.preco = preco;
         this.quantidade = quantidade;
     }
 
-    public Ativo(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade) {
+    public Ativo(UUID uuid, String nome, String tipoAtivo, float preco, int quantidade) {
         this.uuid = uuid;
         this.nome = nome;
         this.tipoAtivo = tipoAtivo;
-        this.precoMedio = precoMedio;
+        this.preco = preco;
         this.quantidade = quantidade;
     }
 
@@ -45,12 +45,12 @@ public abstract class Ativo {
         this.nome = nome;
     }
 
-    public float getPrecoMedio() {
-        return precoMedio;
+    public float getPreco() {
+        return preco;
     }
 
-    public void setPrecoMedio(float precoMedio) {
-        this.precoMedio = precoMedio;
+    public void setPreco(float preco) {
+        this.preco = preco;
     }
 
     public int getQuantidade() {
@@ -62,12 +62,12 @@ public abstract class Ativo {
     }
 
     public float calcularValorTotal() {
-        return precoMedio * quantidade;
+        return preco * quantidade;
     }
 
     @Override
     public String toString() {
-        return uuid + ", " + nome + ", " + tipoAtivo + ", " +precoMedio + ", " + quantidade;
+        return uuid + ", " + nome + ", " + tipoAtivo + ", " + preco + ", " + quantidade;
     }
 
 }
