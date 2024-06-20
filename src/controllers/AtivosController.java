@@ -5,8 +5,6 @@ import models.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 public class AtivosController{
 
@@ -16,7 +14,9 @@ public class AtivosController{
 
     private static ArrayList<String> linhasTxt = new ArrayList<>();
 
-    public static void lerCarteira(String idUsuario) throws IOException, Exception{
+    //metodos auxiliares para leitura e gravação
+
+    private static void lerCarteira(String idUsuario) throws IOException, Exception{
 
         String linha = linhasTxt.get(encontrarCarteira(idUsuario));
 
@@ -79,7 +79,9 @@ public class AtivosController{
         throw new Exception("Carteira não encontrada");
     }
 
-    private static void lerArquivo() throws Exception {
+    //classes de leitura e gravação em arquivo
+
+    public static void lerArquivo() throws Exception {
         try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String linha;
@@ -93,7 +95,7 @@ public class AtivosController{
         }
     }
 
-    public static void salvarAtivos(String idUsuario) throws IOException {
+    public static void salvarArquivo(String idUsuario) throws IOException {
 
 
         try (FileWriter fileWriter = new FileWriter(ATIVOS_USUARIOS);
@@ -113,12 +115,14 @@ public class AtivosController{
         }
     }
 
-    //cadastro Acao
+    //CRUD
+
+        //cadastro Acao
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoAcao, boolean pagaDividendos) {
         ativosConta.add(new Acao(nome, tipoAtivo, preco, quantidade, tipoAcao, pagaDividendos));
     }
 
-    //cadastro Cripto e NFT
+        //cadastro Cripto e NFT
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String parametro1, String parametro2) {
         switch (tipoAtivo) {
             case "Cripto":
@@ -131,12 +135,12 @@ public class AtivosController{
         }
     }
 
-    //cadastro FII
+        //cadastro FII
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoFundo) {
         ativosConta.add(new FundoImobiliario(nome, tipoAtivo, preco, quantidade, tipoFundo));
     }
 
-    //cadastro Renda Fixa
+        //cadastro Renda Fixa
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
         ativosConta.add(new RendaFixa(nome, tipoAtivo, preco, quantidade, categoria, dataVencimento, txJuros));
     }
