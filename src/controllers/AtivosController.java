@@ -55,12 +55,16 @@ public class AtivosController{
 
     }
 
+    private static String[] separaIdCarteira(String linha) {
+        return linha.split("carteira: ");
+    }
+
     private static int encontrarCarteira(String idUsuario) throws Exception {
 
         String idAtual = null;
 
         for (String linhaAtual : linhasTxt) {
-            String[] linhaSplit = linhaAtual.split("carteira: ");
+            String[] linhaSplit = separaIdCarteira(linhaAtual);
             idAtual = linhaSplit[0];
 
             if (idAtual.equals(idUsuario)) {
@@ -91,8 +95,17 @@ public class AtivosController{
 
         try (FileWriter fileWriter = new FileWriter(ATIVOS_USUARIOS);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            for (Ativo temp: ativosConta) {
-                bufferedWriter.write(temp.toString() + "\n");
+            for (String linha: linhasTxt) {
+                //se id da linha for diferente de id usuario -> sobrescreve linha
+                if (!(separaIdCarteira(linha)[0].equals(idUsuario))) {
+                    bufferedWriter.write(linha);
+                } else {
+                    String linhaUsuario = idUsuario + "carteira: ";
+                    for (Ativo ativo: ativosConta) {
+                        linhaUsuario += ativo.toString();
+                    }
+                    bufferedWriter.write(linhaUsuario);
+                }
             }
         }
     }
