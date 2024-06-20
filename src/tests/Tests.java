@@ -8,11 +8,7 @@ import models.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class App {
-    public static void main(String[] args) {
-        teste3();
-    }
-
+public class Tests {
     public static void teste1() {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
 
@@ -92,14 +88,14 @@ public class App {
     }
 
     //teste leitura de ativos
-    public static void teste3(){
+    public static void teste3() {
         try {
             AtivosController.lerAtivos();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        for (Ativo temp: AtivosController.ativosConta) {
+        for (Ativo temp : AtivosController.ativosConta) {
             System.out.println(temp + "\n");
         }
     }
