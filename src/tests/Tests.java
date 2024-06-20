@@ -93,7 +93,7 @@ public class Tests {
     //teste leitura de ativos
     public static void teste3() {
         try {
-            AtivosController.lerAtivos();
+            AtivosController.lerCarteira();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

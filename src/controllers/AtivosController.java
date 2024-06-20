@@ -9,56 +9,48 @@ public class AtivosController{
 
     private static final String ATIVOS_USUARIOS = "ativos_usuarios.txt";
 
-    public static ArrayList<Ativo> ativosConta = new ArrayList<Ativo>();
-
-    public static void lerAtivos(String idUsuario) throws IOException, Exception{
-        try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
-            BufferedReader bufferedReader = new BufferedReader(fileReader))
-        {
-            String linhaAtual;
-            String idAtual = null;
-
-            while (!(idAtual.equals(idUsuario))) {
+    private static ArrayList<Ativo> ativosConta = new ArrayList<>();
 
 
+
+    public static void lerCarteira(String idUsuario) throws IOException, Exception{
+
+        String[] linha = encontrarCarteira(idUsuario).split("; ");
+
+        for (String ativo: linha) {
+            String tipoAtivo = ativo.split(" ,")[2];
+
+            Ativo temp = null;
+            switch (tipoAtivo) {
+                case "Acao":
+                    temp = Acao.fromString(ativo);
+
+                    break;
+
+                case "Fundo Imobiliario":
+                    temp = FundoImobiliario.fromString(ativo);
+
+                    break;
+
+                case "NFT":
+                    temp = Nft.fromString(ativo);
+                    break;
+
+                case "Cripto":
+                    temp = Criptomoeda.fromString(ativo);
+                    break;
+
+                case "Renda Fixa":
+                    temp = RendaFixa.fromString(ativo);
+                    break;
+
+                default:
+                    throw new Exception("Tipo de ativo não reconhecido: " + tipoAtivo);
             }
 
-            while ((linhaAtual = bufferedReader.readLine()) != null) {
-                String[] splitTipo = linhaAtual.split(", ");
-                String tipoAtivo = splitTipo[2];
-
-                Ativo temp = null;
-                switch (tipoAtivo) {
-                    case "Acao":
-                        temp = Acao.fromString(linhaAtual);
-
-                        break;
-
-                    case "Fundo Imobiliario":
-                        temp = FundoImobiliario.fromString(linhaAtual);
-
-                        break;
-
-                    case "NFT":
-                        temp = Nft.fromString(linhaAtual);
-                        break;
-
-                    case "Cripto":
-                        temp = Criptomoeda.fromString(linhaAtual);
-                        break;
-
-                    case "Renda Fixa":
-                        temp = RendaFixa.fromString(linhaAtual);
-                        break;
-
-                    default:
-                        throw new Exception("Tipo de ativo não reconhecido: " + tipoAtivo);
-                }
-
-                ativosConta.add(temp);
-
-            }
+            ativosConta.add(temp);
         }
+
     }
 
     private static String encontrarCarteira(String idUsuario) throws Exception {
