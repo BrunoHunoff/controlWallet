@@ -15,9 +15,11 @@ public class AtivosController{
 
     public static void lerCarteira(String idUsuario) throws IOException, Exception{
 
-        String[] linha = encontrarCarteira(idUsuario).split("; ");
+        String linha = linhasTxt.get(encontrarCarteira(idUsuario));
 
-        for (String ativo: linha) {
+        String[] carteira = (linha.split("carteira: ")[1]).split(", ");
+
+        for (String ativo: carteira) {
             String tipoAtivo = ativo.split(" ,")[2];
 
             Ativo temp = null;
@@ -53,22 +55,21 @@ public class AtivosController{
 
     }
 
-    private static String encontrarCarteira(String idUsuario) throws Exception {
+    private static int encontrarCarteira(String idUsuario) throws Exception {
 
         String idAtual = null;
-        String ativos = null;
 
         for (String linhaAtual : linhasTxt) {
             String[] linhaSplit = linhaAtual.split("carteira: ");
             idAtual = linhaSplit[0];
 
             if (idAtual.equals(idUsuario)) {
-                ativos = linhaSplit[1];
-                return ativos;
+
+                return linhasTxt.indexOf(linhaAtual);
             }
         }
 
-        throw new Exception("Não existem ativos cadatrados");
+        throw new Exception("Carteira não encontrada");
     }
 
     private static void lerArquivo() throws Exception {
