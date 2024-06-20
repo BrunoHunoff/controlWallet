@@ -1,6 +1,6 @@
 import controllers.GerenciarUsuario;
 import helpers.Console;
-
+/* EXEMPLO DE LOGIN
 public class Login {
 
     public static void main(String[] args) {
@@ -10,7 +10,8 @@ public class Login {
         String nomeUsuario = Console.lerString("Digite o nome de usuário: ");
         String senha = Console.lerString("Digite a senha: ");
 
-        String idUsuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
+
+            String idUsuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
 
         if (idUsuario != null) {
             // chamar menu
@@ -23,3 +24,4 @@ public class Login {
     }
     
 }
+*/

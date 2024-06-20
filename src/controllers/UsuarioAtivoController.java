@@ -34,7 +34,7 @@ public class UsuarioAtivoController {
     public void salvarUsuariosEAtivos() throws IOException {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(ATIVOS_USUARIOS))) {
             for (Usuario usuario : usuarios) {
-                for (UUID idAtivo : usuario.getCarteira()) {
+                for (UUID idAtivo : Usuario.getCarteira()) {
                     bufferedWriter.write(usuario.getIdUsuario() + ", " + idAtivo.toString() + "\n");
                 }
             }
@@ -72,3 +72,4 @@ public class UsuarioAtivoController {
         return null;
     }
 }
+
