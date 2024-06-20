@@ -11,11 +11,17 @@ public class AtivosController{
 
     public static ArrayList<Ativo> ativosConta = new ArrayList<Ativo>();
 
-    public static void lerAtivos() throws IOException, Exception{
+    public static void lerAtivos(String idUsuario) throws IOException, Exception{
         try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
             BufferedReader bufferedReader = new BufferedReader(fileReader))
         {
             String linhaAtual;
+            String idAtual = null;
+
+            while (!(idAtual.equals(idUsuario))) {
+
+
+            }
 
             while ((linhaAtual = bufferedReader.readLine()) != null) {
                 String[] splitTipo = linhaAtual.split(", ");
@@ -55,7 +61,31 @@ public class AtivosController{
         }
     }
 
-    public static void salvarAtivos() throws IOException {
+    private static String encontrarCarteira(String idUsuario) throws Exception {
+        try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
+            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String linhaAtual;
+            String idAtual = null;
+            String ativos = null;
+
+            while ((linhaAtual = bufferedReader.readLine()) != null) {
+                String[] linhaSplit = linhaAtual.split("carteira: ");
+                idAtual = linhaSplit[0];
+
+                if (idAtual.equals(idUsuario)) {
+                    ativos = linhaSplit[1];
+                    return ativos;
+                }
+            }
+
+            throw new Exception("Não existem ativos cadatrados");
+
+        }
+    }
+
+    public static void salvarAtivos(String idUsuario) throws IOException {
+
+
         try (FileWriter fileWriter = new FileWriter(ATIVOS_USUARIOS);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             for (Ativo temp: ativosConta) {
