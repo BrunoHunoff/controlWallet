@@ -46,6 +46,10 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    public UUID getUuid(UUID uuid) {
+        return UUID.fromString(idUsuario); 
+    }
 
     @Override
     public String toString() {

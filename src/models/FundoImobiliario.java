@@ -6,7 +6,7 @@ public class FundoImobiliario extends Ativo {
 
     private String tipoFundo;
 
-    public FundoImobiliario(){}
+    public FundoImobiliario(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
     public FundoImobiliario(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoFundo) {
         super(uuid, nome, tipoAtivo, precoMedio, quantidade);

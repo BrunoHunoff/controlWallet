@@ -9,7 +9,7 @@ public class RendaFixa extends Ativo {
     private LocalDate dataVencimento;
     private float txJuros;
 
-    public RendaFixa(){}
+    public RendaFixa(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
     public RendaFixa(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
         super(uuid, nome, tipoAtivo, precoMedio, quantidade);
