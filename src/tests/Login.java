@@ -1,5 +1,6 @@
 import controllers.GerenciarUsuario;
 import helpers.Console;
+import models.Usuario;
 
 public class Login {
 
@@ -10,11 +11,11 @@ public class Login {
         String nomeUsuario = Console.lerString("Digite o nome de usuário: ");
         String senha = Console.lerString("Digite a senha: ");
 
-        String idUsuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
+        Usuario usuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
 
-        if (idUsuario != null) {
+        if (usuario != null) {
             // chamar menu
-            System.out.println(idUsuario);
+            System.out.println(usuario.toString());
             System.out.println("Login efetuado com sucesso!");
         } else {
             System.out.println("Nome de usuário ou senha incorretos.");
