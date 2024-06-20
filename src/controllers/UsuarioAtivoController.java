@@ -49,7 +49,7 @@ public class UsuarioAtivoController {
     }
 
     public ArrayList<UUID> listarAtivosDoUsuario(String idUsuario) {
-        Usuario usuario = getUsuarioId(idUsuario);""
+        Usuario usuario = getUsuarioId(idUsuario);
         if (usuario != null) {
             return usuario.getCarteira();
         }
@@ -62,7 +62,7 @@ public class UsuarioAtivoController {
             usuario.removerAtivo(idAtivo);
         }
     }
-
+    
     private Usuario getUsuarioId(String idUsuario) {
         for (Usuario usuario : usuarios) {
             if (usuario.getIdUsuario().equals(idUsuario)) {
