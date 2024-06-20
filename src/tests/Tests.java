@@ -77,29 +77,10 @@ public class Tests {
 
         RendaFixa r1 = new RendaFixa("CDB", "Renda Fixa", 100, 1, "CDB", LocalDate.of(2030, 12, 31), 11.5f);
 
-        AtivosController.ativosConta.add(a1);
-        AtivosController.ativosConta.add(c1);
-        AtivosController.ativosConta.add(f1);
-        AtivosController.ativosConta.add(n1);
-        AtivosController.ativosConta.add(r1);
 
-        try {
-            AtivosController.salvarAtivos();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     //teste leitura de ativos
     public static void teste3() {
-        try {
-            AtivosController.lerAtivos();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        for (Ativo temp : AtivosController.ativosConta) {
-            System.out.println(temp + "\n");
-        }
     }
 }
