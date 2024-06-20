@@ -49,7 +49,7 @@ public class UsuarioAtivoController {
     }
 
     public ArrayList<UUID> listarAtivosDoUsuario(String idUsuario) {
-        Usuario usuario = getUsuarioId(idUsuario);
+        Usuario usuario = getUsuarioId(idUsuario);""
         if (usuario != null) {
             return usuario.getCarteira();
         }
