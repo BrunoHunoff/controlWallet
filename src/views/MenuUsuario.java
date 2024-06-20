@@ -196,7 +196,7 @@ public class MenuUsuario {
         }
     }
 
-    private static void executarMenuUsuario() {
+    public static void executarMenuUsuario() {
 
         while(true) {
 
