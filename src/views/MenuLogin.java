@@ -16,7 +16,7 @@ public class MenuLogin {
 
 
         if (idUsuario == null) {
-            throw new Exception("Usuario ou Senha inválidos. Tente novamente!");
+            throw new Exception("\nUsuario ou Senha inválidos. Tente novamente!");
         }
 
         return idUsuario;

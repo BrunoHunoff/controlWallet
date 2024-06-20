@@ -1,9 +1,13 @@
 package views;
 
+import controllers.GerenciarUsuario;
+
 public class Sistema {
     private static String idUsuario = null;
 
     public static void exe() {
+
+        GerenciarUsuario.carregarUsuarios();
 
         do {
             try {
@@ -12,6 +16,7 @@ public class Sistema {
                 System.out.println(e.getMessage());
             }
         } while (idUsuario == null);
+
     }
 
 

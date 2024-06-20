@@ -23,7 +23,7 @@ public class GerenciarUsuario {
         carregarUsuarios();
     }
     */
-    private static void carregarUsuarios() {
+    public static void carregarUsuarios() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -34,7 +34,7 @@ public class GerenciarUsuario {
         }
     }
 
-    private static void salvarUsuarios() {
+    public static void salvarUsuarios() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO))) {
             for (Usuario usuario : usuarios) {
                 writer.write(usuario.toString());
