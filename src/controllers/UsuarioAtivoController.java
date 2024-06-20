@@ -5,7 +5,7 @@ import models.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
-/*
+
 public class UsuarioAtivoController {
 
     private static final String ATIVOS_USUARIOS = "ativos_usuarios.txt";
@@ -34,7 +34,7 @@ public class UsuarioAtivoController {
     public void salvarUsuariosEAtivos() throws IOException {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(ATIVOS_USUARIOS))) {
             for (Usuario usuario : usuarios) {
-                for (UUID idAtivo : usuario.getCarteira()) {
+                for (UUID idAtivo : Usuario.getCarteira()) {
                     bufferedWriter.write(usuario.getIdUsuario() + ", " + idAtivo.toString() + "\n");
                 }
             }
@@ -73,4 +73,3 @@ public class UsuarioAtivoController {
     }
 }
 
- */
