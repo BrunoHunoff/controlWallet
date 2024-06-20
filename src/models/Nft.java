@@ -7,7 +7,7 @@ public class Nft extends Ativo {
     private String descricao;
     private String autor;
 
-    public Nft(){}
+    public Nft(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
     public Nft(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String descricao, String autor) {
         super(uuid, nome, tipoAtivo, precoMedio, quantidade);

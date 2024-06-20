@@ -7,7 +7,7 @@ public class Acao extends Ativo {
     private String tipoAcao;
     private boolean pagaDividendos;
 
-    public Acao(){}
+    public Acao(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
     public Acao( String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoAcao, boolean pagaDividendos) {
         super( nome, tipoAtivo, precoMedio, quantidade);

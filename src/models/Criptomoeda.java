@@ -7,7 +7,7 @@ public class Criptomoeda extends Ativo {
     private String tipoMoeda;
     private String rede;
 
-    public Criptomoeda(){}
+    public Criptomoeda(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
     public Criptomoeda(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoMoeda, String rede) {
         super(uuid, nome, tipoAtivo, precoMedio, quantidade);
