@@ -11,7 +11,7 @@ public class AtivosController{
 
     private static ArrayList<Ativo> ativosConta = new ArrayList<>();
 
-
+    private static ArrayList<String> linhasTxt = new ArrayList<>();
 
     public static void lerCarteira(String idUsuario) throws IOException, Exception{
 
@@ -54,24 +54,34 @@ public class AtivosController{
     }
 
     private static String encontrarCarteira(String idUsuario) throws Exception {
-        try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
-            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            String linhaAtual;
-            String idAtual = null;
-            String ativos = null;
 
-            while ((linhaAtual = bufferedReader.readLine()) != null) {
-                String[] linhaSplit = linhaAtual.split("carteira: ");
-                idAtual = linhaSplit[0];
+        String idAtual = null;
+        String ativos = null;
 
-                if (idAtual.equals(idUsuario)) {
-                    ativos = linhaSplit[1];
-                    return ativos;
-                }
+        for (String linhaAtual : linhasTxt) {
+            String[] linhaSplit = linhaAtual.split("carteira: ");
+            idAtual = linhaSplit[0];
+
+            if (idAtual.equals(idUsuario)) {
+                ativos = linhaSplit[1];
+                return ativos;
             }
+        }
 
-            throw new Exception("Não existem ativos cadatrados");
+        throw new Exception("Não existem ativos cadatrados");
+    }
 
+    private static void lerArquivo() throws Exception {
+        try (FileReader fileReader = new FileReader(ATIVOS_USUARIOS);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String linha;
+            while ((linha = bufferedReader.readLine()) != null) {
+                linhasTxt.add(linha);
+            }
+        }
+
+        if (linhasTxt.isEmpty()) {
+            throw new Exception("Arquivo vazio");
         }
     }
 
