@@ -126,7 +126,7 @@ public class AtivosController{
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String parametro1, String parametro2) {
         switch (tipoAtivo) {
             case "Cripto":
-                ativosConta.add(new Criptomoeda(nome, tipoAtivo, preco, quantidade, parametro1, parametro2));
+                ativosConta.add(new Criptomoeda(nome, parametro1, parametro2));
                 break;
 
             case "NFT":
