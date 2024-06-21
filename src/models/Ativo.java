@@ -13,6 +13,15 @@ public abstract class Ativo {
 
     public Ativo(){}
 
+    public Ativo(String nome) {
+        this.uuid = UUID.randomUUID();
+        this.nome = nome;
+        this.tipoAtivo = "";
+        this.preco = 0;
+        this.quantidade = 0;
+        this.saldo = 0;
+    }
+
     public Ativo(String nome, String tipoAtivo, float preco, int quantidade, float saldo) {
         this.uuid = UUID.randomUUID();
         this.nome = nome;
