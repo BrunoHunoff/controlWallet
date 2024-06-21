@@ -58,7 +58,10 @@ public class GerenciarUsuario {
         }
     }
 
-    public static void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) {
+    public static void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) throws Exception{
+        if (nomeUsuarioExiste(nomeUsuario)) {
+            throw new Exception("\nLogin em já está em uso.");
+        }
         String hashSenha = criptografarSenha(senha);
         Usuario usuario = new Usuario(nomeCompleto, nomeUsuario.toLowerCase(), hashSenha);
         usuarios.add(usuario);
@@ -78,8 +81,13 @@ public class GerenciarUsuario {
         return null;
     }
 
-    public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) {
+    public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) throws Exception{
+        if (nomeUsuarioExiste(novoNomeUsuario)) {
+            throw new Exception("\nLogin já está em uso.");
+        }
+
         Usuario usuario = buscarUsuario(nomeAtual);
+
         if (usuario != null) {
             usuario.setNomeCompleto(novoNomeCompleto);
             usuario.setLogin(novoNomeUsuario.toLowerCase());

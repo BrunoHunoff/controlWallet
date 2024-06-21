@@ -55,8 +55,12 @@ public class MenuAdmin {
             String senhaConfirmacao = Console.lerString("Repita a senha: ");
 
             if ((senha.equals(senhaConfirmacao))) {
-                GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
-                return;
+                try {
+                    GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
+                    return;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
             System.out.println("\nAs senha não são iguais. Tente novamente!\n");
         }
@@ -75,12 +79,24 @@ public class MenuAdmin {
         String nomeAtual = Console.lerString("Digite o login atual: ");
 
         Usuario temp = GerenciarUsuario.buscarUsuario(nomeAtual);
+        while (true) {
+            String novoNomeCompleto = Console.lerString("Digite o novo nome completo do usuário: ");
+            String novoLogin = Console.lerString("Digite o novo login: ");
+            String novaSenha = Console.lerString("Digite a nova senha: ");
+            String novaSenhaConfirmacao = Console.lerString("Repita a senha: ");
 
-        String novoNomeCompleto = Console.lerString("Digite o novo nome completo do usuário: ");
-        String novoLogin = Console.lerString("Digite o novo login: ");
-        String novaSenha = Console.lerString("Digite a nova senha: ");
+            if ((novaSenha.equals(novaSenhaConfirmacao))) {
+                try {
+                    GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoLogin, novaSenha);
+                    return;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage() + "Tente novamente!");
+                }
+            }
 
-        GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoLogin, novaSenha);
+            System.out.println("\nAs senhas não são iguais. Tente novamente!");
+
+        }
     }
 
     private static void deletarUsuario() {
