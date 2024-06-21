@@ -69,17 +69,17 @@ public class GerenciarUsuario {
         return usuarios;
     }
 
-    public static Usuario listarUsuario(String id) {
+    public static Usuario buscarUsuario(String nome) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getIdUsuario().equals(id)) {
+            if (usuario.getNomeCompleto().equals(nome)) {
                 return usuario;
             }
         }
         return null;
     }
 
-    public static void atualizarUsuario(String idUsuario, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) {
-        Usuario usuario = listarUsuario(idUsuario);
+    public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) {
+        Usuario usuario = buscarUsuario(nomeAtual);
         if (usuario != null) {
             usuario.setNomeCompleto(novoNomeCompleto);
             usuario.setNomeUsuario(novoNomeUsuario.toLowerCase());
@@ -88,8 +88,8 @@ public class GerenciarUsuario {
         }
     }
 
-    public static void deletarUsuario(String idUsuario) {
-        Usuario usuario = listarUsuario(idUsuario);
+    public static void deletarUsuario(String nome) {
+        Usuario usuario = buscarUsuario(nome);
         if (usuario != null) {
             usuarios.remove(usuario);
             salvarUsuarios();

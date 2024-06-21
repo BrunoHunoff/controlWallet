@@ -61,12 +61,12 @@ public class MenuAdmin {
     }
 
     private static void atualizarUsuario() {
-        String idUsuarioAtualizar = Console.lerString("Digite o ID do usuário: ");
+        String nomeAtual = Console.lerString("Digite o nome atual completo do usuário: ");
         String novoNomeCompleto = Console.lerString("Digite o novo nome completo do usuário: ");
         String novoNomeUsuario = Console.lerString("Digite o novo nome de usuario: ");
         String novaSenha = Console.lerString("Digite a nova senha: ");
 
-        GerenciarUsuario.atualizarUsuario(idUsuarioAtualizar, novoNomeCompleto, novoNomeUsuario, novaSenha);
+        GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoNomeUsuario, novaSenha);
     }
 
     private static void deletarUsuario() {
