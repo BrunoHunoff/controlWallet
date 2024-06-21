@@ -13,7 +13,8 @@ public class MenuUsuario {
         System.out.println("2) Emitir relatório");
     }
 
-    private static void verificarOpcaoUsuario(int op, String idUsuario) {
+    private static boolean verificarOpcaoUsuario(int op, String idUsuario) {
+        boolean finalizarPrograma = false;
 
         switch (op) {
             case 1:
@@ -26,7 +27,7 @@ public class MenuUsuario {
                         menuAcao();
                         break;
                     case 2:
-                        MenuCripto.executarMenuCripto(idUsuario);
+                        finalizarPrograma = MenuCripto.executarMenuCripto(idUsuario);
                         break;
                     
                     case 3:
@@ -52,6 +53,7 @@ public class MenuUsuario {
             default:
                 System.out.println("\nOpção inválida, digite novamente");
             }
+            return finalizarPrograma;
         }
 
     private static void menuSelecionarAtivo() {
@@ -175,11 +177,11 @@ public class MenuUsuario {
     public static void executarMenuUsuario(String idUsuario) {
 
         while(true) {
-
+            boolean finalizarPrograma = false;
             exibirMenuUsuario();
             int op = Console.lerInt("Informe sua opção: ");
-            verificarOpcaoUsuario(op, idUsuario);
-            if (op == 0) {
+            finalizarPrograma = verificarOpcaoUsuario(op, idUsuario);
+            if (finalizarPrograma) {
                 finalizar(idUsuario);
                 return;
             }
@@ -191,6 +193,7 @@ public class MenuUsuario {
         if (salvar == "S" || salvar == "s") {
             salvarArquivo(idUsuario);
         }
+        System.out.println("\nSistema finalizado...");
     }
 
     public static void salvarArquivo(String idUsuario) {
@@ -198,6 +201,7 @@ public class MenuUsuario {
             AtivosController.salvarArquivo(idUsuario);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return;
         }
     }
     

@@ -7,19 +7,20 @@ import models.Criptomoeda;
 
 public class MenuCripto {
 
-    public static int executarMenuCripto(String idUsuario) {
+    public static boolean executarMenuCripto(String idUsuario) {
+        boolean finalizar = false;
         while (true) {
             exibirMenu();
             int op = selecionarOp(idUsuario);
 
 
             if (op == 8) {
-                return 8;
+                return false;
             }
 
             if (op == 0) {
 
-                return 0;
+                return true;
             }
         }
     }
