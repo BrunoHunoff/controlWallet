@@ -113,6 +113,7 @@ public class GerenciarUsuario {
     }
 
     public static String loginValido(String nomeUsuario, String senha) throws Exception{
+
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
 
         if (usuarios.isEmpty()) {
@@ -122,7 +123,7 @@ public class GerenciarUsuario {
         for (Usuario usuario : usuarios) {
             if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo) &&
                 usuario.getSenha().equals(criptografarSenha(senha))) {
-                return usuario.getIdUsuario();
+                return usuario;
             }
         }
         return null;
