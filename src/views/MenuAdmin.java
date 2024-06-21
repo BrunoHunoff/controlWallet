@@ -54,15 +54,19 @@ public class MenuAdmin {
             String senha = Console.lerString("Digite a senha: ");
             String senhaConfirmacao = Console.lerString("Repita a senha: ");
 
-            if ((senha.equals(senhaConfirmacao))) {
-                try {
-                    GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
-                    return;
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+            try{
+                GerenciarUsuario.senhaIgual(senha, senhaConfirmacao);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
             }
-            System.out.println("\nAs senha não são iguais. Tente novamente!\n");
+
+            try {
+                GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
+                return;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
 
@@ -85,17 +89,20 @@ public class MenuAdmin {
             String novaSenha = Console.lerString("Digite a nova senha: ");
             String novaSenhaConfirmacao = Console.lerString("Repita a senha: ");
 
-            if ((novaSenha.equals(novaSenhaConfirmacao))) {
-                try {
-                    GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoLogin, novaSenha);
-                    return;
-                } catch (Exception e) {
-                    System.out.println(e.getMessage() + "Tente novamente!");
-                }
+
+            try{
+                GerenciarUsuario.senhaIgual(novaSenha, novaSenhaConfirmacao);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
             }
 
-            System.out.println("\nAs senhas não são iguais. Tente novamente!");
-
+            try {
+                GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoLogin, novaSenha);
+                return;
+            } catch (Exception e) {
+                System.out.println(e.getMessage() + "Tente novamente!");
+            }
         }
     }
 

@@ -68,6 +68,12 @@ public class GerenciarUsuario {
         salvarUsuarios();
     }
 
+    public static void senhaIgual(String senha, String confirmacao) throws Exception{
+        if (!(senha.equals(confirmacao))) {
+            throw new Exception("\nAs senhas não são iguais. Tente novamente!");
+        }
+    }
+
     public static List<Usuario> listarTodos() {
         return usuarios;
     }
