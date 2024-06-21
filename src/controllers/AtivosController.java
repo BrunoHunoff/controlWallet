@@ -136,8 +136,8 @@ public class AtivosController{
     }
 
         //cadastro FII
-    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoFundo) {
-        ativosConta.add(new FundoImobiliario(nome, tipoAtivo, preco, quantidade, tipoFundo));
+    public static void cadastrarAtivo(String nome, String tipoFundo) {
+        ativosConta.add(new FundoImobiliario(nome, tipoFundo));
     }
 
         //cadastro Renda Fixa
