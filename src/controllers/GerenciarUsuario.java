@@ -17,12 +17,6 @@ public class GerenciarUsuario {
     private static final String ARQUIVO = "usuarios.txt";
     private static List<Usuario> usuarios = new ArrayList<>();
 
-    /*
-    public GerenciarUsuario() {
-        usuarios = new ArrayList<>();
-        carregarUsuarios();
-    }
-    */
     public static void carregarUsuarios() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
