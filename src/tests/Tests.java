@@ -1,11 +1,17 @@
+package tests;
+
+import controllers.AtivosController;
 import controllers.GerenciarUsuario;
 import helpers.Console;
-import models.Usuario;
+import models.*;
 
-public class App {
-    public static void main(String[] args) {
+import java.io.IOException;
+import java.time.LocalDate;
+
+public class Tests {
+    public static void teste1() {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
-        
+
         int opcao;
 
         do {
@@ -15,7 +21,7 @@ public class App {
             System.out.println("4. Deletar Usuário");
             System.out.println("5. Sair");
             opcao = Console.lerInt("Escolha uma opção: ");
-            
+
 
             switch (opcao) {
                 case 1:
@@ -46,7 +52,7 @@ public class App {
 
                 case 4:
                     String idUsuarioDeletar = Console.lerString("Digite o ID do usuário: ");
-                    
+
                     gerenciarUsuario.deletarUsuario(idUsuarioDeletar);
                     break;
 
@@ -57,5 +63,24 @@ public class App {
                     System.out.println("Opção inválida!");
             }
         } while (opcao != 5);
+    }
+
+    //teste gravação de ativos
+    public static void teste2() {
+        Acao a1 = new Acao("CMIG4", "Acao", 35.5f, 10, "Ordinaria", true);
+
+        Criptomoeda c1 = new Criptomoeda("DOG", "Cripto", 0.0060f, 20000, "Memecoin", "BTC");
+
+        FundoImobiliario f1 = new FundoImobiliario("RBRF11", "Fundo Imobiliario", 7.88f, 11, "Papel");
+
+        Nft n1 = new Nft("Macaco", "NFT", 20000.00f, 1, "Moeda do macaco", "Antonio");
+
+        RendaFixa r1 = new RendaFixa("CDB", "Renda Fixa", 100, 1, "CDB", LocalDate.of(2030, 12, 31), 11.5f);
+
+
+    }
+
+    //teste leitura de ativos
+    public static void teste3() {
     }
 }

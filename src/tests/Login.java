@@ -1,6 +1,10 @@
 import controllers.GerenciarUsuario;
 import helpers.Console;
+
 import models.Usuario;
+
+
+/* EXEMPLO DE LOGIN
 
 public class Login {
 
@@ -11,7 +15,12 @@ public class Login {
         String nomeUsuario = Console.lerString("Digite o nome de usuário: ");
         String senha = Console.lerString("Digite a senha: ");
 
+
         Usuario usuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
+
+
+            String idUsuario = gerenciarUsuario.loginValido(nomeUsuario, senha);
+
 
         if (usuario != null) {
             // chamar menu
@@ -24,3 +33,4 @@ public class Login {
     }
     
 }
+*/
