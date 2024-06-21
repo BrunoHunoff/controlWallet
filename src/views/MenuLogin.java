@@ -2,23 +2,24 @@ package views;
 
 import controllers.GerenciarUsuario;
 import helpers.Console;
+import models.Usuario;
 
 public class MenuLogin {
 
-    public static String menuLogin() throws Exception{
+    public static Usuario menuLogin() throws Exception{
         System.out.println("\n--- Control Wallet ---\n");
 
         String login = Console.lerString("Login: ");
         String senha = Console.lerString("Senha: ");
 
 
-        String idUsuario = GerenciarUsuario.loginValido(login, senha);
+        Usuario usuario = GerenciarUsuario.loginValido(login, senha);
 
 
-        if (idUsuario == null) {
+        if (usuario == null) {
             throw new Exception("\nUsuario ou Senha inválidos. Tente novamente!");
         }
 
-        return idUsuario;
+        return usuario;
     }
 }

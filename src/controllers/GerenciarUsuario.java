@@ -17,12 +17,6 @@ public class GerenciarUsuario {
     private static final String ARQUIVO = "usuarios.txt";
     private static List<Usuario> usuarios = new ArrayList<>();
 
-    /*
-    public GerenciarUsuario() {
-        usuarios = new ArrayList<>();
-        carregarUsuarios();
-    }
-    */
     public static void carregarUsuarios() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
@@ -64,38 +58,52 @@ public class GerenciarUsuario {
         }
     }
 
-    public static void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) {
+    public static void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) throws Exception{
+        if (nomeUsuarioExiste(nomeUsuario)) {
+            throw new Exception("\nLogin em já está em uso.");
+        }
         String hashSenha = criptografarSenha(senha);
         Usuario usuario = new Usuario(nomeCompleto, nomeUsuario.toLowerCase(), hashSenha);
         usuarios.add(usuario);
         salvarUsuarios();
     }
 
+    public static void senhaIgual(String senha, String confirmacao) throws Exception{
+        if (!(senha.equals(confirmacao))) {
+            throw new Exception("\nAs senhas não são iguais. Tente novamente!");
+        }
+    }
+
     public static List<Usuario> listarTodos() {
         return usuarios;
     }
 
-    public static Usuario listarUsuario(String id) {
+    public static Usuario buscarUsuario(String login) throws Exception{
         for (Usuario usuario : usuarios) {
-            if (usuario.getIdUsuario().equals(id)) {
+            if (usuario.getLogin().equals(login)) {
                 return usuario;
             }
         }
-        return null;
+        throw new Exception("Usuario não encontrado!");
     }
 
-    public static void atualizarUsuario(String idUsuario, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) {
-        Usuario usuario = listarUsuario(idUsuario);
+    public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) throws Exception{
+        if (nomeUsuarioExiste(novoNomeUsuario)) {
+            throw new Exception("\nLogin já está em uso.");
+        }
+
+        Usuario usuario = buscarUsuario(nomeAtual);
+
         if (usuario != null) {
             usuario.setNomeCompleto(novoNomeCompleto);
-            usuario.setNomeUsuario(novoNomeUsuario.toLowerCase());
+            usuario.setLogin(novoNomeUsuario.toLowerCase());
             usuario.setSenha(criptografarSenha(novaSenha));
             salvarUsuarios();
         }
     }
 
-    public static void deletarUsuario(String idUsuario) {
-        Usuario usuario = listarUsuario(idUsuario);
+    public static void deletarUsuario(String login) throws Exception{
+        Usuario usuario = buscarUsuario(login);
         if (usuario != null) {
             usuarios.remove(usuario);
             salvarUsuarios();
@@ -105,14 +113,14 @@ public class GerenciarUsuario {
     public static Boolean nomeUsuarioExiste(String nomeUsuario) {
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo)) {
+            if (usuario.getLogin().toLowerCase().equals(nomeUsuarioMinusculo)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static String loginValido(String nomeUsuario, String senha) throws Exception{
+    public static Usuario loginValido(String nomeUsuario, String senha) throws Exception{
 
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
 
@@ -121,7 +129,7 @@ public class GerenciarUsuario {
         }
 
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo) &&
+            if (usuario.getLogin().toLowerCase().equals(nomeUsuarioMinusculo) &&
                 usuario.getSenha().equals(criptografarSenha(senha))) {
                 return usuario;
             }
