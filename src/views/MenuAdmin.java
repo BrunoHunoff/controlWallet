@@ -6,7 +6,7 @@ import models.Usuario;
 
 public class MenuAdmin {
  
-    public static void exibirMenuAdmin() {
+    private static void exibirMenuAdmin() {
         
         System.out.println("\nControl Wallet");
         System.out.println("1) Criar usuário");
@@ -61,7 +61,11 @@ public class MenuAdmin {
         }
     }
 
-    private static void executarMenuAdmin() {
+    private static void criarUsuario() {
+
+    }
+
+    public static void executarMenuAdmin() {
 
         while(true) {
 

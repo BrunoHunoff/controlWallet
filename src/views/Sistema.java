@@ -1,9 +1,10 @@
 package views;
 
 import controllers.GerenciarUsuario;
+import models.Usuario;
 
 public class Sistema {
-    private static String idUsuario = null;
+    private static Usuario usuario = null;
 
     public static void exe() {
 
@@ -11,15 +12,15 @@ public class Sistema {
 
         do {
             try {
-                idUsuario = MenuLogin.menuLogin();
+                usuario = MenuLogin.menuLogin();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        } while (idUsuario == null);
+        } while (usuario == null);
 
         //se id == id do Admin
-        if (idUsuario == "95fe9295-44c7-45dc-82dd-025a984b65ba") {
-            MenuAdmin.exibirMenuAdmin();
+        if (usuario.getNomeCompleto().equals("admin")) {
+            MenuAdmin.executarMenuAdmin();
         } else {
             MenuUsuario.executarMenuUsuario();
         }

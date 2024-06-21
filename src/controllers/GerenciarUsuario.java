@@ -112,7 +112,7 @@ public class GerenciarUsuario {
         return false;
     }
 
-    public static String loginValido(String nomeUsuario, String senha) throws Exception{
+    public static Usuario loginValido(String nomeUsuario, String senha) throws Exception{
 
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
 
