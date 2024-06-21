@@ -118,15 +118,15 @@ public class AtivosController{
     //CRUD
 
         //cadastro Acao
-    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoAcao, boolean pagaDividendos) {
-        ativosConta.add(new Acao(nome, tipoAtivo, preco, quantidade, tipoAcao, pagaDividendos));
+    public static void cadastrarAtivo(String nome, String tipoAtivo, String tipoAcao, boolean pagaDividendos) {
+        ativosConta.add(new Acao(nome, tipoAcao, pagaDividendos));
     }
 
         //cadastro Cripto e NFT
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String parametro1, String parametro2) {
         switch (tipoAtivo) {
             case "Cripto":
-                ativosConta.add(new Criptomoeda(nome, tipoAtivo, preco, quantidade, parametro1, parametro2));
+                ativosConta.add(new Criptomoeda(nome, parametro1, parametro2));
                 break;
 
             case "NFT":
