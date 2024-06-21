@@ -130,7 +130,7 @@ public class AtivosController{
                 break;
 
             case "NFT":
-                ativosConta.add(new Nft(nome, tipoAtivo, preco, quantidade, parametro1, parametro2));
+                ativosConta.add(new Nft(nome, parametro1, parametro2));
                 break;
         }
     }
