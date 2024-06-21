@@ -63,6 +63,7 @@ public class MenuAdmin {
 
             try {
                 GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
+                System.out.printf("\nUsuário criado com sucesso!");
                 return;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -105,11 +106,13 @@ public class MenuAdmin {
 
             try {
                 GerenciarUsuario.atualizarUsuario(login, novoNomeCompleto, novoLogin, novaSenha);
+                System.out.println("\nUsuário atualizado com sucesso!");
                 return;
             } catch (Exception e) {
                 System.out.println(e.getMessage() + "Tente novamente!");
             }
         }
+
     }
 
     private static void deletarUsuario() {
@@ -121,7 +124,7 @@ public class MenuAdmin {
             System.out.println(e.getMessage());
             return;
         }
-        System.out.println("Usuario deletado com sucesso!");
+        System.out.println("\nUsuario deletado com sucesso!");
     }
 
     public static void executarMenuAdmin() {
