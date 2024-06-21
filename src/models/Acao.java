@@ -9,8 +9,8 @@ public class Acao extends Ativo {
 
     public Acao(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
-    public Acao( String nome, String tipoAtivo, float precoMedio, int quantidade, String tipoAcao, boolean pagaDividendos) {
-        super( nome, tipoAtivo, precoMedio, quantidade);
+    public Acao(String nome, String tipoAtivo, float preco, int quantidade, float saldo, String tipoAcao, boolean pagaDividendos) {
+        super(nome, tipoAtivo, preco, quantidade, saldo);
         this.tipoAcao = tipoAcao;
         this.pagaDividendos = pagaDividendos;
     }
