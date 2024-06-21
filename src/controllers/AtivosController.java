@@ -159,4 +159,8 @@ public class AtivosController{
 
         ativosConta.remove(temp);
      }
+
+     public static ArrayList<Ativo> getAtivosConta() {
+        return ativosConta;
+     }
 }
