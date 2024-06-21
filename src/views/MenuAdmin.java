@@ -80,9 +80,14 @@ public class MenuAdmin {
     }
 
     private static void atualizarUsuario() {
-        String nomeAtual = Console.lerString("Digite o login atual: ");
+        String login = Console.lerString("Digite o login atual: ");
+        try {
+            Usuario temp = GerenciarUsuario.buscarUsuario(login);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
-        Usuario temp = GerenciarUsuario.buscarUsuario(nomeAtual);
         while (true) {
             String novoNomeCompleto = Console.lerString("Digite o novo nome completo do usuário: ");
             String novoLogin = Console.lerString("Digite o novo login: ");
@@ -98,7 +103,7 @@ public class MenuAdmin {
             }
 
             try {
-                GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoLogin, novaSenha);
+                GerenciarUsuario.atualizarUsuario(login, novoNomeCompleto, novoLogin, novaSenha);
                 return;
             } catch (Exception e) {
                 System.out.println(e.getMessage() + "Tente novamente!");
@@ -107,9 +112,15 @@ public class MenuAdmin {
     }
 
     private static void deletarUsuario() {
-        String nomeCompleto = Console.lerString("Digite o nome completo do usuário: ");
+        String nomeCompleto = Console.lerString("Digite o login do usuário: ");
 
-        GerenciarUsuario.deletarUsuario(nomeCompleto);
+        try {
+            GerenciarUsuario.deletarUsuario(nomeCompleto);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        System.out.println("Usuario deletado com sucesso!");
     }
 
     public static void executarMenuAdmin() {

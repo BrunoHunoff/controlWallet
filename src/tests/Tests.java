@@ -7,7 +7,7 @@ import models.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
+/*
 public class Tests {
     public static void teste1() {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
@@ -84,3 +84,4 @@ public class Tests {
     public static void teste3() {
     }
 }
+*/

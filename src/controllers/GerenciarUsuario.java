@@ -78,13 +78,13 @@ public class GerenciarUsuario {
         return usuarios;
     }
 
-    public static Usuario buscarUsuario(String nome) {
+    public static Usuario buscarUsuario(String login) throws Exception{
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeCompleto().equals(nome)) {
+            if (usuario.getLogin().equals(login)) {
                 return usuario;
             }
         }
-        return null;
+        throw new Exception("Usuario não encontrado!");
     }
 
     public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) throws Exception{
@@ -102,8 +102,8 @@ public class GerenciarUsuario {
         }
     }
 
-    public static void deletarUsuario(String nome) {
-        Usuario usuario = buscarUsuario(nome);
+    public static void deletarUsuario(String login) throws Exception{
+        Usuario usuario = buscarUsuario(login);
         if (usuario != null) {
             usuarios.remove(usuario);
             salvarUsuarios();
