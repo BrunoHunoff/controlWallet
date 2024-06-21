@@ -82,7 +82,7 @@ public class GerenciarUsuario {
         Usuario usuario = buscarUsuario(nomeAtual);
         if (usuario != null) {
             usuario.setNomeCompleto(novoNomeCompleto);
-            usuario.setNomeUsuario(novoNomeUsuario.toLowerCase());
+            usuario.setLogin(novoNomeUsuario.toLowerCase());
             usuario.setSenha(criptografarSenha(novaSenha));
             salvarUsuarios();
         }
@@ -99,7 +99,7 @@ public class GerenciarUsuario {
     public static Boolean nomeUsuarioExiste(String nomeUsuario) {
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo)) {
+            if (usuario.getLogin().toLowerCase().equals(nomeUsuarioMinusculo)) {
                 return true;
             }
         }
@@ -115,7 +115,7 @@ public class GerenciarUsuario {
         }
 
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo) &&
+            if (usuario.getLogin().toLowerCase().equals(nomeUsuarioMinusculo) &&
                 usuario.getSenha().equals(criptografarSenha(senha))) {
                 return usuario;
             }

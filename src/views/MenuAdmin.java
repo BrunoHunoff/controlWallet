@@ -46,11 +46,22 @@ public class MenuAdmin {
     }
 
     private static void criarUsuario() {
-        String nomeCompleto = Console.lerString("Digite o nome completo do usuário: ");
-        String nomeUsuario = Console.lerString("Digite o nome de usuário: ");
-        String senha = Console.lerString("Digite a senha: ");
+        System.out.println("\n--- CADASTRO DE USUÁRIO ---\n");
 
-        GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
+        String nomeCompleto = Console.lerString("Digite o nome completo do usuário: ");
+        String nomeUsuario = Console.lerString("Digite login: ");
+        while (true) {
+            String senha = Console.lerString("Digite a senha: ");
+            String senhaConfirmacao = Console.lerString("Repita a senha: ");
+
+            if ((senha.equals(senhaConfirmacao))) {
+                GerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
+                return;
+            }
+            System.out.println("\nAs senha não são iguais. Tente novamente!\n");
+        }
+
+
     }
 
     private static void listarUsuarios() {
@@ -61,18 +72,21 @@ public class MenuAdmin {
     }
 
     private static void atualizarUsuario() {
-        String nomeAtual = Console.lerString("Digite o nome atual completo do usuário: ");
+        String nomeAtual = Console.lerString("Digite o login atual: ");
+
+        Usuario temp = GerenciarUsuario.buscarUsuario(nomeAtual);
+
         String novoNomeCompleto = Console.lerString("Digite o novo nome completo do usuário: ");
-        String novoNomeUsuario = Console.lerString("Digite o novo nome de usuario: ");
+        String novoLogin = Console.lerString("Digite o novo login: ");
         String novaSenha = Console.lerString("Digite a nova senha: ");
 
-        GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoNomeUsuario, novaSenha);
+        GerenciarUsuario.atualizarUsuario(nomeAtual, novoNomeCompleto, novoLogin, novaSenha);
     }
 
     private static void deletarUsuario() {
-        String idUsuarioDeletar = Console.lerString("Digite o ID do usuário: ");
+        String nomeCompleto = Console.lerString("Digite o nome completo do usuário: ");
 
-        GerenciarUsuario.deletarUsuario(idUsuarioDeletar);
+        GerenciarUsuario.deletarUsuario(nomeCompleto);
     }
 
     public static void executarMenuAdmin() {
