@@ -1,26 +1,25 @@
 package views;
 
 import controllers.AtivosController;
-import controllers.GerenciarUsuario;
 import helpers.Console;
 import models.Ativo;
 import models.Criptomoeda;
 
 public class MenuCripto {
 
-    public static void executarMenuCripto() {
+    public static int executarMenuCripto(String idUsuario) {
         while (true) {
             exibirMenu();
-            int op = selecionarOp();
+            int op = selecionarOp(idUsuario);
 
 
-            if (op == 7) {
-                break;
+            if (op == 8) {
+                return 8;
             }
 
             if (op == 0) {
-                System.out.println("\nSistema finalizado...");
-                break;
+
+                return 0;
             }
         }
     }
@@ -37,17 +36,33 @@ public class MenuCripto {
         System.out.println("4 - Buscar moeda");
         System.out.println("5 - Adicionar transação");
         System.out.println("6 - Visão geral");
-        System.out.println("7 - Voltar");
+        System.out.println("7 - Salvar");
+        System.out.println("8 - Voltar");
         System.out.println("0 - Sair");
 
     }
 
-    private static int selecionarOp() {
+    private static int selecionarOp(String idUsuario) {
         int op = Console.lerInt("Opção: ");
 
         switch (op) {
             case 1:
                 adicionarCripto();
+                break;
+
+            case 7:
+                MenuUsuario.salvarArquivo(idUsuario);
+                break;
+            case 8:
+
+                break;
+
+            case 0:
+
+                break;
+
+            default:
+                System.out.println("Opção inválida!");
                 break;
         }
 

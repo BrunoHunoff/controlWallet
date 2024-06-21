@@ -1,5 +1,6 @@
 package views;
 
+import controllers.AtivosController;
 import controllers.GerenciarUsuario;
 import helpers.Console;
 
@@ -12,8 +13,8 @@ public class MenuUsuario {
         System.out.println("2) Emitir relatório");
     }
 
-    private static void verificarOpcaoUsuario(int op) {
-        
+    private static void verificarOpcaoUsuario(int op, String idUsuario) {
+
         switch (op) {
             case 1:
                 menuSelecionarAtivo();
@@ -25,7 +26,7 @@ public class MenuUsuario {
                         menuAcao();
                         break;
                     case 2:
-                        MenuCripto.executarMenuCripto();
+                        MenuCripto.executarMenuCripto(idUsuario);
                         break;
                     
                     case 3:
@@ -91,31 +92,6 @@ public class MenuUsuario {
                 // método excluir 
                 break;
 
-            default:
-                break;
-        }
-    }
-
-    private static void menuCriptomoeda() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
             default:
                 break;
         }
@@ -196,14 +172,32 @@ public class MenuUsuario {
         }
     }
 
-    public static void executarMenuUsuario() {
+    public static void executarMenuUsuario(String idUsuario) {
 
         while(true) {
 
             exibirMenuUsuario();
             int op = Console.lerInt("Informe sua opção: ");
-            verificarOpcaoUsuario(op);
+            verificarOpcaoUsuario(op, idUsuario);
+            if (op == 0) {
+                finalizar(idUsuario);
+                return;
+            }
+        }
+    }
 
+    private static void finalizar(String idUsuario) {
+        String salvar = Console.lerString("Deseja salvar as alterações antes de finalizar (S/N)? ");
+        if (salvar == "S" || salvar == "s") {
+            salvarArquivo(idUsuario);
+        }
+    }
+
+    public static void salvarArquivo(String idUsuario) {
+        try {
+            AtivosController.salvarArquivo(idUsuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
     
