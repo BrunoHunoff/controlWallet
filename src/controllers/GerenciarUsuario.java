@@ -88,8 +88,11 @@ public class GerenciarUsuario {
     }
 
     public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) throws Exception{
-        if (nomeUsuarioExiste(novoNomeUsuario)) {
+
+        //se login for diferente do atual e já estiver em uso
+        if (!(nomeAtual.equals(novoNomeUsuario)) && (nomeUsuarioExiste(novoNomeUsuario))) {
             throw new Exception("\nLogin já está em uso.");
+
         }
 
         Usuario usuario = buscarUsuario(nomeAtual);
