@@ -25,7 +25,7 @@ public class MenuUsuario {
                         menuAcao();
                         break;
                     case 2:
-                        menuCriptomoeda();
+                        MenuCripto.executarMenuCripto();
                         break;
                     
                     case 3:
