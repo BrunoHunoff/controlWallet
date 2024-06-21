@@ -130,19 +130,19 @@ public class AtivosController{
                 break;
 
             case "NFT":
-                ativosConta.add(new Nft(nome, tipoAtivo, preco, quantidade, parametro1, parametro2));
+                ativosConta.add(new Nft(nome, parametro1, parametro2));
                 break;
         }
     }
 
         //cadastro FII
-    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String tipoFundo) {
-        ativosConta.add(new FundoImobiliario(nome, tipoAtivo, preco, quantidade, tipoFundo));
+    public static void cadastrarAtivo(String nome, String tipoFundo) {
+        ativosConta.add(new FundoImobiliario(nome, tipoFundo));
     }
 
         //cadastro Renda Fixa
     public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
-        ativosConta.add(new RendaFixa(nome, tipoAtivo, preco, quantidade, categoria, dataVencimento, txJuros));
+        ativosConta.add(new RendaFixa(nome, categoria, dataVencimento, txJuros));
     }
 
     public static Ativo buscarAtivo(String nome) throws Exception {

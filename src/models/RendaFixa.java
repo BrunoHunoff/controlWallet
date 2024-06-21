@@ -11,15 +11,23 @@ public class RendaFixa extends Ativo {
 
     public RendaFixa(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
 
-    public RendaFixa(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
-        super(uuid, nome, tipoAtivo, precoMedio, quantidade);
+    public RendaFixa(String nome, String categoria, LocalDate dataVencimento, float txJuros) {
+        super(nome);
+        super.setTipoAtivo("Renda fixa");
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.txJuros = txJuros;
     }
 
-    public RendaFixa(String nome, String tipoAtivo, float precoMedio, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
-        super(nome, tipoAtivo, precoMedio, quantidade);
+    public RendaFixa(String nome, String tipoAtivo, float preco, int quantidade, float saldo, String categoria, LocalDate dataVencimento, float txJuros) {
+        super(nome, tipoAtivo, preco, quantidade, saldo);
+        this.categoria = categoria;
+        this.dataVencimento = dataVencimento;
+        this.txJuros = txJuros;
+    }
+
+    public RendaFixa(UUID uuid, String nome, String tipoAtivo, float preco, int quantidade, float saldo, String categoria, LocalDate dataVencimento, float txJuros) {
+        super(uuid, nome, tipoAtivo, preco, quantidade, saldo);
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.txJuros = txJuros;
@@ -54,7 +62,7 @@ public class RendaFixa extends Ativo {
 
         return new RendaFixa(UUID.fromString(atributos[0]), atributos[1],
                 atributos[2], Float.parseFloat(atributos[3]),
-                Integer.parseInt(atributos[4]), atributos[5], LocalDate.parse(atributos[6]), Float.parseFloat(atributos[7]));
+                Integer.parseInt(atributos[4]), Float.parseFloat(atributos[5]), atributos[6], LocalDate.parse(atributos[7]), Float.parseFloat(atributos[8]));
     }
 
     @Override
