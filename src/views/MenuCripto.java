@@ -51,6 +51,14 @@ public class MenuCripto {
                 adicionarCripto();
                 break;
 
+            case 2:
+                removerCripto();
+                break;
+
+            case 3:
+                editarCripto();
+                break;
+
             case 7:
                 MenuUsuario.salvarArquivo(idUsuario);
                 break;
@@ -68,6 +76,56 @@ public class MenuCripto {
         }
 
         return op;
+    }
+
+    private static void removerCripto() {
+        System.out.println("\nRemover Criptomoeda\n");
+
+        String nome = Console.lerString("Nome da criptomoeda: ");
+
+        while (true) {
+            String confirma = Console.lerString("Deseja remover a criptomoeda " + nome + "?(S/N)");
+
+            if (confirma.equals("N") || confirma.equals("n")) {
+                return;
+            }
+            if (confirma.equals("S") || confirma.equals("s")) {
+                try {
+                    AtivosController.deletarAtivo(nome);
+                    System.out.println("Criptomoeda deletada com sucesso!");
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                return;
+            }
+
+            System.out.println("Opção inválida. Tente novamente");
+        }
+    }
+
+    private static void editarCripto() {
+        System.out.println("\nEditar Criptomoeda\n");
+
+        String nome = Console.lerString("Nome atual: ");
+        Ativo tempCripto = null;
+        try {
+            tempCripto = AtivosController.buscarAtivo(nome);
+
+            if (!(tempCripto instanceof Criptomoeda)) {
+                throw new Exception("Não foi possível encontrar Criptomoeda cadastrada com esse nome!");
+            }
+
+            System.out.println("\nCripto encontrada! Preencha os dados para editar:\n");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        tempCripto = (Criptomoeda)tempCripto;
+
+        tempCripto.setNome(Console.lerString("Nome: "));
+        ((Criptomoeda) tempCripto).setTipoMoeda(Console.lerString("Tipo da moeda: "));
+        ((Criptomoeda) tempCripto).setRede(Console.lerString("Rede: "));
     }
 
     private static void adicionarCripto() {
