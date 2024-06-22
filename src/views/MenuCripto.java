@@ -71,6 +71,10 @@ public class MenuCripto {
                 }
                 break;
 
+            case 6:
+                visaoGeral();
+                break;
+
             case 7:
                 MenuUsuario.salvarArquivo(idUsuario);
                 break;
@@ -88,6 +92,29 @@ public class MenuCripto {
         }
 
         return op;
+    }
+
+    private static void exibirCripto(Criptomoeda ativo) {
+        System.out.println(ativo.getNome());
+        System.out.println(" - Tipo: " + ativo.getTipoMoeda());
+        System.out.println(" - Rede: " + ativo.getRede());
+        System.out.println(" - Preço Médio: " + ativo.getPreco());
+        System.out.println(" - Quantidade: " + ativo.getQuantidade());
+        System.out.println(" - Saldo: " + ativo.getSaldo());
+    }
+
+    private static void visaoGeral() {
+        System.out.println("\nVisão Geral\n");
+        float saldoGeral = 0;
+        for (Ativo ativo: AtivosController.getAtivosConta()) {
+            if (ativo instanceof Criptomoeda) {
+                exibirCripto((Criptomoeda)ativo);
+                System.out.println("\n");
+                saldoGeral += ativo.getSaldo();
+            }
+        }
+
+        System.out.println("Saldo geral Criptomoedas: R$" + saldoGeral);
     }
 
     private static void transacao() throws Exception{
@@ -242,7 +269,8 @@ public class MenuCripto {
     private static void listarCripto() {
         for (Ativo ativo: AtivosController.getAtivosConta()) {
             if (ativo instanceof Criptomoeda) {
-                System.out.println(ativo.toString());
+                String txt = "Nome: " + ativo.getNome() + " | Saldo: " + ativo.getSaldo();
+                System.out.println(txt);
             }
         }
     }
