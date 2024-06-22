@@ -1,5 +1,6 @@
 package views;
 
+import controllers.AtivosController;
 import controllers.GerenciarUsuario;
 import helpers.Console;
 
@@ -12,8 +13,9 @@ public class MenuUsuario {
         System.out.println("2) Emitir relatório");
     }
 
-    private static void verificarOpcaoUsuario(int op) {
-        
+    private static boolean verificarOpcaoUsuario(int op, String idUsuario) {
+        boolean finalizarPrograma = false;
+
         switch (op) {
             case 1:
                 menuSelecionarAtivo();
@@ -25,19 +27,19 @@ public class MenuUsuario {
                         MenuAcao.exibirMenu();
                         break;
                     case 2:
-                        // cripto
+                        finalizarPrograma = MenuCripto.executarMenuCripto(idUsuario);
                         break;
                     
                     case 3:
-                        MenuFundoImobiliario.exibirMenu();
+
                         break;
                     
                     case 4:
-                        MenuNft.exibirMenu();
+
                         break;
                 
                     case 5:
-                        MenuRendaFixa.exibirMenu();
+
                         break;
                     
                     default:
@@ -51,6 +53,7 @@ public class MenuUsuario {
             default:
                 System.out.println("\nOpção inválida, digite novamente");
             }
+            return finalizarPrograma;
         }
 
     private static void menuSelecionarAtivo() {
@@ -71,14 +74,46 @@ public class MenuUsuario {
         System.out.println("4) Excluir");
     }
 
-    public static void executarMenuUsuario() {
+
+    public static void executarMenuUsuario(String idUsuario) {
+
+        try {
+            AtivosController.lerArquivo();
+            AtivosController.lerCarteira(idUsuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         while(true) {
+            boolean finalizarPrograma = false;
 
             exibirMenuUsuario();
-            int op = Console.lerInt("Informe sua opção: ");
-            verificarOpcaoUsuario(op);
 
+            int op = Console.lerInt("Informe sua opção: ");
+
+            finalizarPrograma = verificarOpcaoUsuario(op, idUsuario);
+
+            if (finalizarPrograma) {
+                finalizar(idUsuario);
+                return;
+            }
+        }
+    }
+
+    private static void finalizar(String idUsuario) {
+        String salvar = Console.lerString("Deseja salvar as alterações antes de finalizar (S/N)? ");
+        if (salvar.equals("S") || salvar.equals("s")) {
+            salvarArquivo(idUsuario);
+        }
+        System.out.println("\nSistema finalizado...");
+    }
+
+    public static void salvarArquivo(String idUsuario) {
+        try {
+            AtivosController.salvarArquivo(idUsuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
     }
     

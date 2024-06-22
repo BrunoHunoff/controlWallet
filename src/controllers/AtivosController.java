@@ -16,14 +16,17 @@ public class AtivosController{
 
     //metodos auxiliares para leitura e gravação
 
-    private static void lerCarteira(String idUsuario) throws IOException, Exception{
+    public static void lerCarteira(String idUsuario) throws Exception{
 
         String linha = linhasTxt.get(encontrarCarteira(idUsuario));
 
-        String[] carteira = (linha.split("carteira: ")[1]).split(", ");
+        String[] linhaSplit = linha.split(" carteira: ");
+
+        String[] carteira = linhaSplit[1].split("; ");
 
         for (String ativo: carteira) {
-            String tipoAtivo = ativo.split(" ,")[2];
+
+            String tipoAtivo = ativo.split(", ")[2];
 
             Ativo temp = null;
             switch (tipoAtivo) {
@@ -59,7 +62,7 @@ public class AtivosController{
     }
 
     private static String[] separaIdCarteira(String linha) {
-        return linha.split("carteira: ");
+        return linha.split(" carteira: ");
     }
 
     private static int encontrarCarteira(String idUsuario) throws Exception {
@@ -97,33 +100,58 @@ public class AtivosController{
 
     public static void salvarArquivo(String idUsuario) throws IOException {
 
-
         try (FileWriter fileWriter = new FileWriter(ATIVOS_USUARIOS);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+
+            if (linhasTxt.isEmpty()) {
+
+                bufferedWriter.write(cadastrarNovaCarteira(idUsuario));
+                return;
+
+            }
+            boolean encontrou = false;
             for (String linha: linhasTxt) {
-                //se id da linha for diferente de id usuario -> sobrescreve linha
-                if (!(separaIdCarteira(linha)[0].equals(idUsuario))) {
-                    bufferedWriter.write(linha);
-                } else {
-                    String linhaUsuario = idUsuario + "carteira: ";
+
+
+                String[] linhaAtualSplit = linha.split(" carteira: ");
+
+                if (linhaAtualSplit[0].equals(idUsuario)) {
+                    encontrou = true;
+                    String linhaUsuario = idUsuario + " carteira: ";
                     for (Ativo ativo: ativosConta) {
-                        linhaUsuario += ativo.toString();
+                        linhaUsuario += ativo.toString() + "; ";
                     }
-                    bufferedWriter.write(linhaUsuario);
+                    bufferedWriter.write(linhaUsuario + "\n");
+                } else {
+                    bufferedWriter.write(linha + "\n");
                 }
             }
+            if (!encontrou) {
+                bufferedWriter.write(cadastrarNovaCarteira(idUsuario));
+            }
         }
+
+    }
+
+    private static String cadastrarNovaCarteira(String idUsuario) {
+        String linhaUsuario = idUsuario + " carteira: ";
+
+        for (Ativo ativo: ativosConta) {
+            linhaUsuario += ativo.toString() + "; ";
+        }
+
+        return linhaUsuario;
     }
 
     //CRUD
 
         //cadastro Acao
-    public static void cadastrarAtivo(String nome, String tipoAtivo, String tipoAcao, boolean pagaDividendos) {
+    public static void cadastrarAtivo(String nome, String tipoAcao, boolean pagaDividendos) {
         ativosConta.add(new Acao(nome, tipoAcao, pagaDividendos));
     }
 
         //cadastro Cripto e NFT
-    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String parametro1, String parametro2) {
+    public static void cadastrarAtivo(String nome, String tipoAtivo, String parametro1, String parametro2) {
         switch (tipoAtivo) {
             case "Cripto":
                 ativosConta.add(new Criptomoeda(nome, parametro1, parametro2));
@@ -141,7 +169,7 @@ public class AtivosController{
     }
 
         //cadastro Renda Fixa
-    public static void cadastrarAtivo(String nome, String tipoAtivo, float preco, int quantidade, String categoria, LocalDate dataVencimento, float txJuros) {
+    public static void cadastrarAtivo(String nome, String categoria, LocalDate dataVencimento, float txJuros) {
         ativosConta.add(new RendaFixa(nome, categoria, dataVencimento, txJuros));
     }
 
@@ -158,5 +186,9 @@ public class AtivosController{
         Ativo temp = buscarAtivo(nome);
 
         ativosConta.remove(temp);
+     }
+
+     public static ArrayList<Ativo> getAtivosConta() {
+        return ativosConta;
      }
 }

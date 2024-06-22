@@ -1,7 +1,11 @@
 package views;
 
+import controllers.AtivosController;
 import controllers.GerenciarUsuario;
+import helpers.Console;
 import models.Usuario;
+
+import java.util.PrimitiveIterator;
 
 public class Sistema {
     private static Usuario usuario = null;
@@ -18,13 +22,12 @@ public class Sistema {
             }
         } while (usuario == null);
 
-        //se id == id do Admin
+        //se nome == nome do Admin
         if (usuario.getNomeCompleto().equals("admin")) {
             MenuAdmin.executarMenuAdmin();
         } else {
-            MenuUsuario.executarMenuUsuario();
+            MenuUsuario.executarMenuUsuario(usuario.getIdUsuario());
         }
     }
-
 
 }
