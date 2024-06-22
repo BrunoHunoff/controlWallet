@@ -59,6 +59,10 @@ public class MenuCripto {
                 editarCripto();
                 break;
 
+            case 4:
+                buscarCripto();
+                break;
+
             case 7:
                 MenuUsuario.salvarArquivo(idUsuario);
                 break;
@@ -76,6 +80,18 @@ public class MenuCripto {
         }
 
         return op;
+    }
+
+    private static void buscarCripto() {
+        System.out.println("\nBuscar Criptomoeda\n");
+
+        String nome = Console.lerString("Nome: ");
+
+        try {
+            System.out.println(AtivosController.buscarAtivo(nome));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void removerCripto() {

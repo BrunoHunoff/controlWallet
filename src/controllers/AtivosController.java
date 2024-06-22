@@ -119,7 +119,6 @@ public class AtivosController{
                     encontrou = true;
                     String linhaUsuario = idUsuario + " carteira: ";
                     for (Ativo ativo: ativosConta) {
-                        System.out.println(ativo.toString());
                         linhaUsuario += ativo.toString() + "; ";
                     }
                     bufferedWriter.write(linhaUsuario + "\n");
