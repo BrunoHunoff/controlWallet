@@ -7,25 +7,37 @@ public abstract class Ativo {
     private UUID uuid;
     protected String nome;
     protected String tipoAtivo;
-    protected float precoMedio;
+    protected float preco;
     protected int quantidade;
+    protected float saldo;
 
     public Ativo(){}
 
-    public Ativo(String nome, String tipoAtivo, float precoMedio, int quantidade) {
+    public Ativo(String nome) {
+        this.uuid = UUID.randomUUID();
+        this.nome = nome;
+        this.tipoAtivo = "";
+        this.preco = 0;
+        this.quantidade = 0;
+        this.saldo = 0;
+    }
+
+    public Ativo(String nome, String tipoAtivo, float preco, int quantidade, float saldo) {
         this.uuid = UUID.randomUUID();
         this.nome = nome;
         this.tipoAtivo = tipoAtivo;
-        this.precoMedio = precoMedio;
+        this.preco = preco;
         this.quantidade = quantidade;
+        this.saldo = saldo;
     }
 
-    public Ativo(UUID uuid, String nome, String tipoAtivo, float precoMedio, int quantidade) {
+    public Ativo(UUID uuid, String nome, String tipoAtivo, float preco, int quantidade, float saldo) {
         this.uuid = uuid;
         this.nome = nome;
         this.tipoAtivo = tipoAtivo;
-        this.precoMedio = precoMedio;
+        this.preco = preco;
         this.quantidade = quantidade;
+        this.saldo = saldo;
     }
 
     public String getTipoAtivo() {
@@ -37,6 +49,14 @@ public abstract class Ativo {
         return this;
     }
 
+    public float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -45,12 +65,12 @@ public abstract class Ativo {
         this.nome = nome;
     }
 
-    public float getPrecoMedio() {
-        return precoMedio;
+    public float getPreco() {
+        return preco;
     }
 
-    public void setPrecoMedio(float precoMedio) {
-        this.precoMedio = precoMedio;
+    public void setPreco(float preco) {
+        this.preco = preco;
     }
 
     public int getQuantidade() {
@@ -62,12 +82,12 @@ public abstract class Ativo {
     }
 
     public float calcularValorTotal() {
-        return precoMedio * quantidade;
+        return preco * quantidade;
     }
 
     @Override
     public String toString() {
-        return uuid + ", " + nome + ", " + tipoAtivo + ", " +precoMedio + ", " + quantidade;
+        return uuid + ", " + nome + ", " + tipoAtivo + ", " + preco + ", " + quantidade + ", " + saldo;
     }
 
 }

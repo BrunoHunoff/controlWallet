@@ -6,14 +6,14 @@ public class Usuario {
     
     private String idUsuario;
     private String nomeCompleto;
-    private String nomeUsuario;
+    private String login;
     private String senha;
     private ArrayList<Ativo> carteira;
 
-    public Usuario(String nomeCompleto, String nomeUsuario, String senha) {
+    public Usuario(String nomeCompleto, String login, String senha) {
         this.idUsuario = UUID.randomUUID().toString();
         this.nomeCompleto = nomeCompleto;
-        this.nomeUsuario = nomeUsuario;
+        this.login = login;
         this.carteira = new ArrayList<Ativo>();
         this.senha = senha;
 
@@ -31,12 +31,12 @@ public class Usuario {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getLogin() {
+        return login;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
@@ -46,11 +46,15 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    public UUID getUuid(UUID uuid) {
+        return UUID.fromString(idUsuario); 
+    }
 
     @Override
     public String toString() {
         // retorna nome e idade da superclasse
-        return idUsuario + "," + nomeCompleto + "," + nomeUsuario + "," + senha;
+        return idUsuario + "," + nomeCompleto + "," + login + "," + senha;
     }
 
     public static Usuario fromString(String usuarioString) {

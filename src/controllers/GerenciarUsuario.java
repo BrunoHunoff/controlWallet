@@ -15,14 +15,9 @@ import models.Usuario;
 public class GerenciarUsuario {
 
     private static final String ARQUIVO = "usuarios.txt";
-    private List<Usuario> usuarios;
+    private static List<Usuario> usuarios = new ArrayList<>();
 
-    public GerenciarUsuario() {
-        usuarios = new ArrayList<>();
-        carregarUsuarios();
-    }
-
-    private void carregarUsuarios() {
+    public static void carregarUsuarios() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -33,7 +28,7 @@ public class GerenciarUsuario {
         }
     }
 
-    private void salvarUsuarios() {
+    public static void salvarUsuarios() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO))) {
             for (Usuario usuario : usuarios) {
                 writer.write(usuario.toString());
@@ -45,7 +40,7 @@ public class GerenciarUsuario {
     }
 
     // chat GPT
-    private String criptografarSenha(String senha) {
+    private static String criptografarSenha(String senha) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(senha.getBytes());
@@ -63,63 +58,86 @@ public class GerenciarUsuario {
         }
     }
 
-    public void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) {
+    public static void criarUsuario(String nomeCompleto, String nomeUsuario, String senha) throws Exception{
+        if (nomeUsuarioExiste(nomeUsuario)) {
+            throw new Exception("\nLogin em já está em uso.");
+        }
         String hashSenha = criptografarSenha(senha);
         Usuario usuario = new Usuario(nomeCompleto, nomeUsuario.toLowerCase(), hashSenha);
         usuarios.add(usuario);
         salvarUsuarios();
     }
 
-    public List<Usuario> listarTodos() {
+    public static void senhaIgual(String senha, String confirmacao) throws Exception{
+        if (!(senha.equals(confirmacao))) {
+            throw new Exception("\nAs senhas não são iguais. Tente novamente!");
+        }
+    }
+
+    public static List<Usuario> listarTodos() {
         return usuarios;
     }
 
-    public Usuario listarUsuario(String id) {
+    public static Usuario buscarUsuario(String login) throws Exception{
         for (Usuario usuario : usuarios) {
-            if (usuario.getIdUsuario().equals(id)) {
+            if (usuario.getLogin().equals(login)) {
                 return usuario;
             }
         }
-        return null;
+        throw new Exception("Usuario não encontrado!");
     }
 
-    public void atualizarUsuario(String idUsuario, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) {
-        Usuario usuario = listarUsuario(idUsuario);
+    public static void atualizarUsuario(String nomeAtual, String novoNomeCompleto, String novoNomeUsuario, String novaSenha) throws Exception{
+
+        //se login for diferente do atual e já estiver em uso
+        if (!(nomeAtual.equals(novoNomeUsuario)) && (nomeUsuarioExiste(novoNomeUsuario))) {
+            throw new Exception("\nLogin já está em uso.");
+
+        }
+
+        Usuario usuario = buscarUsuario(nomeAtual);
+
         if (usuario != null) {
             usuario.setNomeCompleto(novoNomeCompleto);
-            usuario.setNomeUsuario(novoNomeUsuario.toLowerCase());
+            usuario.setLogin(novoNomeUsuario.toLowerCase());
             usuario.setSenha(criptografarSenha(novaSenha));
             salvarUsuarios();
         }
     }
 
-    public void deletarUsuario(String idUsuario) {
-        Usuario usuario = listarUsuario(idUsuario);
+    public static void deletarUsuario(String login) throws Exception{
+        Usuario usuario = buscarUsuario(login);
         if (usuario != null) {
             usuarios.remove(usuario);
             salvarUsuarios();
         }
     }
 
-    public Boolean nomeUsuarioExiste(String nomeUsuario) {
+    public static Boolean nomeUsuarioExiste(String nomeUsuario) {
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo)) {
+            if (usuario.getLogin().toLowerCase().equals(nomeUsuarioMinusculo)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Boolean loginValido(String nomeUsuario, String senha) {
+    public static Usuario loginValido(String nomeUsuario, String senha) throws Exception{
+
         String nomeUsuarioMinusculo = nomeUsuario.toLowerCase();
+
+        if (usuarios.isEmpty()) {
+            throw new Exception("Não há usuários cadastrados");
+        }
+
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().toLowerCase().equals(nomeUsuarioMinusculo) &&
+            if (usuario.getLogin().toLowerCase().equals(nomeUsuarioMinusculo) &&
                 usuario.getSenha().equals(criptografarSenha(senha))) {
-                return true;
+                return usuario;
             }
-        }        
-        return false;
+        }
+        return null;
     }
 
 }

@@ -7,12 +7,8 @@ import models.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
-public class App {
-    public static void main(String[] args) {
-        teste3();
-    }
-
+/*
+public class Tests {
     public static void teste1() {
         GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
 
@@ -31,6 +27,9 @@ public class App {
                 case 1:
                     String nomeCompleto = Console.lerString("Digite o nome completo do usuário: ");
                     String nomeUsuario = Console.lerString("Digite o nome de usuario: ");
+                    while (gerenciarUsuario.nomeUsuarioExiste(nomeUsuario)) {
+                        nomeUsuario = Console.lerString("Usuário inválido. Digite novamente o nome de usuario: ");
+                    };
                     String senha = Console.lerString("Digite a senha: ");
 
                     gerenciarUsuario.criarUsuario(nomeCompleto, nomeUsuario, senha);
@@ -78,29 +77,11 @@ public class App {
 
         RendaFixa r1 = new RendaFixa("CDB", "Renda Fixa", 100, 1, "CDB", LocalDate.of(2030, 12, 31), 11.5f);
 
-        AtivosController.ativosConta.add(a1);
-        AtivosController.ativosConta.add(c1);
-        AtivosController.ativosConta.add(f1);
-        AtivosController.ativosConta.add(n1);
-        AtivosController.ativosConta.add(r1);
 
-        try {
-            AtivosController.salvarAtivos();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     //teste leitura de ativos
-    public static void teste3(){
-        try {
-            AtivosController.lerAtivos();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        for (Ativo temp: AtivosController.ativosConta) {
-            System.out.println(temp + "\n");
-        }
+    public static void teste3() {
     }
 }
+*/
