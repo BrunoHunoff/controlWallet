@@ -83,7 +83,7 @@ public class MenuCripto {
     private static void listarCripto() {
         for (Ativo ativo: AtivosController.getAtivosConta()) {
             if (ativo instanceof Criptomoeda) {
-                System.out.printf(ativo.toString());
+                System.out.println(ativo.toString());
             }
         }
     }

@@ -1,5 +1,1 @@
-280db449-1740-47fa-b7b4-886fe74c48c0, CMIG4, Acao, 35.5, 10, Ordinaria, true
-8c08daf2-5906-4051-af63-75ab5e189fe6, DOG, Cripto, 0.006, 20000, Memecoin, BTC
-9af2c30e-c505-41b0-8b34-b1f0bca5522b, RBRF11, Fundo Imobiliario, 7.88, 11, Papel
-8fe579be-3493-4f46-9a37-004d28994fa3, Macaco, NFT, 20000.0, 1, Moeda do macaco, Antonio
-0581db5c-cca2-4ae3-9504-0602a11881f9, CDB, Renda Fixa, 100.0, 1, CDB, 2030-12-31, 11.5
+0edc4d82-c633-4464-8a4a-5f96efcd2f09 carteira: 68ff29f8-020f-48d0-89a8-267c7b26340d, DOG, Cripto, 0.0, 0, 0.0, meme, runes; a0aefdfc-ba58-4ee3-82cb-062fb686dc03, btc, Cripto, 0.0, 0, 0.0, btc, btc; 4675e6d8-c4bd-432a-9797-9c2d7b24bb61, shibainu, Cripto, 0.0, 0, 0.0, shib, eth; 

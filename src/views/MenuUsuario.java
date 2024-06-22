@@ -24,22 +24,22 @@ public class MenuUsuario {
                 switch (opcao) {
 
                     case 1:
-                        menuAcao();
+
                         break;
                     case 2:
                         finalizarPrograma = MenuCripto.executarMenuCripto(idUsuario);
                         break;
                     
                     case 3:
-                        menuFundoImobiliario();
+
                         break;
                     
                     case 4:
-                        menuNft();
+
                         break;
                 
                     case 5:
-                        menuRendaFixa();
+
                         break;
                     
                     default:
@@ -74,113 +74,25 @@ public class MenuUsuario {
         System.out.println("4) Excluir");
     }
 
-    private static void menuAcao() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    private static void menuFundoImobiliario() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-    private static void menuNft() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-    private static void menuRendaFixa() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
-    }
 
     public static void executarMenuUsuario(String idUsuario) {
 
+        try {
+            AtivosController.lerArquivo();
+            AtivosController.lerCarteira(idUsuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         while(true) {
             boolean finalizarPrograma = false;
+
             exibirMenuUsuario();
+
             int op = Console.lerInt("Informe sua opção: ");
+
             finalizarPrograma = verificarOpcaoUsuario(op, idUsuario);
+
             if (finalizarPrograma) {
                 finalizar(idUsuario);
                 return;
@@ -190,7 +102,7 @@ public class MenuUsuario {
 
     private static void finalizar(String idUsuario) {
         String salvar = Console.lerString("Deseja salvar as alterações antes de finalizar (S/N)? ");
-        if (salvar == "S" || salvar == "s") {
+        if (salvar.equals("S") || salvar.equals("s")) {
             salvarArquivo(idUsuario);
         }
         System.out.println("\nSistema finalizado...");

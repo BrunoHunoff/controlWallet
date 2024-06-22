@@ -16,14 +16,17 @@ public class AtivosController{
 
     //metodos auxiliares para leitura e gravação
 
-    private static void lerCarteira(String idUsuario) throws IOException, Exception{
+    public static void lerCarteira(String idUsuario) throws Exception{
 
         String linha = linhasTxt.get(encontrarCarteira(idUsuario));
 
-        String[] carteira = (linha.split("carteira: ")[1]).split(", ");
+        String[] linhaSplit = linha.split(" carteira: ");
+
+        String[] carteira = linhaSplit[1].split("; ");
 
         for (String ativo: carteira) {
-            String tipoAtivo = ativo.split(" ,")[2];
+
+            String tipoAtivo = ativo.split(", ")[2];
 
             Ativo temp = null;
             switch (tipoAtivo) {
@@ -59,7 +62,7 @@ public class AtivosController{
     }
 
     private static String[] separaIdCarteira(String linha) {
-        return linha.split("carteira: ");
+        return linha.split(" carteira: ");
     }
 
     private static int encontrarCarteira(String idUsuario) throws Exception {
@@ -97,22 +100,37 @@ public class AtivosController{
 
     public static void salvarArquivo(String idUsuario) throws IOException {
 
-
         try (FileWriter fileWriter = new FileWriter(ATIVOS_USUARIOS);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+
+            if (linhasTxt.isEmpty()) {
+
+                String linhaUsuario = idUsuario + " carteira: ";
+
+                for (Ativo ativo: ativosConta) {
+                    linhaUsuario += ativo.toString() + "; ";
+                }
+                bufferedWriter.write(linhaUsuario);
+                return;
+            }
+
             for (String linha: linhasTxt) {
+
                 //se id da linha for diferente de id usuario -> sobrescreve linha
-                if (!(separaIdCarteira(linha)[0].equals(idUsuario))) {
-                    bufferedWriter.write(linha);
-                } else {
-                    String linhaUsuario = idUsuario + "carteira: ";
+                String[] linhaAtualSplit = linha.split(" carteira: ");
+                if (linhaAtualSplit[0].equals(idUsuario)) {
+                    String linhaUsuario = idUsuario + " carteira: ";
                     for (Ativo ativo: ativosConta) {
-                        linhaUsuario += ativo.toString();
+                        System.out.println(ativo.toString());
+                        linhaUsuario += ativo.toString() + "; ";
                     }
                     bufferedWriter.write(linhaUsuario);
+                } else {
+                    bufferedWriter.write(linha);
                 }
             }
         }
+
     }
 
     //CRUD
