@@ -105,32 +105,43 @@ public class AtivosController{
 
             if (linhasTxt.isEmpty()) {
 
-                String linhaUsuario = idUsuario + " carteira: ";
-
-                for (Ativo ativo: ativosConta) {
-                    linhaUsuario += ativo.toString() + "; ";
-                }
-                bufferedWriter.write(linhaUsuario);
+                bufferedWriter.write(cadastrarNovaCarteira(idUsuario));
                 return;
-            }
 
+            }
+            boolean encontrou = false;
             for (String linha: linhasTxt) {
 
-                //se id da linha for diferente de id usuario -> sobrescreve linha
+
                 String[] linhaAtualSplit = linha.split(" carteira: ");
+
                 if (linhaAtualSplit[0].equals(idUsuario)) {
+                    encontrou = true;
                     String linhaUsuario = idUsuario + " carteira: ";
                     for (Ativo ativo: ativosConta) {
                         System.out.println(ativo.toString());
                         linhaUsuario += ativo.toString() + "; ";
                     }
-                    bufferedWriter.write(linhaUsuario);
+                    bufferedWriter.write(linhaUsuario + "\n");
                 } else {
-                    bufferedWriter.write(linha);
+                    bufferedWriter.write(linha + "\n");
                 }
+            }
+            if (!encontrou) {
+                bufferedWriter.write(cadastrarNovaCarteira(idUsuario));
             }
         }
 
+    }
+
+    private static String cadastrarNovaCarteira(String idUsuario) {
+        String linhaUsuario = idUsuario + " carteira: ";
+
+        for (Ativo ativo: ativosConta) {
+            linhaUsuario += ativo.toString() + "; ";
+        }
+
+        return linhaUsuario;
     }
 
     //CRUD
