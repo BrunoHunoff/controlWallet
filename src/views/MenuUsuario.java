@@ -24,7 +24,7 @@ public class MenuUsuario {
                 switch (opcao) {
 
                     case 1:
-
+                        MenuAcao.exibirMenu();
                         break;
                     case 2:
                         finalizarPrograma = MenuCripto.executarMenuCripto(idUsuario);
