@@ -22,22 +22,22 @@ public class MenuUsuario {
                 switch (opcao) {
 
                     case 1:
-                        menuAcao();
+                        MenuAcao.exibirMenu();
                         break;
                     case 2:
-                        menuCriptomoeda();
+                        // cripto
                         break;
                     
                     case 3:
-                        menuFundoImobiliario();
+                        MenuFundoImobiliario.exibirMenu();
                         break;
                     
                     case 4:
-                        menuNft();
+                        MenuNft.exibirMenu();
                         break;
                 
                     case 5:
-                        menuRendaFixa();
+                        MenuRendaFixa.exibirMenu();
                         break;
                     
                     default:
@@ -69,131 +69,6 @@ public class MenuUsuario {
         System.out.println("2) Listar");
         System.out.println("3) Atualizar");
         System.out.println("4) Excluir");
-    }
-
-    private static void menuAcao() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    private static void menuCriptomoeda() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-    private static void menuFundoImobiliario() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-    private static void menuNft() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-    private static void menuRendaFixa() {
-        exibirMenuAtivos();
-        int op = Console.lerInt("Informe sua opção: ");
-        switch (op) {
-            case 1:
-                // método cadastrar
-                break;
-            
-            case 2:
-                // método listar
-                break;
-
-            case 3:
-                // método atualizar
-                break;
-            
-            case 4:
-                // método excluir 
-                break;
-                
-            default:
-                break;
-        }
     }
 
     public static void executarMenuUsuario() {
