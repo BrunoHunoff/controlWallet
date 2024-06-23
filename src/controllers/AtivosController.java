@@ -154,6 +154,15 @@ public class AtivosController{
         throw new Exception("Ativo não encontrado");
     }
 
+    public static RendaFixa buscarRendaFixa(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo instanceof RendaFixa && ativo.getNome().equals(nome)) {
+                return (RendaFixa) ativo;
+            }
+        }
+        throw new Exception("Criptomoeda não encontrada");
+    }
+
      public static void deletarAtivo(String nome) throws Exception {
         Ativo temp = buscarAtivo(nome);
 

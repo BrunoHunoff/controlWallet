@@ -45,8 +45,8 @@ public class RendaFixa extends Ativo {
         return dataVencimento;
     }
 
-    public void setDataVencimento(LocalDate dataVencimento) {
-        this.dataVencimento = dataVencimento;
+    public void setDataVencimento(String dataVencimento2) {
+        this.dataVencimento = dataVencimento2;
     }
 
     public float getTxJuros() {
