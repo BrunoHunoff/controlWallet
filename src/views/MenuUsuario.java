@@ -4,6 +4,8 @@ import controllers.AtivosController;
 import controllers.GerenciarUsuario;
 import helpers.Console;
 
+import static views.MenuAtivoInterface.finalizar;
+
 public class MenuUsuario {
 
     private static void exibirMenuUsuario() {
@@ -31,14 +33,16 @@ public class MenuUsuario {
                         break;
                     
                     case 3:
-
+                        finalizarPrograma = MenuFundoImobiliario.executarMenuFundo(idUsuario);
                         break;
                     
                     case 4:
+                        finalizarPrograma = MenuNft.executarMenuNft(idUsuario);
 
                         break;
                 
                     case 5:
+
 
                         break;
                     
@@ -100,22 +104,7 @@ public class MenuUsuario {
         }
     }
 
-    private static void finalizar(String idUsuario) {
-        String salvar = Console.lerString("Deseja salvar as alterações antes de finalizar (S/N)? ");
-        if (salvar.equals("S") || salvar.equals("s")) {
-            salvarArquivo(idUsuario);
-        }
-        System.out.println("\nSistema finalizado...");
-    }
 
-    public static void salvarArquivo(String idUsuario) {
-        try {
-            AtivosController.salvarArquivo(idUsuario);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-    }
     
     // private static void login() {
 

@@ -49,6 +49,8 @@ public abstract class Ativo {
         return this;
     }
 
+    public abstract boolean nomeExiste(String nome) throws Exception;
+
     public float getSaldo() {
         return saldo;
     }

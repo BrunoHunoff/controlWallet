@@ -1,5 +1,7 @@
 package models;
 
+import controllers.AtivosController;
+
 import java.util.UUID;
 
 public class FundoImobiliario extends Ativo {
@@ -30,6 +32,14 @@ public class FundoImobiliario extends Ativo {
 
     public void setTipoFundo(String tipoFundo) {
         this.tipoFundo = tipoFundo;
+    }
+
+    @Override
+    public boolean nomeExiste(String nome) throws Exception {
+        if (AtivosController.buscarFii(nome) != null) {
+            return true;
+        }
+        return false;
     }
 
     public static FundoImobiliario fromString(String linha) {

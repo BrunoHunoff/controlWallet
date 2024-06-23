@@ -28,7 +28,7 @@ public class MenuRendaFixa {
             case 2:
                 nome = Console.lerString("Digite o nome da renda fixa que deseja excluir: ");
                 try {
-                    AtivosController.deletarAtivo(nome);
+                    //AtivosController.deletarAtivo(nome);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

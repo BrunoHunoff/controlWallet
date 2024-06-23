@@ -22,14 +22,18 @@ public class MenuAcao {
                 
                 String nome = Console.lerString("Nome: ");
                 String tipoAcao = Console.lerString("Tipo de Ação: ");
-                
-                AtivosController.cadastrarAtivo(nome, tipoAcao, false);
+
+                try {
+                    AtivosController.cadastrarAtivo(nome, tipoAcao, false);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             
             case 2:
                 nome = Console.lerString("Digite o nome do ativo que deseja excluir: ");
                 try {
-                    AtivosController.deletarAtivo(nome);
+                    //AtivosController.deletarAtivo(nome);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -43,7 +47,7 @@ public class MenuAcao {
                 nome = Console.lerString("Digite o nome do ativo que deseja buscar: ");
 
                 try {
-                    AtivosController.buscarAtivo(nome);
+                    AtivosController.buscarAcao(nome);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

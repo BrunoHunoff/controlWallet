@@ -1,5 +1,7 @@
 package models;
 
+import controllers.AtivosController;
+
 import java.util.UUID;
 
 public class Nft extends Ativo {
@@ -43,6 +45,14 @@ public class Nft extends Ativo {
 
     public void setDescricao(String TipoNFT) {
         this.descricao = TipoNFT;
+    }
+
+    @Override
+    public boolean nomeExiste(String nome) throws Exception {
+        if (AtivosController.buscarNft(nome) != null) {
+            return true;
+        }
+        return false;
     }
 
     public static Nft fromString(String linha) {
