@@ -131,7 +131,7 @@ public class MenuCripto {
         String nome = Console.lerString("Criptomoeda: ");
 
         try {
-            tempCripto = (Criptomoeda)AtivosController.buscarAtivo(nome);
+            tempCripto = (Criptomoeda)AtivosController.buscarCripto(nome);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
@@ -200,7 +200,7 @@ public class MenuCripto {
         String nome = Console.lerString("Nome: ");
 
         try {
-            System.out.println(AtivosController.buscarAtivo(nome));
+            System.out.println(AtivosController.buscarCripto(nome));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -237,7 +237,7 @@ public class MenuCripto {
         String nome = Console.lerString("Nome atual: ");
         Ativo tempCripto = null;
         try {
-            tempCripto = AtivosController.buscarAtivo(nome);
+            tempCripto = AtivosController.buscarCripto(nome);
 
             if (!(tempCripto instanceof Criptomoeda)) {
                 throw new Exception("Não foi possível encontrar Criptomoeda cadastrada com esse nome!");

@@ -43,7 +43,7 @@ public class MenuAcao {
                 nome = Console.lerString("Digite o nome do ativo que deseja buscar: ");
 
                 try {
-                    AtivosController.buscarAtivo(nome);
+                    AtivosController.buscarAcao(nome);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

@@ -131,7 +131,7 @@ public class MenuNft {
         String nome = Console.lerString("NFT: ");
 
         try {
-            tempNft = (Nft)AtivosController.buscarAtivo(nome);
+            tempNft = (Nft)AtivosController.buscarNft(nome);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
@@ -200,7 +200,7 @@ public class MenuNft {
         String nome = Console.lerString("Nome: ");
 
         try {
-            System.out.println(AtivosController.buscarAtivo(nome));
+            System.out.println(AtivosController.buscarNft(nome));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -237,7 +237,7 @@ public class MenuNft {
         String nome = Console.lerString("Nome atual: ");
         Ativo tempNft = null;
         try {
-            tempNft = AtivosController.buscarAtivo(nome);
+            tempNft = AtivosController.buscarNft(nome);
 
             if (!(tempNft instanceof Nft)) {
                 throw new Exception("Não foi possível encontrar NFT cadastrada com esse nome!");

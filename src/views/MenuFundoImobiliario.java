@@ -127,7 +127,7 @@ public class MenuFundoImobiliario {
         String nome = Console.lerString("Fundo Imobiliário: ");
 
         try {
-            tempFundo = (FundoImobiliario)AtivosController.buscarAtivo(nome);
+            tempFundo = (FundoImobiliario)AtivosController.buscarFii(nome);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
@@ -196,7 +196,7 @@ public class MenuFundoImobiliario {
         String nome = Console.lerString("Nome: ");
 
         try {
-            System.out.println(AtivosController.buscarAtivo(nome));
+            System.out.println(AtivosController.buscarFii(nome));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -233,7 +233,7 @@ public class MenuFundoImobiliario {
         String nome = Console.lerString("Nome atual: ");
         Ativo tempFundo = null;
         try {
-            tempFundo = AtivosController.buscarAtivo(nome);
+            tempFundo = AtivosController.buscarFii(nome);
 
             if (!(tempFundo instanceof FundoImobiliario)) {
                 throw new Exception("Não foi possível encontrar fundo imobiliário cadastrado com esse nome!");
