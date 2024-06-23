@@ -16,11 +16,11 @@ public class MenuAcao {
         System.out.println("5 - Adicionar transação");
         System.out.println("0 - Voltar");
 
-        int op = Console.lerInt("Informe sua opção: ");
+        int opcao = Console.lerInt("Informe sua opção: ");
 
-        switch (op) {
+        switch (opcao) {
             case 1:
-                // adicionarAcao();
+                adicionarAcao();
                 break;
             
             case 2:
@@ -45,6 +45,18 @@ public class MenuAcao {
         }
     }
 
+        private static void adicionarAcao(){
+            System.out.println("\nAdicionar nova Ação\n");
+
+            String nome = Console.lerString("Nome: ");
+            String tipoAcao = Console.lerString("Tipo: ");
+
+            try {
+                AtivosController.cadastrarAtivo(nome, tipoAcao);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         private static void removerAcao() {
         System.out.println("\nRemover Ação\n");
