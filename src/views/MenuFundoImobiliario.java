@@ -5,6 +5,8 @@ import helpers.Console;
 import models.Ativo;
 import models.FundoImobiliario;
 
+import java.time.chrono.IsoEra;
+
 public class MenuFundoImobiliario {
 
     public static boolean executarMenuFundo(String idUsuario) {
@@ -256,8 +258,11 @@ public class MenuFundoImobiliario {
 
         String nome = Console.lerString("Nome: ");
         String tipoFundo = Console.lerString("Tipo: ");
-
-        AtivosController.cadastrarAtivo(nome, tipoFundo);
+        try {
+            AtivosController.cadastrarAtivo(nome, tipoFundo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void listarFundos() {

@@ -5,6 +5,8 @@ import helpers.Console;
 import models.Ativo;
 import models.Criptomoeda;
 
+import java.util.ArrayList;
+
 public class MenuCripto {
 
     public static boolean executarMenuCripto(String idUsuario) {
@@ -28,7 +30,7 @@ public class MenuCripto {
     private static void exibirMenu() {
         System.out.println("\n--- CRIPTO ---\n");
 
-        listarCripto();
+        exibirListaCripto();
 
         System.out.println("\n");
         System.out.println("1 - Adicionar nova moeda");
@@ -239,10 +241,6 @@ public class MenuCripto {
         try {
             tempCripto = AtivosController.buscarCripto(nome);
 
-            if (!(tempCripto instanceof Criptomoeda)) {
-                throw new Exception("Não foi possível encontrar Criptomoeda cadastrada com esse nome!");
-            }
-
             System.out.println("\nCripto encontrada! Preencha os dados para editar:\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -251,13 +249,18 @@ public class MenuCripto {
 
         tempCripto = (Criptomoeda) tempCripto;
 
+        String novoNome = Console.lerString("Nome: ");
 
-        try {
-            tempCripto.setNome(MenuAtivoInterface.setNovoNome(tempCripto));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
+        //verifica se nome vai mudar
+        if (!(novoNome.equals(nome))) {
+            try {
+                nomeEmUso(novoNome);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return;
+            }
         }
+        tempCripto.setNome(novoNome);
         ((Criptomoeda) tempCripto).setTipoMoeda(Console.lerString("Tipo da moeda: "));
         ((Criptomoeda) tempCripto).setRede(Console.lerString("Rede: "));
     }
@@ -266,18 +269,46 @@ public class MenuCripto {
         System.out.println("\nAdicionar nova Criptomoeda\n");
 
         String nome = Console.lerString("Nome: ");
+
+        try {
+            nomeEmUso(nome);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         String tipoMoeda = Console.lerString("Tipo: ");
         String rede = Console.lerString("Rede: ");
 
         AtivosController.cadastrarAtivo(nome, "Cripto", tipoMoeda, rede);
+
     }
 
-    private static void listarCripto() {
+    private static void nomeEmUso(String nome) throws Exception{
+        for (Criptomoeda criptomoeda: listarCripto()) {
+            if (criptomoeda.getNome().equals(nome)) {
+                throw new Exception("Nome já está em uso");
+            }
+        }
+    }
+
+
+    private static ArrayList<Criptomoeda> listarCripto() {
+        ArrayList<Criptomoeda> lista = new ArrayList<>();
         for (Ativo ativo: AtivosController.getAtivosConta()) {
             if (ativo instanceof Criptomoeda) {
-                String txt = "Nome: " + ativo.getNome() + " | Saldo: " + ativo.getSaldo();
-                System.out.println(txt);
+                lista.add((Criptomoeda) ativo);
             }
+        }
+        return lista;
+    }
+
+    private static void exibirListaCripto() {
+        for (Criptomoeda criptomoeda: listarCripto()) {
+
+            String txt = "Nome: " + criptomoeda.getNome() + " | Saldo: " + criptomoeda.getSaldo();
+            System.out.println(txt);
+
         }
     }
 }

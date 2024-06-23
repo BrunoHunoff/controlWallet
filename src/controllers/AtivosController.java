@@ -146,30 +146,35 @@ public class AtivosController{
     //CRUD
 
         //cadastro Acao
-    public static void cadastrarAtivo(String nome, String tipoAcao, boolean pagaDividendos) {
+    public static void cadastrarAtivo(String nome, String tipoAcao, boolean pagaDividendos){
+
         ativosConta.add(new Acao(nome, tipoAcao, pagaDividendos));
     }
 
         //cadastro Cripto e NFT
-    public static void cadastrarAtivo(String nome, String tipoAtivo, String parametro1, String parametro2) {
+    public static void cadastrarAtivo(String nome, String tipoAtivo, String parametro1, String parametro2){
         switch (tipoAtivo) {
             case "Cripto":
                 ativosConta.add(new Criptomoeda(nome, parametro1, parametro2));
                 break;
 
             case "NFT":
+
                 ativosConta.add(new Nft(nome, parametro1, parametro2));
                 break;
         }
     }
 
         //cadastro FII
-    public static void cadastrarAtivo(String nome, String tipoFundo) {
+    public static void cadastrarAtivo(String nome, String tipoFundo) throws Exception{
+
         ativosConta.add(new FundoImobiliario(nome, tipoFundo));
     }
 
         //cadastro Renda Fixa
-    public static void cadastrarAtivo(String nome, String categoria, LocalDate dataVencimento, float txJuros) {
+    public static void cadastrarAtivo(String nome, String categoria, LocalDate dataVencimento, float txJuros){
+
+
         ativosConta.add(new RendaFixa(nome, categoria, dataVencimento, txJuros));
     }
 

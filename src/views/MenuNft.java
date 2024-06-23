@@ -263,7 +263,11 @@ public class MenuNft {
         String descricao = Console.lerString("Descrição: ");
         String autor = Console.lerString("Autor: ");
 
-        AtivosController.cadastrarAtivo(nome, "NFT", autor, descricao);
+        try {
+            AtivosController.cadastrarAtivo(nome, "NFT", autor, descricao);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void listarNft() {

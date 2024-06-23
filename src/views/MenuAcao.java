@@ -22,8 +22,12 @@ public class MenuAcao {
                 
                 String nome = Console.lerString("Nome: ");
                 String tipoAcao = Console.lerString("Tipo de Ação: ");
-                
-                AtivosController.cadastrarAtivo(nome, tipoAcao, false);
+
+                try {
+                    AtivosController.cadastrarAtivo(nome, tipoAcao, false);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             
             case 2:
