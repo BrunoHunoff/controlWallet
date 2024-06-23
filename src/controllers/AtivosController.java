@@ -166,7 +166,7 @@ public class AtivosController{
     }
 
         //cadastro FII
-    public static void cadastrarAtivo(String nome, String tipoFundo) throws Exception{
+    public static void cadastrarAtivo(String nome, String tipoFundo){
 
         ativosConta.add(new FundoImobiliario(nome, tipoFundo));
     }
@@ -187,9 +187,10 @@ public class AtivosController{
         throw new Exception("Ativo não encontrado");
     }
 
+    //.equals pois é preciso que a busca seja precisa
     public static Nft buscarNft(String nome) throws Exception {
         for (Ativo ativo: ativosConta) {
-            if (ativo instanceof Nft && ativo.getNome().contains(nome)) {
+            if (ativo instanceof Nft && ativo.getNome().equals(nome)) {
                 return (Nft)ativo;
             }
         }
@@ -198,7 +199,7 @@ public class AtivosController{
 
     public static Acao buscarAcao(String nome) throws Exception {
         for (Ativo ativo: ativosConta) {
-            if (ativo instanceof Acao && ativo.getNome().contains(nome)) {
+            if (ativo instanceof Acao && ativo.getNome().equals(nome)) {
                 return (Acao)ativo;
             }
         }
@@ -207,7 +208,7 @@ public class AtivosController{
 
     public static FundoImobiliario buscarFii(String nome) throws Exception {
         for (Ativo ativo: ativosConta) {
-            if (ativo instanceof FundoImobiliario && ativo.getNome().contains(nome)) {
+            if (ativo instanceof FundoImobiliario && ativo.getNome().equals(nome)) {
                 return (FundoImobiliario) ativo;
             }
         }
@@ -216,7 +217,7 @@ public class AtivosController{
 
     public static Criptomoeda buscarCripto(String nome) throws Exception {
         for (Ativo ativo: ativosConta) {
-            if (ativo instanceof Criptomoeda && ativo.getNome().contains(nome)) {
+            if (ativo instanceof Criptomoeda && ativo.getNome().equals(nome)) {
                 return (Criptomoeda) ativo;
             }
         }
@@ -225,7 +226,7 @@ public class AtivosController{
 
     public static RendaFixa buscarRendaFixa(String nome) throws Exception {
         for (Ativo ativo: ativosConta) {
-            if (ativo instanceof RendaFixa && ativo.getNome().contains(nome)) {
+            if (ativo instanceof RendaFixa && ativo.getNome().equals(nome)) {
                 return (RendaFixa) ativo;
             }
         }

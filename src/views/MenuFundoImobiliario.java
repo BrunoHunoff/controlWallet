@@ -6,6 +6,7 @@ import models.Ativo;
 import models.FundoImobiliario;
 
 import java.time.chrono.IsoEra;
+import java.util.ArrayList;
 
 public class MenuFundoImobiliario {
 
@@ -28,7 +29,7 @@ public class MenuFundoImobiliario {
     private static void exibirMenu() {
         System.out.println("\n--- FUNDOS IMOBILIÁRIOS ---\n");
 
-        listarFundos();
+        exibirFundos();
 
         System.out.println("\n");
         System.out.println("1 - Adicionar novo Fundo imobiliário");
@@ -232,47 +233,81 @@ public class MenuFundoImobiliario {
     }
 
     private static void editarFundo() {
-        System.out.println("\nEditar Fundo\n");
+        System.out.println("\nEditar FII\n");
 
         String nome = Console.lerString("Nome atual: ");
         Ativo tempFundo = null;
         try {
             tempFundo = AtivosController.buscarFii(nome);
 
-            if (!(tempFundo instanceof FundoImobiliario)) {
-                throw new Exception("Não foi possível encontrar fundo imobiliário cadastrado com esse nome!");
-            }
-
-            System.out.println("\nFundo encontrado! Preencha os dados para editar:\n");
+            System.out.println("\nFII encontrado! Preencha os dados para editar:\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
 
-        tempFundo = (FundoImobiliario)tempFundo;
+        tempFundo = (FundoImobiliario) tempFundo;
 
-        tempFundo.setNome(Console.lerString("Nome: "));
-        ((FundoImobiliario) tempFundo).setTipoFundo(Console.lerString("Tipo do Fundo: "));
+        String novoNome = Console.lerString("Nome: ");
+
+        //verifica se nome vai mudar
+        if (!(novoNome.equals(nome))) {
+            try {
+                nomeEmUso(novoNome);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return;
+            }
+        }
+        tempFundo.setNome(novoNome);
+        ((FundoImobiliario) tempFundo).setTipoFundo(Console.lerString("Tipo do FII: "));
+
     }
 
     private static void adicionarFundo() {
-        System.out.println("\nAdicionar novo Fundo Imobiliário\n");
+        System.out.println("\nAdicionar novo FII\n");
 
         String nome = Console.lerString("Nome: ");
-        String tipoFundo = Console.lerString("Tipo: ");
+
         try {
-            AtivosController.cadastrarAtivo(nome, tipoFundo);
+            nomeEmUso(nome);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return;
+        }
+
+        String tipoFundo = Console.lerString("Tipo: ");
+
+
+        AtivosController.cadastrarAtivo(nome, tipoFundo);
+
+    }
+
+    private static void nomeEmUso(String nome) throws Exception{
+        for (FundoImobiliario fundoImobiliario: listarFundos()) {
+            if (fundoImobiliario.getNome().equals(nome)) {
+                throw new Exception("Nome já está em uso");
+            }
         }
     }
 
-    private static void listarFundos() {
+
+    private static ArrayList<FundoImobiliario> listarFundos() {
+        ArrayList<FundoImobiliario> lista = new ArrayList<>();
         for (Ativo ativo: AtivosController.getAtivosConta()) {
             if (ativo instanceof FundoImobiliario) {
-                String txt = "Nome: " + ativo.getNome() + " | Saldo: " + ativo.getSaldo();
-                System.out.println(txt);
+                lista.add((FundoImobiliario) ativo);
             }
+        }
+        return lista;
+    }
+
+    private static void exibirFundos() {
+        for (FundoImobiliario fundoImobiliario: listarFundos()) {
+
+            String txt = "Nome: " + fundoImobiliario.getNome() + " | Saldo: " + fundoImobiliario.getSaldo();
+            System.out.println(txt);
+
         }
     }
 }

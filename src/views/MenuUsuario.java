@@ -6,7 +6,7 @@ import helpers.Console;
 
 import static views.MenuAtivoInterface.finalizar;
 
-public class MenuUsuario {
+public class MenuUsuario{
 
     private static void exibirMenuUsuario() {
         
