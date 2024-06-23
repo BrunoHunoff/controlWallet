@@ -32,7 +32,7 @@ public class MenuAcao {
                 break;
             
             case 4:
-                // buscarAcao();
+                buscarAcao();
                 break;
             
             case 5:
@@ -45,7 +45,7 @@ public class MenuAcao {
         }
     }
 
-        private static void adicionarAcao(){
+        private static void adicionarAcao() {
             System.out.println("\nAdicionar nova Ação\n");
 
             String nome = Console.lerString("Nome: ");
@@ -85,4 +85,18 @@ public class MenuAcao {
         }
     }
 
+        // private static void editarAcao() {}
+        
+        private static void buscarAcao() {
+            System.out.println("\nBuscar Ação\n");
+
+            String nome = Console.lerString("Nome: ");
+
+            try {
+                System.out.println(AtivosController.buscarAcao(nome));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
 }
