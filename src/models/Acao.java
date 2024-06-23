@@ -1,5 +1,7 @@
 package models;
 
+import controllers.AtivosController;
+
 import java.util.UUID;
 
 public class Acao extends Ativo {
@@ -43,6 +45,15 @@ public class Acao extends Ativo {
 
     public void setTipoAcao(String tipoAcao) {
         this.tipoAcao = tipoAcao;
+    }
+
+    @Override
+    public boolean nomeExiste(String nome) throws Exception{
+
+        if (AtivosController.buscarAcao(nome) != null) {
+            return true;
+        }
+        return false;
     }
 
     public static Acao fromString(String linha) {

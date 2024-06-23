@@ -1,5 +1,7 @@
 package models;
 
+import controllers.AtivosController;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -55,6 +57,14 @@ public class RendaFixa extends Ativo {
 
     public void setTxJuros(float txJuros) {
         this.txJuros = txJuros;
+    }
+
+    @Override
+    public boolean nomeExiste(String nome) throws Exception {
+        if (AtivosController.buscarRendaFixa(nome) != null) {
+            return true;
+        }
+        return false;
     }
 
     public static RendaFixa fromString(String linha) {

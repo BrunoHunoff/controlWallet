@@ -48,7 +48,9 @@ public abstract class Ativo {
         this.tipoAtivo = tipoAtivo;
         return this;
     }
-    
+
+    public abstract boolean nomeExiste(String nome) throws Exception;
+
     public float getSaldo() {
         return saldo;
     }

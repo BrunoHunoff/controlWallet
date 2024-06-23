@@ -1,5 +1,7 @@
 package models;
 
+import controllers.AtivosController;
+
 import java.util.UUID;
 
 public class Criptomoeda extends Ativo {
@@ -43,6 +45,14 @@ public class Criptomoeda extends Ativo {
 
     public void setTipoMoeda(String tipoMoeda) {
         this.tipoMoeda = tipoMoeda;
+    }
+
+    @Override
+    public boolean nomeExiste(String nome) throws Exception {
+        if (AtivosController.buscarCripto(nome) != null) {
+            return true;
+        }
+        return false;
     }
 
     public static Criptomoeda fromString(String linha) {
