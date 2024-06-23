@@ -221,7 +221,8 @@ public class MenuCripto {
             }
             if (confirma.equals("S") || confirma.equals("s")) {
                 try {
-                    AtivosController.deletarAtivo(nome);
+                    Criptomoeda temp = AtivosController.buscarCripto(nome);
+                    AtivosController.deletarAtivo(temp);
                     System.out.println("Criptomoeda deletada com sucesso!");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());

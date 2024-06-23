@@ -219,7 +219,9 @@ public class MenuNft {
             }
             if (confirma.equals("S") || confirma.equals("s")) {
                 try {
-                    AtivosController.deletarAtivo(nome);
+                    Nft temp = AtivosController.buscarNft(nome);
+
+                    AtivosController.deletarAtivo(temp);
                     System.out.println("NFT deletada com sucesso!");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());

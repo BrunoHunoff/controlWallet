@@ -232,8 +232,7 @@ public class AtivosController{
         throw new Exception("Renda fixa não encontrada");
     }
 
-     public static void deletarAtivo(String nome) throws Exception {
-        Ativo temp = buscarAtivo(nome);
+     public static void deletarAtivo(Ativo temp) {
 
         ativosConta.remove(temp);
      }

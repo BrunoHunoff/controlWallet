@@ -217,7 +217,9 @@ public class MenuFundoImobiliario {
             }
             if (confirma.equals("S") || confirma.equals("s")) {
                 try {
-                    AtivosController.deletarAtivo(nome);
+                    FundoImobiliario temp = AtivosController.buscarFii(nome);
+
+                    AtivosController.deletarAtivo(temp);
                     System.out.println("Fundo Imobiliário deletado com sucesso!");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
