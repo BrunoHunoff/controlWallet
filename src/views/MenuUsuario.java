@@ -31,7 +31,7 @@ public class MenuUsuario {
                         break;
                     
                     case 3:
-                        MenuFundoImobiliario.executarMenuFundo(idUsuario);
+                        finalizarPrograma = MenuFundoImobiliario.executarMenuFundo(idUsuario);
                         break;
                     
                     case 4:
