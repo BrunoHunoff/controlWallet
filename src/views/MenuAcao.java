@@ -3,6 +3,9 @@ package views;
 import controllers.AtivosController;
 import helpers.Console;
 import models.Acao;
+import models.Ativo;
+import models.FundoImobiliario;
+import models.Acao;
 
 public class MenuAcao {
     
@@ -28,7 +31,7 @@ public class MenuAcao {
                 break;
 
             case 3:
-                // editarAcao();
+                editarAcao();
                 break;
             
             case 4:
@@ -85,7 +88,29 @@ public class MenuAcao {
         }
     }
 
-        // private static void editarAcao() {}
+        private static void editarAcao() {
+            System.out.println("\nEditar Ação\n");
+
+            String nome = Console.lerString("Nome atual: ");
+            Ativo tempAcao = null;
+            try {
+                tempAcao = AtivosController.buscarAcao(nome);
+
+                if (!(tempAcao instanceof Acao)) {
+                    throw new Exception("Não foi possível encontrar ação cadastrada com esse nome!");
+                }
+
+                System.out.println("\nAção encontrada! Preencha os dados para editar:\n");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return;
+            }
+
+            tempAcao = (Acao)tempAcao;
+
+            tempAcao.setNome(Console.lerString("Nome: "));
+            ((Acao) tempAcao).setTipoAcao(Console.lerString("Tipo da Ação: "));
+        }
         
         private static void buscarAcao() {
             System.out.println("\nBuscar Ação\n");
@@ -98,5 +123,5 @@ public class MenuAcao {
                 System.out.println(e.getMessage());
             }
         }
-        
+
 }
