@@ -5,6 +5,8 @@ import helpers.Console;
 import models.Ativo;
 import models.Nft;
 
+import java.util.ArrayList;
+
 public class MenuNft {
 
     public static boolean executarMenuNft (String idUsuario) {
@@ -28,7 +30,7 @@ public class MenuNft {
     private static void exibirMenu() {
         System.out.println("\n--- NFT ---\n");
 
-        listarNft();
+        exibirListaNft();
 
         System.out.println("\n");
         System.out.println("1 - Adicionar novo NFT");
@@ -241,19 +243,26 @@ public class MenuNft {
         try {
             tempNft = AtivosController.buscarNft(nome);
 
-            if (!(tempNft instanceof Nft)) {
-                throw new Exception("Não foi possível encontrar NFT cadastrada com esse nome!");
-            }
-
             System.out.println("\nNFT encontrada! Preencha os dados para editar:\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
 
-        tempNft = (Nft)tempNft;
+        tempNft = (Nft) tempNft;
 
-        tempNft.setNome(Console.lerString("Nome: "));
+        String novoNome = Console.lerString("Nome: ");
+
+        //verifica se nome vai mudar
+        if (!(novoNome.equals(nome))) {
+            try {
+                nomeEmUso(novoNome);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return;
+            }
+        }
+        tempNft.setNome(novoNome);
         ((Nft) tempNft).setDescricao(Console.lerString("Descrição: "));
         ((Nft) tempNft).setAutor(Console.lerString("Autor: "));
     }
@@ -262,22 +271,46 @@ public class MenuNft {
         System.out.println("\nAdicionar nova NFT\n");
 
         String nome = Console.lerString("Nome: ");
+
+        try {
+            nomeEmUso(nome);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         String descricao = Console.lerString("Descrição: ");
         String autor = Console.lerString("Autor: ");
 
-        try {
-            AtivosController.cadastrarAtivo(nome, "NFT", autor, descricao);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        AtivosController.cadastrarAtivo(nome, "NFT", descricao, autor);
+
+    }
+
+    private static void nomeEmUso(String nome) throws Exception{
+        for (Nft nft: listarNft()) {
+            if (nft.getNome().equals(nome)) {
+                throw new Exception("Nome já está em uso");
+            }
         }
     }
 
-    private static void listarNft() {
+
+    private static ArrayList<Nft> listarNft() {
+        ArrayList<Nft> lista = new ArrayList<>();
         for (Ativo ativo: AtivosController.getAtivosConta()) {
             if (ativo instanceof Nft) {
-                String txt = "Nome: " + ativo.getNome() + " | Saldo: " + ativo.getSaldo();
-                System.out.println(txt);
+                lista.add((Nft) ativo);
             }
+        }
+        return lista;
+    }
+
+    private static void exibirListaNft() {
+        for (Nft nft: listarNft()) {
+
+            String txt = "Nome: " + nft.getNome() + " | Saldo: " + nft.getSaldo();
+            System.out.println(txt);
+
         }
     }
 }
