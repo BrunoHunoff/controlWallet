@@ -35,7 +35,7 @@ public class AtivosController{
 
                     break;
 
-                case "Fundo Imobiliario":
+                case "FII":
                     temp = FundoImobiliario.fromString(ativo);
 
                     break;
