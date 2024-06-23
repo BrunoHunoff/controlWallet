@@ -49,6 +49,7 @@ public class Criptomoeda extends Ativo {
 
     @Override
     public boolean nomeExiste(String nome) throws Exception {
+
         if (AtivosController.buscarCripto(nome) != null) {
             return true;
         }

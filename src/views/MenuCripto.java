@@ -76,7 +76,7 @@ public class MenuCripto {
                 break;
 
             case 7:
-                MenuUsuario.salvarArquivo(idUsuario);
+                MenuAtivoInterface.salvarArquivo(idUsuario);
                 break;
             case 8:
 
@@ -249,9 +249,15 @@ public class MenuCripto {
             return;
         }
 
-        tempCripto = (Criptomoeda)tempCripto;
+        tempCripto = (Criptomoeda) tempCripto;
 
-        tempCripto.setNome(Console.lerString("Nome: "));
+
+        try {
+            tempCripto.setNome(MenuAtivoInterface.setNovoNome(tempCripto));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         ((Criptomoeda) tempCripto).setTipoMoeda(Console.lerString("Tipo da moeda: "));
         ((Criptomoeda) tempCripto).setRede(Console.lerString("Rede: "));
     }

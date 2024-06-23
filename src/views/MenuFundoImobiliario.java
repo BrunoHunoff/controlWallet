@@ -74,7 +74,7 @@ public class MenuFundoImobiliario {
                 break;
 
             case 7:
-                MenuUsuario.salvarArquivo(idUsuario);
+                MenuAtivoInterface.salvarArquivo(idUsuario);
                 break;
             case 8:
 
