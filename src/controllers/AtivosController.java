@@ -182,6 +182,51 @@ public class AtivosController{
         throw new Exception("Ativo não encontrado");
     }
 
+    public static Nft buscarNft(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo instanceof Nft && ativo.getNome().contains(nome)) {
+                return (Nft)ativo;
+            }
+        }
+        throw new Exception("NFT não encontrada");
+    }
+
+    public static Acao buscarAcao(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo instanceof Acao && ativo.getNome().contains(nome)) {
+                return (Acao)ativo;
+            }
+        }
+        throw new Exception("Ação não encontrada");
+    }
+
+    public static FundoImobiliario buscarFii(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo instanceof FundoImobiliario && ativo.getNome().contains(nome)) {
+                return (FundoImobiliario) ativo;
+            }
+        }
+        throw new Exception("FII não encontrado");
+    }
+
+    public static Criptomoeda buscarCripto(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo instanceof Criptomoeda && ativo.getNome().contains(nome)) {
+                return (Criptomoeda) ativo;
+            }
+        }
+        throw new Exception("Criptomoeda não encontrada");
+    }
+
+    public static RendaFixa buscarRendaFixa(String nome) throws Exception {
+        for (Ativo ativo: ativosConta) {
+            if (ativo instanceof RendaFixa && ativo.getNome().contains(nome)) {
+                return (RendaFixa) ativo;
+            }
+        }
+        throw new Exception("Renda fixa não encontrada");
+    }
+
      public static void deletarAtivo(String nome) throws Exception {
         Ativo temp = buscarAtivo(nome);
 

@@ -35,6 +35,7 @@ public class MenuUsuario {
                         break;
                     
                     case 4:
+                        finalizarPrograma = MenuNft.executarMenuNft(idUsuario);
 
                         break;
                 

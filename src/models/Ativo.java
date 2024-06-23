@@ -48,7 +48,7 @@ public abstract class Ativo {
         this.tipoAtivo = tipoAtivo;
         return this;
     }
-
+    
     public float getSaldo() {
         return saldo;
     }
