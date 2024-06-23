@@ -166,7 +166,7 @@ public class AtivosController{
     }
 
         //cadastro FII
-    public static void cadastrarAtivo(String nome, String tipoFundo) throws Exception{
+    public static void cadastrarAtivo(String nome, String tipoFundo){
 
         ativosConta.add(new FundoImobiliario(nome, tipoFundo));
     }
