@@ -191,6 +191,10 @@ public class MenuAcao {
 
         float precoMedio = saldoFinal / quantidadeFinal;
 
+        if (saldoFinal < 0) {
+            throw new Exception("Valor indisponível para saque!\nSaldo: R$" + saldoAtual);
+        }
+
         temp.setQuantidade(quantidadeFinal);
         temp.setSaldo(saldoFinal);
         temp.setPreco(precoMedio);
