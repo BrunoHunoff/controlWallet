@@ -1,18 +1,14 @@
-## Getting Started
+# Login
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Funcionamento
 
-## Folder Structure
+-   Criado classe de usuário com identificação unica utilizando UUID
+-   Dentro dos métodos da classe, temos as opções de criação, busca, atualização, exclusão (CRUD)
+-   Criado um método para validação se o usuário existe ou não para evitar duplicidade
+-   Criado um método para validar o login do usuário
+-   Criado um método para criptografar a senha antes de salvar no arquivo txt
 
-The workspace contains two folders by default, where:
+## Uso do chat gpt
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+-   Utilizado introdução ao uso de UUID para identificação única de usuário no sistema
+-   Utilizado na criação da lógica para criptografia das senhas no txt
