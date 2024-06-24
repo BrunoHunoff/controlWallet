@@ -4,30 +4,51 @@ import java.util.ArrayList;
 
 import controllers.AtivosController;
 import helpers.Console;
-import models.Acao;
 import models.Ativo;
-import models.FundoImobiliario;
 import models.Acao;
-
 public class MenuAcao {
+
+    public static boolean executarMenuAcao(String idUsuario) {
+        boolean finalizar = false;
+        while (true) {
+            exibirMenu();
+            int opcao = selecionarOpcao(idUsuario);
+            if (opcao == 8) {
+                return false;
+            }
+            if (opcao == 0) {
+                return true;
+            }
+        }
+    }
     
     static void exibirMenu() {
 
         System.out.printf("\n--- AÇÃO ---\n");
+        
+        exibirAcoes();
+        
+        System.out.println("\n");
         System.out.println("1 - Adicionar nova ação");
         System.out.println("2 - Remover ação");
         System.out.println("3 - Editar ação");
         System.out.println("4 - Buscar ação");
         System.out.println("5 - Adicionar transação");
-        System.out.println("0 - Voltar");
+        System.out.println("6 - Visão geral");
+        System.out.println("7 - Salvar");
+        System.out.println("8 - Voltar");
+        System.out.println("0 - Sair");
 
-        int opcao = Console.lerInt("Informe sua opção: ");
+    }
+
+    private static int selecionarOpcao(String idUsuario) {
+        int opcao = Console.lerInt("Opção: ");
 
         switch (opcao) {
             case 1:
                 adicionarAcao();
                 break;
-            
+                
             case 2:
                 removerAcao();
                 break;
@@ -41,13 +62,34 @@ public class MenuAcao {
                 break;
             
             case 5:
-                // método transação
+                try {
+                    transacao();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            
+            case 6:
+                visaoGeral();
+                break;
+
+            case 7:
+                MenuAtivoInterface.salvarArquivo(idUsuario);
+                break;
+                
+            case 8:
+                break;
+
+            case 0:
                 break;
 
             default:
                 System.out.println("Opção inválida! Tente Novamente...");
                 break;
         }
+
+        return opcao;    
+
     }
 
         private static void adicionarAcao() {
