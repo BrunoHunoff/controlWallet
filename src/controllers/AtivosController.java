@@ -48,7 +48,7 @@ public class AtivosController{
                     temp = Criptomoeda.fromString(ativo);
                     break;
 
-                case "Renda Fixa":
+                case "Renda fixa":
                     temp = RendaFixa.fromString(ativo);
                     break;
 

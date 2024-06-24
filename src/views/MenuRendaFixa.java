@@ -296,16 +296,8 @@ public class MenuRendaFixa {
         }
 
         String categoria = Console.lerString("Categoria: ");
-
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
         String dataVencimento = Console.lerString("Digite a data de vencimento no formato dd/MM/yyyy: ");
-
-        // try {
-        //     LocalDate date = LocalDate.parse(dataVencimento, formatter);
-        // } catch (DateTimeParseException e) {
-        //     System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
-        // }
 
         float txJuros = Console.lerFloat("Taxa de juros: ");
 
