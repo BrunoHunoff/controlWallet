@@ -92,6 +92,28 @@ public class MenuAcao {
 
     }
 
+    private static void exibirAcao(Acao ativo) {
+        System.out.println(ativo.getNome());
+        System.out.println(" - Tipo: " + ativo.getTipoAcao());
+        System.out.println(" - Preço Médio: " + ativo.getPreco());
+        System.out.println(" - Quantidade: " + ativo.getQuantidade());
+        System.out.println(" - Saldo: " + ativo.getSaldo());
+    }
+
+    private static void visaoGeral() {
+        System.out.println("\nVisão Geral\n");
+        float saldoGeral = 0;
+        for (Ativo ativo : AtivosController.getAtivosConta()) {
+            if (ativo instanceof Acao) {
+                exibirAcao((Acao)ativo);
+                System.out.println("\n");
+                saldoGeral += ativo.getSaldo();
+            }
+        }
+        System.out.println("Saldo geral em Ações: R$" + saldoGeral);
+    }
+
+
         private static void adicionarAcao() {
             System.out.println("\nAdicionar nova Ação\n");
 
