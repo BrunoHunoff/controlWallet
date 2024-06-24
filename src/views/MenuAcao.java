@@ -113,6 +113,76 @@ public class MenuAcao {
         System.out.println("Saldo geral em Ações: R$" + saldoGeral);
     }
 
+    private static void transacao() throws Exception {
+        System.out.println("\nNova transação\n");
+
+        for (Ativo temp : AtivosController.getAtivosConta()) {
+            if (temp instanceof Acao) {
+                System.out.println(temp.getNome() + "\n");
+            }
+        }
+
+        Acao tempAcao = null;
+
+        String nome = Console.lerString("Ação: ");
+
+        try {
+            tempAcao = (Acao)AtivosController.buscarAcao(nome);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        System.out.println("Operação: ");
+        System.out.println("1 - Compra");
+        System.out.println("2 - Venda");
+        int operacao = Console.lerInt("Operação: ");
+        int quantidade = Console.lerInt("Quantidade: ");
+        float preco = Console.lerFloat("Preço médio: ");
+
+        float saldoAtual = tempAcao.getSaldo();
+
+        switch (operacao) {
+            case 1:
+                comprar(tempAcao, quantidade, preco, saldoAtual);
+                break;
+
+            case 2:
+                vender(tempAcao, quantidade, preco, saldoAtual);
+                break;
+
+            default:
+            System.out.println("Operação inválida!");
+                break;
+        }
+    }
+
+    private static void comprar(Acao temp, int quantidade, float preco, float saldoAtual) {
+        int quantidadeFinal = temp.getQuantidade() + quantidade;
+
+        float saldoFinal = saldoAtual + (quantidade * preco);
+
+        float precoMedio = saldoFinal / quantidadeFinal;
+
+        temp.setQuantidade(quantidadeFinal);
+        temp.setSaldo(saldoFinal);
+        temp.setPreco(precoMedio);
+
+    }
+
+    private static void vender(Acao temp, int quantidade, float preco, float saldoAtual) throws Exception {
+        int quantidadeFinal = temp.getQuantidade() - quantidade;
+
+        float saldoFinal = saldoAtual + (quantidade * preco);
+
+        float precoMedio = saldoFinal / quantidadeFinal;
+
+        temp.setQuantidade(quantidadeFinal);
+        temp.setSaldo(saldoFinal);
+        temp.setPreco(precoMedio);
+        
+    }
+
 
         private static void adicionarAcao() {
             System.out.println("\nAdicionar nova Ação\n");
