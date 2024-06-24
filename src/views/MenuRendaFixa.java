@@ -110,7 +110,18 @@ public class MenuRendaFixa {
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
-    private static void visaoGeral() {
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarRendaFixa()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
+    public static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
         try {

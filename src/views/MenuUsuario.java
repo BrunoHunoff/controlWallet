@@ -4,6 +4,8 @@ import controllers.AtivosController;
 import controllers.GerenciarUsuario;
 import helpers.Console;
 
+import java.util.UUID;
+
 import static views.MenuAtivoInterface.finalizar;
 
 public class MenuUsuario{
@@ -26,7 +28,7 @@ public class MenuUsuario{
                 switch (opcao) {
 
                     case 1:
-                        MenuAcao.exibirMenu();
+                        //MenuAcao.exibirMenu();
                         break;
                     case 2:
                         finalizarPrograma = MenuCripto.executarMenuCripto(idUsuario);
@@ -51,7 +53,7 @@ public class MenuUsuario{
                 }
 
             case 2:
-                // método emitir relatório
+                MenuRelatorio.gerarRelatorio(UUID.fromString(idUsuario));
                 break;
             
             default:

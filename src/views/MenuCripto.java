@@ -105,6 +105,17 @@ public class MenuCripto {
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarCripto()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
     private static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
