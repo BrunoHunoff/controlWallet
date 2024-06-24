@@ -148,5 +148,11 @@ public class MenuAcao {
             return lista;
         }
 
+        private static void exibirAcoes() {
+            for (Acao acao : listarAcoes()) {
+                String txt = "Nome: " + acao.getNome() + " | Saldo: " + acao.getSaldo();
+                System.out.println(txt);
+            }
+        }
 
 }
