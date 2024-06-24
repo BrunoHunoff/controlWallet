@@ -265,6 +265,22 @@ public class MenuAcao {
 
         ((Acao) tempAcao).setTipoAcao(Console.lerString("Tipo da Ação: "));
 
+        while (true) {
+            String pagaDividendos = Console.lerString("A ação " + novoNome + " paga dividendos? [S/N] ").toLowerCase();
+
+            if (pagaDividendos.equals("n")) {
+                ((Acao) tempAcao).setPagaDividendos(false);
+                return;
+            }
+
+            if (pagaDividendos.equals("s")) {
+                ((Acao) tempAcao).setPagaDividendos(true);
+                return;
+            }
+
+            System.out.println("Opção inválida. Tente novamente...");
+        }
+
     }
 
     private static void adicionarAcao() {
