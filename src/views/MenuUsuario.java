@@ -15,6 +15,7 @@ public class MenuUsuario{
         System.out.println("\nControl Wallet");
         System.out.println("1) Gerenciar ativos");
         System.out.println("2) Emitir relatório");
+        System.out.println("0) Sair");
     }
 
     private static boolean verificarOpcaoUsuario(int op, String idUsuario) {
@@ -55,6 +56,10 @@ public class MenuUsuario{
             case 2:
                 MenuRelatorio.gerarRelatorio(UUID.fromString(idUsuario));
                 break;
+
+            case 0:
+                finalizarPrograma = true;
+                break;
             
             default:
                 System.out.println("\nOpção inválida, digite novamente");
@@ -71,15 +76,6 @@ public class MenuUsuario{
         System.out.println("4) NFT");
         System.out.println("5) Renda fixa");
     }
-    
-    private static void exibirMenuAtivos() {
-
-        System.out.println("\n1) Cadastrar");
-        System.out.println("2) Listar");
-        System.out.println("3) Atualizar");
-        System.out.println("4) Excluir");
-    }
-
 
     public static void executarMenuUsuario(String idUsuario) {
 
