@@ -117,7 +117,7 @@ public class MenuFundoImobiliario {
     }
 
     private static void transacao() throws Exception{
-        System.out.println("\nNova Transacao\n");
+        System.out.println("\nNova transação\n");
 
         for (Ativo temp: AtivosController.getAtivosConta()) {
             if (temp instanceof FundoImobiliario) {

@@ -241,4 +241,5 @@ public class AtivosController{
      public static ArrayList<Ativo> getAtivosConta() {
         return ativosConta;
      }
+
 }
