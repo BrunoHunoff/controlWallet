@@ -22,7 +22,7 @@ public class MenuAcao {
         }
     }
     
-    static void exibirMenu() {
+    private static void exibirMenu() {
 
         System.out.printf("\n--- AÇÃO ---\n");
         
@@ -76,7 +76,7 @@ public class MenuAcao {
             case 7:
                 MenuAtivoInterface.salvarArquivo(idUsuario);
                 break;
-                
+
             case 8:
                 break;
 
