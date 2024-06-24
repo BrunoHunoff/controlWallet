@@ -281,8 +281,21 @@ public class MenuAcao {
 
         String tipoAcao = Console.lerString("Tipo: ");
 
+        while (true) {
+            String pagaDividendos = Console.lerString("A ação " + nome + " paga dividendos? [S/N] ").toLowerCase();
 
-        AtivosController.cadastrarAtivo(nome, tipoAcao);
+            if (pagaDividendos.equals("n")) {
+                AtivosController.cadastrarAtivo(nome, tipoAcao, false);
+                return;
+            }
+
+            if (pagaDividendos.equals("s")) {
+                AtivosController.cadastrarAtivo(nome, tipoAcao, true);
+                return;
+            }
+
+            System.out.println("Opção inválida. Tente novamente...");
+        }
 
     }
 

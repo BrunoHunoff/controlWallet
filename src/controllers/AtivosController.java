@@ -147,7 +147,6 @@ public class AtivosController{
 
         //cadastro Acao
     public static void cadastrarAtivo(String nome, String tipoAcao, boolean pagaDividendos){
-
         ativosConta.add(new Acao(nome, tipoAcao, pagaDividendos));
     }
 
