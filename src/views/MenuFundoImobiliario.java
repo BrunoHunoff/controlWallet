@@ -299,7 +299,14 @@ public class MenuFundoImobiliario {
     }
 
     private static void nomeEmUso(String nome) throws Exception{
-        for (FundoImobiliario fundoImobiliario: listarFundos()) {
+        ArrayList<FundoImobiliario> temp = new ArrayList<>();
+        try {
+            for (FundoImobiliario fundoImobiliario : listarFundos()) {
+                temp.add(fundoImobiliario);
+            }
+        } catch (Exception e) {}
+
+        for (FundoImobiliario fundoImobiliario: temp) {
             if (fundoImobiliario.getNome().equals(nome)) {
                 throw new Exception("Nome já está em uso");
             }

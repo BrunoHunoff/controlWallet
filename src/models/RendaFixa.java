@@ -11,7 +11,7 @@ public class RendaFixa extends Ativo {
     private String dataVencimento;
     private float txJuros;
 
-    public RendaFixa(String parte, String tipoAtivo1, float parseFloat, int parseInt){}
+
 
     public RendaFixa(String nome, String categoria, String dataVencimento, float txJuros) {
         super(nome);
@@ -70,8 +70,9 @@ public class RendaFixa extends Ativo {
     public static RendaFixa fromString(String linha) {
         String[] atributos = linha.split(", ");
 
-        return new RendaFixa(atributos[1],
-                atributos[2], atributos[6], Float.parseFloat(atributos[8]));
+        return new RendaFixa(UUID.fromString(atributos[0]), atributos[1],
+                atributos[2], Float.parseFloat(atributos[3]),
+                Integer.parseInt(atributos[4]), Float.parseFloat(atributos[5]), atributos[6], atributos[7], Float.parseFloat(atributos[8]));
     }
 
     @Override

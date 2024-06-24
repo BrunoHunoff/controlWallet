@@ -301,7 +301,15 @@ public class MenuNft {
     }
 
     private static void nomeEmUso(String nome) throws Exception{
-        for (Nft nft: listarNft()) {
+        ArrayList<Nft> temp = new ArrayList<>();
+
+        try {
+            for (Nft nft : listarNft()) {
+                temp.add(nft);
+            }
+        } catch (Exception e) {}
+
+        for (Nft nft: temp) {
             if (nft.getNome().equals(nome)) {
                 throw new Exception("Nome já está em uso");
             }

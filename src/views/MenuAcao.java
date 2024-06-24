@@ -320,7 +320,14 @@ public class MenuAcao {
     }
 
     private static void nomeEmUso(String nome) throws Exception{
-        for (Acao acao : listarAcoes()) {
+        ArrayList<Acao> temp = new ArrayList<>();
+        try {
+            for (Acao acao : listarAcoes()) {
+                temp.add(acao);
+            }
+        } catch (Exception e) {}
+
+        for (Acao acao : temp) {
             if (acao.getNome().equals(nome)) {
                 throw new Exception("Nome já está em uso!");
             }
@@ -329,10 +336,16 @@ public class MenuAcao {
   
     private static ArrayList<Acao> listarAcoes() throws Exception {
         ArrayList<Acao> lista = new ArrayList<>();
-        for (Ativo ativo : AtivosController.getAtivosConta()) {
-            if (ativo instanceof Acao) {
-                lista.add((Acao) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof Acao) {
+                    lista.add((Acao) ativo);
+                }
             }
+        } catch (Exception e) {}
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há ações cadastradas!");
         }
         return lista;
     }
