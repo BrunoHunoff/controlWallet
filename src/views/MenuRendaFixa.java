@@ -121,7 +121,7 @@ public class MenuRendaFixa {
             }
         }
 
-        System.out.println("Saldo geral Renda fiax: R$" + saldoGeral);
+        System.out.println("Saldo geral Renda fixa: R$" + saldoGeral);
     }
 
     private static void transacao() throws Exception{
@@ -135,7 +135,7 @@ public class MenuRendaFixa {
 
         RendaFixa tempRendaFixa = null;
 
-        String nome = Console.lerString("Criptomoeda: ");
+        String nome = Console.lerString("Nome da Renda Fixa: ");
 
         try {
             tempRendaFixa = (RendaFixa)AtivosController.buscarRendaFixa(nome);
@@ -297,15 +297,15 @@ public class MenuRendaFixa {
 
         String categoria = Console.lerString("Categoria: ");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
-        String dataVencimento = Console.lerString("Digite uma data no formato dd/MM/yyyy: ");
+        String dataVencimento = Console.lerString("Digite a data de vencimento no formato dd/MM/yyyy: ");
 
-        try {
-            LocalDate date = LocalDate.parse(dataVencimento, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
-        }
+        // try {
+        //     LocalDate date = LocalDate.parse(dataVencimento, formatter);
+        // } catch (DateTimeParseException e) {
+        //     System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
+        // }
 
         float txJuros = Console.lerFloat("Taxa de juros: ");
 
@@ -320,7 +320,6 @@ public class MenuRendaFixa {
             }
         }
     }
-
 
     private static ArrayList<RendaFixa> listarRendaFixa() {
         ArrayList<RendaFixa> lista = new ArrayList<>();

@@ -42,7 +42,7 @@ public class MenuUsuario{
                         break;
                 
                     case 5:
-
+                        finalizarPrograma = MenuRendaFixa.executarMenuRendaFixa(idUsuario);
 
                         break;
                     
