@@ -19,3 +19,5 @@
 -   A classe menuLogin utiliza o método usuarioValido para validar se o usuário existe ou não
 -   Caso o usuário exista e seja o admin, é chamado o menu de admin, que gerencia usuários
 -   Caso o usuário existe mas não seja o admin, é chamado o menu de usuário para gerenciamento da carteira
+-   O usuário admin pode realizar as operações do CRUD de usuários do sistema
+-   O usuário comum pode acessar sua carteira, gerar relatório e manipular os 5 tipos de ativos disponíveis
