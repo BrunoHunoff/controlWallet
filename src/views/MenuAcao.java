@@ -197,25 +197,19 @@ public class MenuAcao {
         
     }
 
+    private static void buscarAcao() {
+        System.out.println("\nBuscar Ação\n");
 
-        private static void adicionarAcao() {
-            System.out.println("\nAdicionar nova Ação\n");
+        String nome = Console.lerString("Nome: ");
 
-            String nome = Console.lerString("Nome: ");
-
-            try {
-                nomeEmUso(nome);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return;
-            }
-
-            String tipoAcao = Console.lerString("Tipo: ");
-
-            AtivosController.cadastrarAtivo(nome, tipoAcao);           
+        try {
+            System.out.println(AtivosController.buscarAcao(nome));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+    }
 
-        private static void removerAcao() {
+    private static void removerAcao() {
         System.out.println("\nRemover Ação\n");
 
         String nome = Console.lerString("Nome da Ação: ");
@@ -242,77 +236,79 @@ public class MenuAcao {
         }
     }
 
-        private static void editarAcao() {
-            System.out.println("\nEditar Ação\n");
+    private static void editarAcao() {
+        System.out.println("\nEditar Ação\n");
 
-            String nome = Console.lerString("Nome atual: ");
-            Ativo tempAcao = null;
+        String nome = Console.lerString("Nome atual: ");
+        Ativo tempAcao = null;
+        try {
+            tempAcao = AtivosController.buscarAcao(nome);
+            System.out.println("\nAção encontrada! Preencha os dados para editar:\n");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        tempAcao = (Acao) tempAcao;
+
+        String novoNome = Console.lerString("Nome: ");
+
+        if (!(novoNome.equals(nome))) {
             try {
-                tempAcao = AtivosController.buscarAcao(nome);
-
-                if (!(tempAcao instanceof Acao)) {
-                    throw new Exception("Não foi possível encontrar ação cadastrada com esse nome!");
-                }
-
-                System.out.println("\nAção encontrada! Preencha os dados para editar:\n");
+                nomeEmUso(novoNome);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;
             }
-
-            tempAcao = (Acao)tempAcao;
-
-            tempAcao.setNome(Console.lerString("Nome: "));
-            ((Acao) tempAcao).setTipoAcao(Console.lerString("Tipo da Ação: "));
         }
-        
-        private static void buscarAcao() {
-            System.out.println("\nBuscar Ação\n");
+        tempAcao.setNome(novoNome);
 
-            String nome = Console.lerString("Nome: ");
+        ((Acao) tempAcao).setTipoAcao(Console.lerString("Tipo da Ação: "));
 
-            try {
-                System.out.println(AtivosController.buscarAcao(nome));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    }
 
-        private static void nomeEmUso(String nome) throws Exception{
-            for (Acao acao : listarAcoes()) {
-                if (acao.getNome().equals(nome)) {
-                    throw new Exception("Nome já está em uso!");
-                }
-            }
+    private static void adicionarAcao() {
+        System.out.println("\nAdicionar nova Ação\n");
+
+        String nome = Console.lerString("Nome: ");
+
+        try {
+            nomeEmUso(nome);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
 
-        private static ArrayList<Acao> listarAcoes() throws Exception{
-            ArrayList<Acao> lista = new ArrayList<>();
-            try {
-                for (Ativo ativo : AtivosController.getAtivosConta()) {
-                    if (ativo instanceof Acao) {
-                        lista.add((Acao) ativo);
-                    }
-                }
-            } catch (Exception e) {
-                //excessão vai ser tratada abaixo
-            }
+        String tipoAcao = Console.lerString("Tipo: ");
 
-            if (lista.isEmpty()) {
-                throw new Exception("Não há ações cadastradas!");
-            }
-            return lista;
-        }
 
-        private static void exibirAcoes() {
-            try {
-                for (Acao acao : listarAcoes()) {
-                    String txt = "Nome: " + acao.getNome() + " | Saldo: " + acao.getSaldo();
-                    System.out.println(txt);
-                }
-            } catch (Exception e ){
-                //não deve haver mensagem de erro nesse caso
+        AtivosController.cadastrarAtivo(nome, tipoAcao);
+
+    }
+
+    private static void nomeEmUso(String nome) throws Exception{
+        for (Acao acao : listarAcoes()) {
+            if (acao.getNome().equals(nome)) {
+                throw new Exception("Nome já está em uso!");
             }
         }
+    }
+  
+    private static ArrayList<Acao> listarAcoes() {
+        ArrayList<Acao> lista = new ArrayList<>();
+        for (Ativo ativo: AtivosController.getAtivosConta()) {
+            if (ativo instanceof Acao) {
+                lista.add((Acao) ativo);
+            }
+        }
+        return lista;
+    }
+
+    private static void exibirAcoes() {
+        for (Acao acao : listarAcoes()) {
+            String txt = "Nome: " + acao.getNome() + " | Saldo: " + acao.getSaldo();
+            System.out.println(txt);
+        }
+    }
 
 }
