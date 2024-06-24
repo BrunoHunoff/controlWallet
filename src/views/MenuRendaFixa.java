@@ -192,8 +192,11 @@ public class MenuRendaFixa {
         float precoMedio = saldoFinal/quantidadeFinal;
 
         temp.setSaldo(saldoFinal);
+        System.out.println("saldo setado");
         temp.setPreco(precoMedio);
+        System.out.println("preço setado");
         temp.setQuantidade(quantidadeFinal);
+        System.out.println("quantidade setada");
 
     }
 
@@ -320,7 +323,15 @@ public class MenuRendaFixa {
     }
 
     private static void nomeEmUso(String nome) throws Exception{
-        for (RendaFixa rendaFixa: listarRendaFixa()) {
+        ArrayList<RendaFixa> temp = new ArrayList<>();
+
+        try {
+            for (RendaFixa rendaFixa : listarRendaFixa()) {
+                temp.add(rendaFixa);
+            }
+        } catch (Exception e) {}
+
+        for (RendaFixa rendaFixa: temp) {
             if (rendaFixa.getNome().equals(nome)) {
                 throw new Exception("Nome já está em uso");
             }
