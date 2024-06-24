@@ -1,7 +1,6 @@
 package views;
 
 import controllers.AtivosController;
-import controllers.GerenciarUsuario;
 import helpers.Console;
 
 import static views.MenuAtivoInterface.finalizar;
@@ -26,7 +25,7 @@ public class MenuUsuario{
                 switch (opcao) {
 
                     case 1:
-                        MenuAcao.exibirMenu();
+                        finalizarPrograma = MenuAcao.executarMenuAcao(idUsuario);
                         break;
                     case 2:
                         finalizarPrograma = MenuCripto.executarMenuCripto(idUsuario);
