@@ -50,8 +50,10 @@ public class MenuUsuario{
                         break;
                     
                     default:
+                        System.out.println("Opção Inválida!");
                         break;
                 }
+                break;
 
             case 2:
                 MenuRelatorio.gerarRelatorio(UUID.fromString(idUsuario));
