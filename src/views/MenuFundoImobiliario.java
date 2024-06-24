@@ -103,15 +103,30 @@ public class MenuFundoImobiliario {
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
-    private static void visaoGeral() {
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarFundos()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
+    public static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof FundoImobiliario) {
-                exibirFundo((FundoImobiliario)ativo);
+        try {
+            for (Ativo ativo : listarFundos()) {
+                exibirFundo((FundoImobiliario) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
+
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
         System.out.println("Saldo geral em Fundo Imobiliário: R$" + saldoGeral);
     }
@@ -292,22 +307,33 @@ public class MenuFundoImobiliario {
     }
 
 
-    private static ArrayList<FundoImobiliario> listarFundos() {
+    private static ArrayList<FundoImobiliario> listarFundos() throws Exception{
         ArrayList<FundoImobiliario> lista = new ArrayList<>();
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof FundoImobiliario) {
-                lista.add((FundoImobiliario) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof FundoImobiliario) {
+                    lista.add((FundoImobiliario) ativo);
+                }
             }
+        } catch (Exception e) {
+            //excessão tratada abaixo
+        }
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há FIIs cadastrados!");
         }
         return lista;
     }
 
     private static void exibirFundos() {
-        for (FundoImobiliario fundoImobiliario: listarFundos()) {
+        try {
+            for (FundoImobiliario fundoImobiliario : listarFundos()) {
 
-            String txt = "Nome: " + fundoImobiliario.getNome() + " | Saldo: " + fundoImobiliario.getSaldo();
-            System.out.println(txt);
+                String txt = "Nome: " + fundoImobiliario.getNome() + " | Saldo: " + fundoImobiliario.getSaldo();
+                System.out.println(txt);
 
-        }
+            }
+        } catch (Exception e) {}
+
     }
 }

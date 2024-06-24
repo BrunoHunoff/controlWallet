@@ -105,15 +105,29 @@ public class MenuCripto {
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarCripto()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
     private static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof Criptomoeda) {
-                exibirCripto((Criptomoeda)ativo);
+        try {
+            for (Ativo ativo : listarCripto()) {
+                exibirCripto((Criptomoeda) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
 
         System.out.println("Saldo geral Criptomoedas: R$" + saldoGeral);
@@ -295,22 +309,31 @@ public class MenuCripto {
     }
 
 
-    private static ArrayList<Criptomoeda> listarCripto() {
+    private static ArrayList<Criptomoeda> listarCripto() throws Exception{
         ArrayList<Criptomoeda> lista = new ArrayList<>();
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof Criptomoeda) {
-                lista.add((Criptomoeda) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof Criptomoeda) {
+                    lista.add((Criptomoeda) ativo);
+                }
             }
+        } catch (Exception e) {
+            //excessão tratada abaixo
+        }
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há criptomoedas cadastradas!");
         }
         return lista;
     }
 
     private static void exibirListaCripto() {
-        for (Criptomoeda criptomoeda: listarCripto()) {
+        try {
+            for (Criptomoeda criptomoeda : listarCripto()) {
+                String txt = "Nome: " + criptomoeda.getNome() + " | Saldo: " + criptomoeda.getSaldo();
+                System.out.println(txt);
 
-            String txt = "Nome: " + criptomoeda.getNome() + " | Saldo: " + criptomoeda.getSaldo();
-            System.out.println(txt);
-
-        }
+            }
+        } catch (Exception e) {}
     }
 }
