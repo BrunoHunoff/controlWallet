@@ -3,6 +3,7 @@ package views;
 import controllers.AtivosController;
 import helpers.Console;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import static views.MenuAtivoInterface.finalizar;
@@ -81,9 +82,9 @@ public class MenuUsuario{
         try {
             AtivosController.lerArquivo();
             AtivosController.lerCarteira(idUsuario);
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (Exception e) {}
 
         while(true) {
             boolean finalizarPrograma = false;

@@ -301,9 +301,17 @@ public class MenuCripto {
     }
 
     private static void nomeEmUso(String nome) throws Exception{
-        for (Criptomoeda criptomoeda: listarCripto()) {
+        //arraylist temp para poder capturar excessão e lançar nova
+        ArrayList<Criptomoeda> temp = new ArrayList<>();
+        try {
+            for (Criptomoeda criptomoeda : listarCripto()) {
+                temp.add(criptomoeda);
+            }
+        } catch (Exception e) {}
+
+        for (Criptomoeda criptomoeda: temp) {
             if (criptomoeda.getNome().equals(nome)) {
-                throw new Exception("Nome já está em uso");
+                throw new Exception("Nome já está em uso!");
             }
         }
     }
