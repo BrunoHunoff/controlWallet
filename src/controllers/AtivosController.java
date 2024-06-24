@@ -172,7 +172,7 @@ public class AtivosController{
     }
 
         //cadastro Renda Fixa
-    public static void cadastrarAtivo(String nome, String categoria, LocalDate dataVencimento, float txJuros){
+    public static void cadastrarAtivo(String nome, String categoria, String dataVencimento, float txJuros){
 
 
         ativosConta.add(new RendaFixa(nome, categoria, dataVencimento, txJuros));
