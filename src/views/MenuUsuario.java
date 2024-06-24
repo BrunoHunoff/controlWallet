@@ -103,23 +103,4 @@ public class MenuUsuario{
             }
         }
     }
-
-
-    
-    // private static void login() {
-
-    //     GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
-
-    //     String nomeUsuario = Console.lerString("Digite o nome de usuário: ");
-    //     String senha = Console.lerString("Digite a senha: ");
-
-    //     if (gerenciarUsuario.loginValido(nomeUsuario, senha)) {
-            
-    //         System.out.println("Login efetuado com sucesso!");
-    //         executarMenuUsuario();
-    //     } else {
-    //         System.out.println("Nome de usuário ou senha incorretos.");
-    //     }
-    // }
-
 }
