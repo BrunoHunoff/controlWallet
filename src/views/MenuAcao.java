@@ -1,5 +1,7 @@
 package views;
 
+import java.util.ArrayList;
+
 import controllers.AtivosController;
 import helpers.Console;
 import models.Acao;
@@ -52,13 +54,17 @@ public class MenuAcao {
             System.out.println("\nAdicionar nova Ação\n");
 
             String nome = Console.lerString("Nome: ");
-            String tipoAcao = Console.lerString("Tipo: ");
 
             try {
-                AtivosController.cadastrarAtivo(nome, tipoAcao);
+                nomeEmUso(nome);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                return;
             }
+
+            String tipoAcao = Console.lerString("Tipo: ");
+
+            AtivosController.cadastrarAtivo(nome, tipoAcao);           
         }
 
         private static void removerAcao() {
@@ -123,5 +129,24 @@ public class MenuAcao {
                 System.out.println(e.getMessage());
             }
         }
+
+        private static void nomeEmUso(String nome) throws Exception{
+            for (Acao acao : listarAcoes()) {
+                if (acao.getNome().equals(nome)) {
+                    throw new Exception("Nome já está em uso!");
+                }
+            }
+        }
+
+        private static ArrayList<Acao> listarAcoes() {
+            ArrayList<Acao> lista = new ArrayList<>();
+            for (Ativo ativo: AtivosController.getAtivosConta()) {
+                if (ativo instanceof Acao) {
+                    lista.add((Acao) ativo);
+                }
+            }
+            return lista;
+        }
+
 
 }
