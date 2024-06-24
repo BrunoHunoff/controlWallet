@@ -12,3 +12,10 @@
 
 -   Utilizado introdução ao uso de UUID para identificação única de usuário no sistema
 -   Utilizado na criação da lógica para criptografia das senhas no txt
+
+## Utilização
+
+-   Ao executar a classe principal, é chamada a classe Sistema que por sua vez chama a menuLogin
+-   A classe menuLogin utiliza o método usuarioValido para validar se o usuário existe ou não
+-   Caso o usuário exista e seja o admin, é chamado o menu de admin, que gerencia usuários
+-   Caso o usuário existe mas não seja o admin, é chamado o menu de usuário para gerenciamento da carteira
