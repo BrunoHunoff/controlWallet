@@ -9,6 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import models.Usuario;
 
@@ -76,6 +77,15 @@ public class GerenciarUsuario {
 
     public static List<Usuario> listarTodos() {
         return usuarios;
+    }
+
+    public static Usuario buscarUsuario(UUID id) throws Exception{
+        for (Usuario usuario: usuarios) {
+            if (usuario.getIdUsuario().equals(String.valueOf(id))) {
+                return usuario;
+            }
+        }
+        throw new Exception("Usuario não encontrado!");
     }
 
     public static Usuario buscarUsuario(String login) throws Exception{

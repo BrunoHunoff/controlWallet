@@ -100,15 +100,29 @@ public class MenuAcao {
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
-    private static void visaoGeral() {
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarAcoes()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
+    public static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo : AtivosController.getAtivosConta()) {
-            if (ativo instanceof Acao) {
-                exibirAcao((Acao)ativo);
+        try {
+            for (Ativo ativo : listarAcoes()) {
+                exibirAcao((Acao) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
         System.out.println("Saldo geral em Ações: R$" + saldoGeral);
     }
@@ -279,7 +293,7 @@ public class MenuAcao {
             }
         }
     }
-
+  
     private static ArrayList<Acao> listarAcoes() {
         ArrayList<Acao> lista = new ArrayList<>();
         for (Ativo ativo: AtivosController.getAtivosConta()) {

@@ -110,15 +110,29 @@ public class MenuRendaFixa {
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
-    private static void visaoGeral() {
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarRendaFixa()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
+    public static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof RendaFixa) {
-                exibirRendaFixa((RendaFixa)ativo);
+        try {
+            for (Ativo ativo : listarRendaFixa()) {
+                exibirRendaFixa((RendaFixa) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
 
         System.out.println("Saldo geral Renda fixa: R$" + saldoGeral);
@@ -296,16 +310,8 @@ public class MenuRendaFixa {
         }
 
         String categoria = Console.lerString("Categoria: ");
-
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
         String dataVencimento = Console.lerString("Digite a data de vencimento no formato dd/MM/yyyy: ");
-
-        // try {
-        //     LocalDate date = LocalDate.parse(dataVencimento, formatter);
-        // } catch (DateTimeParseException e) {
-        //     System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
-        // }
 
         float txJuros = Console.lerFloat("Taxa de juros: ");
 
@@ -321,22 +327,30 @@ public class MenuRendaFixa {
         }
     }
 
-    private static ArrayList<RendaFixa> listarRendaFixa() {
+    private static ArrayList<RendaFixa> listarRendaFixa() throws Exception{
         ArrayList<RendaFixa> lista = new ArrayList<>();
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof RendaFixa) {
-                lista.add((RendaFixa) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof RendaFixa) {
+                    lista.add((RendaFixa) ativo);
+                }
             }
+        } catch (Exception e) {}
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há ativos de renda fixa cadastrados!");
         }
         return lista;
     }
 
     private static void exibirListaRendaFixa() {
-        for (RendaFixa rendaFixa: listarRendaFixa()) {
+        try {
+            for (RendaFixa rendaFixa : listarRendaFixa()) {
 
-            String txt = "Nome: " + rendaFixa.getNome() + " | Saldo: " + rendaFixa.getSaldo();
-            System.out.println(txt);
+                String txt = "Nome: " + rendaFixa.getNome() + " | Saldo: " + rendaFixa.getSaldo();
+                System.out.println(txt);
 
-        }
+            }
+        } catch (Exception e) {}
     }
 }
