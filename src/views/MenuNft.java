@@ -108,12 +108,15 @@ public class MenuNft {
     private static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof Nft) {
-                exibirNFT((Nft)ativo);
+        try {
+            for (Ativo ativo : listarNft()) {
+                exibirNFT((Nft) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println("Não há NFTs cadastrados!");
+            return;
         }
 
         System.out.println("Saldo geral NFT: R$" + saldoGeral);
@@ -295,22 +298,32 @@ public class MenuNft {
     }
 
 
-    private static ArrayList<Nft> listarNft() {
+    private static ArrayList<Nft> listarNft() throws Exception{
         ArrayList<Nft> lista = new ArrayList<>();
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof Nft) {
-                lista.add((Nft) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof Nft) {
+                    lista.add((Nft) ativo);
+                }
             }
+        } catch (Exception e) {
+            //excessão tratada abaixo
+        }
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há NFTs cadastrados!");
         }
         return lista;
     }
 
     private static void exibirListaNft() {
-        for (Nft nft: listarNft()) {
+        try {
+            for (Nft nft : listarNft()) {
 
-            String txt = "Nome: " + nft.getNome() + " | Saldo: " + nft.getSaldo();
-            System.out.println(txt);
+                String txt = "Nome: " + nft.getNome() + " | Saldo: " + nft.getSaldo();
+                System.out.println(txt);
 
-        }
+            }
+        } catch (Exception e) {}
     }
 }

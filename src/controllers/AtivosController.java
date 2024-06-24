@@ -238,7 +238,11 @@ public class AtivosController{
         ativosConta.remove(temp);
      }
 
-     public static ArrayList<Ativo> getAtivosConta() {
+     public static ArrayList<Ativo> getAtivosConta() throws Exception{
+        if (ativosConta.isEmpty()) {
+            throw new Exception("Não há ativos cadastrados");
+        }
+
         return ativosConta;
      }
 

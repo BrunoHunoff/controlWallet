@@ -103,12 +103,15 @@ public class MenuAcao {
     private static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo : AtivosController.getAtivosConta()) {
-            if (ativo instanceof Acao) {
-                exibirAcao((Acao)ativo);
+        try {
+            for (Ativo ativo : listarAcoes()) {
+                exibirAcao((Acao) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
         System.out.println("Saldo geral em Ações: R$" + saldoGeral);
     }
@@ -272,20 +275,32 @@ public class MenuAcao {
             }
         }
 
-        private static ArrayList<Acao> listarAcoes() {
+        private static ArrayList<Acao> listarAcoes() throws Exception{
             ArrayList<Acao> lista = new ArrayList<>();
-            for (Ativo ativo: AtivosController.getAtivosConta()) {
-                if (ativo instanceof Acao) {
-                    lista.add((Acao) ativo);
+            try {
+                for (Ativo ativo : AtivosController.getAtivosConta()) {
+                    if (ativo instanceof Acao) {
+                        lista.add((Acao) ativo);
+                    }
                 }
+            } catch (Exception e) {
+                //excessão vai ser tratada abaixo
+            }
+
+            if (lista.isEmpty()) {
+                throw new Exception("Não há ações cadastradas!");
             }
             return lista;
         }
 
         private static void exibirAcoes() {
-            for (Acao acao : listarAcoes()) {
-                String txt = "Nome: " + acao.getNome() + " | Saldo: " + acao.getSaldo();
-                System.out.println(txt);
+            try {
+                for (Acao acao : listarAcoes()) {
+                    String txt = "Nome: " + acao.getNome() + " | Saldo: " + acao.getSaldo();
+                    System.out.println(txt);
+                }
+            } catch (Exception e ){
+                //não deve haver mensagem de erro nesse caso
             }
         }
 

@@ -113,12 +113,15 @@ public class MenuRendaFixa {
     private static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof RendaFixa) {
-                exibirRendaFixa((RendaFixa)ativo);
+        try {
+            for (Ativo ativo : listarRendaFixa()) {
+                exibirRendaFixa((RendaFixa) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
 
         System.out.println("Saldo geral Renda fixa: R$" + saldoGeral);
@@ -313,22 +316,30 @@ public class MenuRendaFixa {
         }
     }
 
-    private static ArrayList<RendaFixa> listarRendaFixa() {
+    private static ArrayList<RendaFixa> listarRendaFixa() throws Exception{
         ArrayList<RendaFixa> lista = new ArrayList<>();
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof RendaFixa) {
-                lista.add((RendaFixa) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof RendaFixa) {
+                    lista.add((RendaFixa) ativo);
+                }
             }
+        } catch (Exception e) {}
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há ativos de renda fixa cadastrados!");
         }
         return lista;
     }
 
     private static void exibirListaRendaFixa() {
-        for (RendaFixa rendaFixa: listarRendaFixa()) {
+        try {
+            for (RendaFixa rendaFixa : listarRendaFixa()) {
 
-            String txt = "Nome: " + rendaFixa.getNome() + " | Saldo: " + rendaFixa.getSaldo();
-            System.out.println(txt);
+                String txt = "Nome: " + rendaFixa.getNome() + " | Saldo: " + rendaFixa.getSaldo();
+                System.out.println(txt);
 
-        }
+            }
+        } catch (Exception e) {}
     }
 }
