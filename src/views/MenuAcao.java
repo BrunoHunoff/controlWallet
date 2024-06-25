@@ -147,58 +147,7 @@ public class MenuAcao {
             return;
         }
 
-        System.out.println("Operação: ");
-        System.out.println("1 - Compra");
-        System.out.println("2 - Venda");
-        int operacao = Console.lerInt("Operação: ");
-        int quantidade = Console.lerInt("Quantidade: ");
-        float preco = Console.lerFloat("Preço médio: ");
-
-        float saldoAtual = tempAcao.getSaldo();
-
-        switch (operacao) {
-            case 1:
-                comprar(tempAcao, quantidade, preco, saldoAtual);
-                break;
-
-            case 2:
-                vender(tempAcao, quantidade, preco, saldoAtual);
-                break;
-
-            default:
-            System.out.println("Operação inválida!");
-                break;
-        }
-    }
-
-    private static void comprar(Acao temp, int quantidade, float preco, float saldoAtual) {
-        int quantidadeFinal = temp.getQuantidade() + quantidade;
-
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        float precoMedio = saldoFinal / quantidadeFinal;
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setSaldo(saldoFinal);
-        temp.setPreco(precoMedio);
-
-    }
-
-    private static void vender(Acao temp, int quantidade, float preco, float saldoAtual) throws Exception {
-        int quantidadeFinal = temp.getQuantidade() - quantidade;
-
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        float precoMedio = saldoFinal / quantidadeFinal;
-
-        if (saldoFinal < 0) {
-            throw new Exception("Valor indisponível para saque!\nSaldo: R$" + saldoAtual);
-        }
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setSaldo(saldoFinal);
-        temp.setPreco(precoMedio);
-        
+        MenuAtivoInterface.transacao(tempAcao);
     }
 
     private static void buscarAcao() {
