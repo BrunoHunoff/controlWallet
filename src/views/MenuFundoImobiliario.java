@@ -151,61 +151,7 @@ public class MenuFundoImobiliario {
             return;
         }
 
-        System.out.println("Operação: ");
-        System.out.println("1 - Compra");
-        System.out.println("2 - Venda");
-        int operacao = Console.lerInt("Operação: ");
-        int quantidade = Console.lerInt("Quantidade: ");
-        float preco = Console.lerFloat("Preço médio: ");
-
-        float saldoAtual = tempFundo.getSaldo();
-
-        switch (operacao) {
-            case 1:
-                comprar(tempFundo, quantidade, preco, saldoAtual);
-                break;
-
-            case 2:
-                vender(tempFundo, quantidade, preco, saldoAtual);
-                break;
-
-            default:
-                System.out.println("Operação inválida!");
-                break;
-        }
-    }
-
-    private static void comprar(FundoImobiliario temp, int quantidade, float preco, float saldoAtual) {
-
-        int quantidadeAtual = temp.getQuantidade();
-
-        int quantidadeFinal = quantidadeAtual + quantidade;
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        //calcula preço médio de compra
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        temp.setSaldo(saldoFinal);
-        temp.setPreco(precoMedio);
-        temp.setQuantidade(quantidadeFinal);
-
-    }
-
-    private static void vender(FundoImobiliario temp, int quantidade, float preco, float saldoAtual) throws Exception{
-
-        int quantidadeFinal = temp.getQuantidade() - quantidade;
-
-        float saldoFinal = saldoAtual - (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        if (saldoFinal < 0) {
-            throw new Exception("Valor indisponível para saque!\nSaldo do Fundo: " + saldoAtual);
-        }
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setPreco(precoMedio);
-        temp.setSaldo(saldoFinal);
+        MenuAtivoInterface.transacao(tempFundo);
     }
 
     private static void buscarFundo() {

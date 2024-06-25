@@ -153,62 +153,10 @@ public class MenuCripto {
             return;
         }
 
-        System.out.println("Operação: ");
-        System.out.println("1 - Compra");
-        System.out.println("2 - Venda");
-        int operacao = Console.lerInt("Operação: ");
-        int quantidade = Console.lerInt("Quantidade: ");
-        float preco = Console.lerFloat("Preço médio: ");
-
-        float saldoAtual = tempCripto.getSaldo();
-
-        switch (operacao) {
-            case 1:
-                comprar(tempCripto, quantidade, preco, saldoAtual);
-                break;
-
-            case 2:
-                vender(tempCripto, quantidade, preco, saldoAtual);
-                break;
-
-            default:
-                System.out.println("Operação inválida!");
-                break;
-        }
+        MenuAtivoInterface.transacao(tempCripto);
     }
 
-    private static void comprar(Criptomoeda temp, int quantidade, float preco, float saldoAtual) {
 
-        int quantidadeAtual = temp.getQuantidade();
-
-        int quantidadeFinal = quantidadeAtual + quantidade;
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        //calcula preço médio de compra
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        temp.setSaldo(saldoFinal);
-        temp.setPreco(precoMedio);
-        temp.setQuantidade(quantidadeFinal);
-
-    }
-
-    private static void vender(Criptomoeda temp, int quantidade, float preco, float saldoAtual) throws Exception{
-
-        int quantidadeFinal = temp.getQuantidade() - quantidade;
-
-        float saldoFinal = saldoAtual - (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        if (saldoFinal < 0) {
-            throw new Exception("Valor indisponível para saque!\nSaldo da moeda: " + saldoAtual);
-        }
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setPreco(precoMedio);
-        temp.setSaldo(saldoFinal);
-    }
 
     private static void buscarCripto() {
         System.out.println("\nBuscar Criptomoeda\n");

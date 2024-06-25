@@ -57,6 +57,8 @@ public interface MenuAtivoInterface {
                 break;
         }
 
+        System.out.println("\nTransação realizada com sucesso! Saldo: R$" + temp.getSaldo());
+
     }
 
     private static void comprar(Ativo temp, int quantidade, float preco, float saldoAtual) {
@@ -75,7 +77,7 @@ public interface MenuAtivoInterface {
     private static void vender(Ativo temp, int quantidade, float preco, float saldoAtual) throws Exception {
         int quantidadeFinal = temp.getQuantidade() - quantidade;
 
-        float saldoFinal = saldoAtual + (quantidade * preco);
+        float saldoFinal = saldoAtual - (quantidade * preco);
 
         float precoMedio = saldoFinal / quantidadeFinal;
 
