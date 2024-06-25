@@ -26,7 +26,7 @@
 
 ## Como Executar o Projeto
 
--  Ao executar a classe principal, é chamada a classe Sistema que por sua vez chama a menuLogin
+-  Ao executar a classe 'App', é chamada a classe Sistema que por sua vez chama a menuLogin
 -  A classe menuLogin utiliza o método usuarioValido para validar se o usuário existe ou não
 -  Será necessário iniciar com o login e senha já cadastrado de um administrador. Login: admin; Senha: 12345
 -  A partir do menu de administrador será possível criar um novo Usuário 
