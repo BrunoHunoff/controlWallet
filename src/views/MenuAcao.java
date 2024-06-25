@@ -191,6 +191,10 @@ public class MenuAcao {
 
         float precoMedio = saldoFinal / quantidadeFinal;
 
+        if (saldoFinal < 0) {
+            throw new Exception("Valor indisponível para saque!\nSaldo: R$" + saldoAtual);
+        }
+
         temp.setQuantidade(quantidadeFinal);
         temp.setSaldo(saldoFinal);
         temp.setPreco(precoMedio);
@@ -265,6 +269,22 @@ public class MenuAcao {
 
         ((Acao) tempAcao).setTipoAcao(Console.lerString("Tipo da Ação: "));
 
+        while (true) {
+            String pagaDividendos = Console.lerString("A ação " + novoNome + " paga dividendos? [S/N] ").toLowerCase();
+
+            if (pagaDividendos.equals("n")) {
+                ((Acao) tempAcao).setPagaDividendos(false);
+                return;
+            }
+
+            if (pagaDividendos.equals("s")) {
+                ((Acao) tempAcao).setPagaDividendos(true);
+                return;
+            }
+
+            System.out.println("Opção inválida. Tente novamente...");
+        }
+
     }
 
     private static void adicionarAcao() {
@@ -281,8 +301,21 @@ public class MenuAcao {
 
         String tipoAcao = Console.lerString("Tipo: ");
 
+        while (true) {
+            String pagaDividendos = Console.lerString("A ação " + nome + " paga dividendos? [S/N] ").toLowerCase();
 
-        AtivosController.cadastrarAtivo(nome, tipoAcao);
+            if (pagaDividendos.equals("n")) {
+                AtivosController.cadastrarAtivo(nome, tipoAcao, false);
+                return;
+            }
+
+            if (pagaDividendos.equals("s")) {
+                AtivosController.cadastrarAtivo(nome, tipoAcao, true);
+                return;
+            }
+
+            System.out.println("Opção inválida. Tente novamente...");
+        }
 
     }
 

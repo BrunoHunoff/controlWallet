@@ -2,3 +2,4 @@
 af78c620-d9a8-487d-a64d-4d9aba5b8b7b carteira: 23102b48-65b6-4a8f-a1d3-578872af145f, teste, Cripto, 0.0, 0, 0.0, teste, teste; 014914be-c14a-42ed-b970-5f5f95eff336, btc, Cripto, 0.0, 0, 0.0, btc, btc;
 a6b83ea1-f6da-4d8a-9180-8f0e5251ae11 carteira: 
 5143f2a0-9efb-443b-894a-de7b7e5d1ad0 carteira: ed9370e3-222c-4eb4-a2f7-7b3b5c7952b8, teste, Cripto, 0.0, 0, 0.0, teste, teste; 
+
