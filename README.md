@@ -1,23 +1,40 @@
-# Login
+# Control Wallet
 
-## Funcionamento
+## Informações Gerais sobre o Projeto
 
--   Criado classe de usuário com identificação unica utilizando UUID
--   Dentro dos métodos da classe, temos as opções de criação, busca, atualização, exclusão (CRUD)
--   Criado um método para validação se o usuário existe ou não para evitar duplicidade
--   Criado um método para validar o login do usuário
--   Criado um método para criptografar a senha antes de salvar no arquivo txt
+-  O Sistema ‘ControlWallet’ foi desenvolvido com o intuito de o usuário ter um melhor controle de seus investimentos, como ações, criptomoedas, fundos imobiliários NFTs e renda fixa.
+-  O sistema oferece para o usuário as funcionalidades para criar, listar, atualizar e além de gerar relatórios sobre sua carteira. Para o administrador as funcionalidades são para criar, listar, atualizar e deletar usuários.
 
-## Uso do chat gpt
+## Informações sobre as Classes e suas Relações
+
+-  Models:
+*  A classe 'Ativo' é a superclasse de 'Açao', 'Criptomoeda', 'FundoImobiliário', 'Nft' e 'RendaFixa'.
+*  A classe 'Usuario' possui como atributos os dados para cadastro de um cliente.
+
+-  Controllers:
+*  A classe 'AtivosController' possui um ArrayList de 'Ativo', caracterizando assim uma agregação, além disso, há métodos para leitura e gravação em arquivos e métodos para realização do CRUD nos tipos de 'Ativo'.
+*  A classe 'GerenciarUsuario' possui um uma lista de 'Usuario', caracterizando assim uma agregação, além de métodos para tratamento de exceções, carregar e salvar o usuário e realizar o CRUD do mesmo. Também há a parte de criptografia das senhas.
+
+-  Views
+*  Cada tipo de Ativo possui um menu expecífico com métodos para realização do CRUD.
+*  A classe 'MenuUsuario é usada para chamar os menus de cada tipo de Ativo.
+*  A classe 'MenuAdmin' é utilizada para o CRUD de 'Usuario'.
+*  A classe 'MenuAtivoInferface' é utilizada para salvar as alterações feitas antes do sistema ser encerrado.
+*  A classe 'MenuRelatorio' possui um atributo do tipo 'Usuario', sendo assim uma associação, além de métodos para saber o total investido em cada tipo de Ativo.
+*  A classe 'MenuLogin' é usada para realizar o login do usuário
+
+
+## Como Executar o Projeto
+
+-  Ao executar a classe principal, é chamada a classe Sistema que por sua vez chama a menuLogin
+-  A classe menuLogin utiliza o método usuarioValido para validar se o usuário existe ou não
+-  Será necessário iniciar com o login e senha já cadastrado de um administrador. Login: admin; Senha: 12345
+-  A partir do menu de administrador será possível criar um novo Usuário 
+-  O usuário admin pode realizar as operações do CRUD de usuários do sistema
+-  Agora com Usuário criado pode reiniciar o sistema e entrar com o login e senha criado
+-  O usuário comum pode acessar sua carteira, gerar relatório e manipular os 5 tipos de ativos disponíveis
+
+## Uso do ChatGPT
 
 -   Utilizado introdução ao uso de UUID para identificação única de usuário no sistema
 -   Utilizado na criação da lógica para criptografia das senhas no txt
-
-## Utilização
-
--   Ao executar a classe principal, é chamada a classe Sistema que por sua vez chama a menuLogin
--   A classe menuLogin utiliza o método usuarioValido para validar se o usuário existe ou não
--   Caso o usuário exista e seja o admin, é chamado o menu de admin, que gerencia usuários
--   Caso o usuário existe mas não seja o admin, é chamado o menu de usuário para gerenciamento da carteira
--   O usuário admin pode realizar as operações do CRUD de usuários do sistema
--   O usuário comum pode acessar sua carteira, gerar relatório e manipular os 5 tipos de ativos disponíveis
