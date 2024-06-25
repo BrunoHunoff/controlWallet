@@ -4,11 +4,6 @@ import controllers.AtivosController;
 import helpers.Console;
 import models.Ativo;
 import models.RendaFixa;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class MenuRendaFixa {
@@ -104,21 +99,35 @@ public class MenuRendaFixa {
         System.out.println(ativo.getNome());
         System.out.println(" - Categoria: " + ativo.getCategoria());
         System.out.println(" - Data de vencimento: " + ativo.getDataVencimento());
-        System.out.println(" - Taxa de juros:" + ativo.getTxJuros());
+        System.out.println(" - Taxa de juros:" + ativo.getTxJuros() + "%");
         System.out.println(" - Preço Médio: " + ativo.getPreco());
         System.out.println(" - Quantidade: " + ativo.getQuantidade());
         System.out.println(" - Saldo: " + ativo.getSaldo());
     }
 
-    private static void visaoGeral() {
+    public static float getSaldoGeral() {
+        float saldo = 0;
+        try {
+            for (Ativo ativo: listarRendaFixa()) {
+                saldo += ativo.getSaldo();
+            }
+        } catch (Exception e) {}
+
+        return saldo;
+    }
+
+    public static void visaoGeral() {
         System.out.println("\nVisão Geral\n");
         float saldoGeral = 0;
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof RendaFixa) {
-                exibirRendaFixa((RendaFixa)ativo);
+        try {
+            for (Ativo ativo : listarRendaFixa()) {
+                exibirRendaFixa((RendaFixa) ativo);
                 System.out.println("\n");
                 saldoGeral += ativo.getSaldo();
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
 
         System.out.println("Saldo geral Renda fixa: R$" + saldoGeral);
@@ -144,60 +153,7 @@ public class MenuRendaFixa {
             return;
         }
 
-        System.out.println("Operação: ");
-        System.out.println("1 - Compra");
-        System.out.println("2 - Venda");
-        int operacao = Console.lerInt("Operação: ");
-        int quantidade = Console.lerInt("Quantidade: ");
-        float preco = Console.lerFloat("Preço médio: ");
-
-        float saldoAtual = tempRendaFixa.getSaldo();
-
-        switch (operacao) {
-            case 1:
-                comprar(tempRendaFixa, quantidade, preco, saldoAtual);
-                break;
-
-            case 2:
-                vender(tempRendaFixa, quantidade, preco, saldoAtual);
-                break;
-
-            default:
-                System.out.println("Operação inválida!");
-                break;
-        }
-    }
-
-    private static void comprar(RendaFixa temp, int quantidade, float preco, float saldoAtual) {
-
-        int quantidadeAtual = temp.getQuantidade();
-
-        int quantidadeFinal = quantidadeAtual + quantidade;
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        temp.setSaldo(saldoFinal);
-        temp.setPreco(precoMedio);
-        temp.setQuantidade(quantidadeFinal);
-
-    }
-
-    private static void vender(RendaFixa temp, int quantidade, float preco, float saldoAtual) throws Exception{
-
-        int quantidadeFinal = temp.getQuantidade() - quantidade;
-
-        float saldoFinal = saldoAtual - (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        if (saldoFinal < 0) {
-            throw new Exception("Valor indisponível para saque!\nSaldo da moeda: " + saldoAtual);
-        }
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setPreco(precoMedio);
-        temp.setSaldo(saldoFinal);
+        MenuAtivoInterface.transacao(tempRendaFixa);
     }
 
     private static void buscarRendaFixa() {
@@ -268,15 +224,7 @@ public class MenuRendaFixa {
         }
         tempRendaFixa.setNome(novoNome);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        String dataVencimento = Console.lerString("Digite uma data no formato dd/MM/yyyy: ");
-        
-        try {
-            LocalDate date = LocalDate.parse(dataVencimento, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Formato de data inválido. Por favor, use o formato dd/MM/yyyy.");
-        }
+        String dataVencimento = Console.lerString("Digite a data de vencimento no formato dd/MM/yyyy: ");
 
         ((RendaFixa) tempRendaFixa).setDataVencimento(dataVencimento);
         ((RendaFixa) tempRendaFixa).setCategoria(Console.lerString("Categoria: "));
@@ -306,29 +254,45 @@ public class MenuRendaFixa {
     }
 
     private static void nomeEmUso(String nome) throws Exception{
-        for (RendaFixa rendaFixa: listarRendaFixa()) {
+        ArrayList<RendaFixa> temp = new ArrayList<>();
+
+        try {
+            for (RendaFixa rendaFixa : listarRendaFixa()) {
+                temp.add(rendaFixa);
+            }
+        } catch (Exception e) {}
+
+        for (RendaFixa rendaFixa: temp) {
             if (rendaFixa.getNome().equals(nome)) {
                 throw new Exception("Nome já está em uso");
             }
         }
     }
 
-    private static ArrayList<RendaFixa> listarRendaFixa() {
+    private static ArrayList<RendaFixa> listarRendaFixa() throws Exception{
         ArrayList<RendaFixa> lista = new ArrayList<>();
-        for (Ativo ativo: AtivosController.getAtivosConta()) {
-            if (ativo instanceof RendaFixa) {
-                lista.add((RendaFixa) ativo);
+        try {
+            for (Ativo ativo : AtivosController.getAtivosConta()) {
+                if (ativo instanceof RendaFixa) {
+                    lista.add((RendaFixa) ativo);
+                }
             }
+        } catch (Exception e) {}
+
+        if (lista.isEmpty()) {
+            throw new Exception("Não há ativos de renda fixa cadastrados!");
         }
         return lista;
     }
 
     private static void exibirListaRendaFixa() {
-        for (RendaFixa rendaFixa: listarRendaFixa()) {
+        try {
+            for (RendaFixa rendaFixa : listarRendaFixa()) {
 
-            String txt = "Nome: " + rendaFixa.getNome() + " | Saldo: " + rendaFixa.getSaldo();
-            System.out.println(txt);
+                String txt = "Nome: " + rendaFixa.getNome() + " | Saldo: " + rendaFixa.getSaldo();
+                System.out.println(txt);
 
-        }
+            }
+        } catch (Exception e) {}
     }
 }
