@@ -22,5 +22,83 @@ public interface MenuAtivoInterface {
             return;
         }
     }
+
+    public static void transacao(Ativo temp ) throws Exception{
+
+        float saldoAtual = temp.getSaldo();
+
+        System.out.println("1 - Compra");
+        System.out.println("2 - Venda");
+
+        int operacao = Console.lerInt("Operação: ");
+
+        int quantidade = Console.lerInt("Quantidade: ");
+        float preco = Console.lerFloat("Preço médio: ");
+
+        if (quantidade <= 0) {
+            throw new Exception("A quantidade deve ser maior que 0");
+        }
+
+        if (preco <= 0) {
+            throw new Exception("O preço deve ser maior que 0");
+        }
+
+        switch (operacao) {
+            case 1:
+                comprar(temp, quantidade, preco, saldoAtual);
+                break;
+
+            case 2:
+                vender(temp, quantidade, preco, saldoAtual);
+                break;
+
+            default:
+                System.out.println("Operação inválida!");
+                break;
+        }
+
+        System.out.println("\nTransação realizada com sucesso! Saldo: R$" + temp.getSaldo());
+
+    }
+
+    private static void comprar(Ativo temp, int quantidade, float preco, float saldoAtual) {
+        int quantidadeFinal = temp.getQuantidade() + quantidade;
+
+        float saldoFinal = saldoAtual + (quantidade * preco);
+
+        float precoMedio = saldoFinal / quantidadeFinal;
+
+        temp.setQuantidade(quantidadeFinal);
+        temp.setSaldo(saldoFinal);
+        temp.setPreco(precoMedio);
+
+    }
+
+    private static void vender(Ativo temp, int quantidade, float preco, float saldoAtual) throws Exception {
+        int quantidadeFinal = temp.getQuantidade() - quantidade;
+
+        float saldoFinal = saldoAtual - (quantidade * preco);
+
+        float precoMedio = saldoFinal / quantidadeFinal;
+
+        if (quantidadeFinal < 0) {
+            throw new Exception("Quantidade indisponível para saque");
+        }
+
+        if (saldoFinal < 0) {
+            throw new Exception("Valor indisponível para saque!\nSaldo: R$" + saldoAtual);
+        }
+
+        temp.setQuantidade(quantidadeFinal);
+
+        temp.setPreco(precoMedio);
+
+        if (quantidadeFinal == 0) {
+            temp.setSaldo(0);
+            return;
+        }
+        temp.setSaldo(saldoFinal);
+
+    }
 }
 

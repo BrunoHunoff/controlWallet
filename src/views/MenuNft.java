@@ -133,10 +133,10 @@ public class MenuNft {
         System.out.println("Saldo geral NFT: R$" + saldoGeral);
     }
 
-    private static void transacao() throws Exception{
+    private static void transacao() throws Exception {
         System.out.println("\nNova Transacao\n");
 
-        for (Ativo temp: AtivosController.getAtivosConta()) {
+        for (Ativo temp : AtivosController.getAtivosConta()) {
             if (temp instanceof Nft) {
                 System.out.println(temp.getNome() + "\n");
             }
@@ -147,67 +147,13 @@ public class MenuNft {
         String nome = Console.lerString("NFT: ");
 
         try {
-            tempNft = (Nft)AtivosController.buscarNft(nome);
+            tempNft = (Nft) AtivosController.buscarNft(nome);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
 
-        System.out.println("Operação: ");
-        System.out.println("1 - Compra");
-        System.out.println("2 - Venda");
-        int operacao = Console.lerInt("Operação: ");
-        int quantidade = Console.lerInt("Quantidade: ");
-        float preco = Console.lerFloat("Preço médio: ");
-
-        float saldoAtual = tempNft.getSaldo();
-
-        switch (operacao) {
-            case 1:
-                comprar(tempNft, quantidade, preco, saldoAtual);
-                break;
-
-            case 2:
-                vender(tempNft, quantidade, preco, saldoAtual);
-                break;
-
-            default:
-                System.out.println("Operação inválida!");
-                break;
-        }
-    }
-
-    private static void comprar(Nft temp, int quantidade, float preco, float saldoAtual) {
-
-        int quantidadeAtual = temp.getQuantidade();
-
-        int quantidadeFinal = quantidadeAtual + quantidade;
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        //calcula preço médio de compra
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        temp.setSaldo(saldoFinal);
-        temp.setPreco(precoMedio);
-        temp.setQuantidade(quantidadeFinal);
-
-    }
-
-    private static void vender(Nft temp, int quantidade, float preco, float saldoAtual) throws Exception{
-
-        int quantidadeFinal = temp.getQuantidade() - quantidade;
-
-        float saldoFinal = saldoAtual - (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        if (saldoFinal < 0) {
-            throw new Exception("Valor indisponível para saque!\nSaldo em NFT: " + saldoAtual);
-        }
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setPreco(precoMedio);
-        temp.setSaldo(saldoFinal);
+        MenuAtivoInterface.transacao(tempNft);
     }
 
     private static void buscarNFT() {

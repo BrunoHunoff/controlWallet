@@ -158,63 +158,7 @@ public class MenuRendaFixa {
             return;
         }
 
-        System.out.println("Operação: ");
-        System.out.println("1 - Compra");
-        System.out.println("2 - Venda");
-        int operacao = Console.lerInt("Operação: ");
-        int quantidade = Console.lerInt("Quantidade: ");
-        float preco = Console.lerFloat("Preço médio: ");
-
-        float saldoAtual = tempRendaFixa.getSaldo();
-
-        switch (operacao) {
-            case 1:
-                comprar(tempRendaFixa, quantidade, preco, saldoAtual);
-                break;
-
-            case 2:
-                vender(tempRendaFixa, quantidade, preco, saldoAtual);
-                break;
-
-            default:
-                System.out.println("Operação inválida!");
-                break;
-        }
-    }
-
-    private static void comprar(RendaFixa temp, int quantidade, float preco, float saldoAtual) {
-
-        int quantidadeAtual = temp.getQuantidade();
-
-        int quantidadeFinal = quantidadeAtual + quantidade;
-        float saldoFinal = saldoAtual + (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        temp.setSaldo(saldoFinal);
-        System.out.println("saldo setado");
-        temp.setPreco(precoMedio);
-        System.out.println("preço setado");
-        temp.setQuantidade(quantidadeFinal);
-        System.out.println("quantidade setada");
-
-    }
-
-    private static void vender(RendaFixa temp, int quantidade, float preco, float saldoAtual) throws Exception{
-
-        int quantidadeFinal = temp.getQuantidade() - quantidade;
-
-        float saldoFinal = saldoAtual - (quantidade * preco);
-
-        float precoMedio = saldoFinal/quantidadeFinal;
-
-        if (saldoFinal < 0) {
-            throw new Exception("Valor indisponível para saque!\nSaldo da moeda: " + saldoAtual);
-        }
-
-        temp.setQuantidade(quantidadeFinal);
-        temp.setPreco(precoMedio);
-        temp.setSaldo(saldoFinal);
+        MenuAtivoInterface.transacao(tempRendaFixa);
     }
 
     private static void buscarRendaFixa() {
